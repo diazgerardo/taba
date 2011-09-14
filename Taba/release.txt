@@ -1,0 +1,12 @@
+Release "Tandil"
+
+Features deseables para este release:
+
+- Poder salvar la Trayectoria asignandole un nuevo nombre
+-   " editar datos de nodo asignando una foto si asi se desea
+-   " cambiar el tiempo entre lecturas del GPS
+-   " crear un nodo tomando una foto
+-   " cambiar la trayectoria
+-   " ver la representación gráfica del camino a seguir, el camino seguido efectivamente, y la ubicación del móvil en el mismo
+- Una documentación -aunque sea mínima- no estaría del todo mal :)
+ 
