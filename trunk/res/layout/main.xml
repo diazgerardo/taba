@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	
+	<TextView android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:text="@string/situacionMovil" android:textSize="24sp"/>
+		
+	<TextView android:id="@+id/VelocidadParcial" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textSize="18sp" />
+		
+	<TextView android:id="@+id/VelocidadReal" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textSize="18sp" />
+		
+	<TextView android:id="@+id/Anterior" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textSize="18sp" />
+
+	<TextView android:id="@+id/Siguiente" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textSize="18sp" />
+		
+	<TextView android:id="@+id/TiempoEstimado" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textSize="18sp" />
+		
+	<TextView android:id="@+id/TiempoEstimadoFin" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:textSize="18sp" />
+	
+</LinearLayout>
