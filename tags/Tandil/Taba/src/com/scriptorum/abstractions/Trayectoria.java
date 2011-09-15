@@ -13,7 +13,7 @@ import android.view.View.OnClickListener;
 import com.scriptorum.singletons.Movil;
 import com.scriptorum.xml.TrayectoriaSerializer;
 
-public class Trayectoria extends Grafo implements OnClickListener, PropertyChangeListener {
+public class Trayectoria implements OnClickListener, PropertyChangeListener {
 	private static final long serialVersionUID = -5433997207358050284L;
 	protected static LinkedList<Vertice> trayectoria;
 	private static BigDecimal distanciaTotalRecorrida;
@@ -31,7 +31,6 @@ public class Trayectoria extends Grafo implements OnClickListener, PropertyChang
 		return _instance;
 	}
 
-	@Override
 	public void update() {
 		Movil movil = Movil.getInstance();
 		Vertice locationAnterior, locationInicial;
