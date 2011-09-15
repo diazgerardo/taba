@@ -7,17 +7,17 @@ import android.location.Location;
 
 import com.scriptorum.singletons.Movil;
 
-public class Ruta extends Grafo {
+public class Ruta {
 
 	protected LinkedList<Vertice> ruta = new LinkedList<Vertice>();
 
 	private static final long serialVersionUID = -6633290557437173334L;
 
-	@Override
 	public void update() {
 		Movil movil = Movil.getInstance();
 		Location movilLocation = movil.getVertice().getLocation();
 		float results[] = { 0, 0, 0 };
+		// TODO esta cocinada usando flags es horrorosa y hay q eliminarla 
 		boolean inicio=true, cambio=true, cambioAnterior=true;
 		Vertice rutaLocationAnterior = null;
 		for ( Vertice rutaLocation : ruta) {
@@ -29,14 +29,17 @@ public class Ruta extends Grafo {
 			}
 			cambio = rutaLocation.isDistanciaAlMovilCreciente();
 			if(inicio) {
+				// TODO esta cocinada usando flags es horrorosa y hay q eliminarla 
 				rutaLocationAnterior = rutaLocation;
 				cambioAnterior = cambio;
 				inicio = false;
 			}
 			if(cambio != cambioAnterior) { 
+				// TODO esta cocinada usando flags es horrorosa y hay q eliminarla 
 					movil.setAnterior(rutaLocationAnterior);
 					movil.setSiguiente(rutaLocation);
 			}
+			// TODO esta cocinada usando flags es horrorosa y hay q eliminarla 
 			cambioAnterior = cambio;
 			rutaLocationAnterior = rutaLocation;
 		}
