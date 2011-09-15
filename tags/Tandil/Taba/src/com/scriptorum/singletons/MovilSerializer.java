@@ -5,11 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 
 import android.os.Environment;
-
-import com.scriptorum.abstractions.Vertice;
 
 public class MovilSerializer {
 	public static void save(Movil _movil) {

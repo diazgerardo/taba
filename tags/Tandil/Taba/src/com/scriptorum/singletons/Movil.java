@@ -101,7 +101,7 @@ public class Movil implements LocationListener, OnClickListener {
 	}
 
 	public void setAnterior(Vertice anterior) {
-		this.anterior = anterior;
+		Movil.anterior = anterior;
 	}
 
 	public Vertice getSiguiente() {
@@ -109,7 +109,7 @@ public class Movil implements LocationListener, OnClickListener {
 	}
 
 	public void setSiguiente(Vertice siguiente) {
-		this.siguiente = siguiente;
+		Movil.siguiente = siguiente;
 	}
 
 	public long getTiempoEstimado() {
@@ -126,7 +126,7 @@ public class Movil implements LocationListener, OnClickListener {
 
 	public void setVelocidadPromedioParcial(
 			BigDecimal velocidadPromedioParcial) {
-		this.velocidadPromedioParcial = velocidadPromedioParcial;
+		Movil.velocidadPromedioParcial = velocidadPromedioParcial;
 	}
 
 	public BigDecimal getVelocidadPromedioReal() {
@@ -134,15 +134,15 @@ public class Movil implements LocationListener, OnClickListener {
 	}
 
 	public void setVelocidadPromedioReal(BigDecimal velocidadPromedioReal) {
-		this.velocidadPromedioReal = velocidadPromedioReal;
+		Movil.velocidadPromedioReal = velocidadPromedioReal;
 	}
 
 	public void setTiempoEstimado(long tiempoEstimado) {
-		this.tiempoEstimado = tiempoEstimado;
+		Movil.tiempoEstimado = tiempoEstimado;
 	}
 
 	public void setTiempoEstimadoFin(long tiempoEstimadoFin) {
-		this.tiempoEstimadoFin = tiempoEstimadoFin;
+		Movil.tiempoEstimadoFin = tiempoEstimadoFin;
 	}
 
 	public void save() {

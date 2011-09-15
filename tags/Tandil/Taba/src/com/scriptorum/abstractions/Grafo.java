@@ -1,6 +1,5 @@
 package com.scriptorum.abstractions;
 
-import java.math.MathContext;
 import java.util.LinkedList;
 
 public abstract class Grafo extends LinkedList<Vertice> {
