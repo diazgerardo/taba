@@ -2,7 +2,6 @@ package com.scriptorum.view.test;
 
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.TextView;
 
 import com.scriptorum.view.Taba;
 
@@ -25,6 +24,7 @@ public class TabaTest extends ActivityInstrumentationTestCase2<Taba> {
 	    public void testPreconditions() {
 	        assertNotNull(intent);
 	        assertNotNull(mAct);
+	        assertNotNull(resourceString);
 	      }
 	    
 }
