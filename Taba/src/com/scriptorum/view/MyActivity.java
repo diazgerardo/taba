@@ -16,7 +16,7 @@ import com.scriptorum.abstractions.Ruta;
 import com.scriptorum.singletons.Movil;
 import com.scriptorum.singletons.RutaParser;
 
-public abstract class MyActivity extends Activity implements PropertyChangeListener {
+public class MyActivity extends Activity implements PropertyChangeListener {
 	static final File xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/buenosAires-Cordoba.xml");
 	protected LocationManager myLocationManager;
 	protected static Movil movil;
