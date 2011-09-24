@@ -1,0 +1,22 @@
+Release "Tandil"
+
+Features deseables para este release:
+
+- Poder salvar la Trayectoria asignandole un nuevo nombre
+-   " editar datos de nodo asignando una foto si asi se desea
+-   " cambiar el tiempo entre lecturas del GPS
+-   " crear un nodo tomando información contextual
+-   " cambiar la trayectoria
+- Una documentación -aunque sea mínima- no estaría del todo mal :)
+
+Mejoras técnicas
+
+- Garantizar q los "features" actuales continúan funcionando -> junit test cases :)
+- Efectuar un refactor haciendo más claro el diseño (o la falta del mismo, bah)
+ 	* Eliminar clases estáticas
+ 	* Mejorar la semántica
+ 	* Eliminar clases innecesarias
+ 	
+ Mejoras de usabilidad
+ 
+- ?? 
