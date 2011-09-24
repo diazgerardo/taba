@@ -1,8 +1,0 @@
-Algunos links que me resultaron de ayuda
-
-Calcular distancia entre 2 coordenadas geograficas    
-http://www.cartesia.org/foro/viewtopic.php?t=6873
-
-Proyecto Mapear
-http://www.proyectomapear.com.ar/index.php
-proyectotaba/tup79bag
