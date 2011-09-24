@@ -1,0 +1,3 @@
+Android SQLite Basics: creating and using a database, and working with sqlite3
+charlie.collins's blog
+http://www.screaming-penguin.com/node/7742
