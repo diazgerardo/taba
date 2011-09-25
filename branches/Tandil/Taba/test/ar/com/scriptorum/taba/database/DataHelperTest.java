@@ -44,5 +44,4 @@ public class DataHelperTest extends ActivityInstrumentationTestCase2 {
 		}
 		assertTrue("zarateescobarcampana".equals(sb.toString()));
 	}
-
 }

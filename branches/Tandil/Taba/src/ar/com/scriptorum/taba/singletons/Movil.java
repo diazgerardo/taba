@@ -48,7 +48,8 @@ public class Movil implements LocationListener, OnClickListener {
 	public void onLocationChanged(Location loc) {
 		try {
 			vertice = new Vertice(loc);
-			notifyListeners(); // TODO listeners son 1er y 2do tab, quizás debieran ser Ruta y Trayectoria.. 
+			notifyListeners(); // TODO listeners son 1er y 2do tab, quizás debieran ser Ruta y Trayectoria..
+			save(); 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -146,7 +147,7 @@ public class Movil implements LocationListener, OnClickListener {
 	}
 
 	public void save() {
-		MovilSerializer.save(_movil);
+		MovilSerializer.getInstance().save(_movil);
 	}
 	
 	public void reset() {
