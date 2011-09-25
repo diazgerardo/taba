@@ -55,6 +55,7 @@ public class Trayectoria implements OnClickListener, PropertyChangeListener {
 		if(tiempoTotalEmpleado.compareTo(new BigDecimal(0))!= 0)
 			movil.setVelocidadPromedioReal(new BigDecimal((distanciaTotalRecorrida.doubleValue()/tiempoTotalEmpleado.doubleValue())*3600));
 		trayectoria.add(currentLocation);
+		save();
 	}
 	
 	public void reset() {

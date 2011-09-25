@@ -17,7 +17,7 @@ import ar.com.scriptorum.taba.singletons.RutaParser;
 
 
 public class MyActivity extends Activity implements PropertyChangeListener {
-	static final File xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/buenosAires-Cordoba.xml");
+	static final File xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/campana-Lujan.xml");
 	protected LocationManager myLocationManager;
 	protected static Movil movil;
 	protected static TextView myVelocidadParcial;

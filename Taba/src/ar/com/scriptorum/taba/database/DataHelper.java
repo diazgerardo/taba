@@ -29,6 +29,11 @@ public class DataHelper {
 		return this.insertStmt.executeInsert();
 	}
 
+	public long update(String name, String string) {
+		name = string;
+		return 0;
+	}
+
 	public void deleteAll() {
 		this.db.delete(Constants.TABLE_NAME, null, null);
 	}
