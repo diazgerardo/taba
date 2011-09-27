@@ -6,6 +6,7 @@ import java.io.File;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.Criteria;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,7 +19,6 @@ import ar.com.scriptorum.taba.singletons.RutaParser;
 
 public class MyActivity extends Activity implements PropertyChangeListener {
 	static final File xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/campana-Lujan.xml");
-	protected LocationManager myLocationManager;
 	protected static Movil movil;
 	protected static TextView myVelocidadParcial;
 	protected static TextView myVelocidadReal;
@@ -32,11 +32,22 @@ public class MyActivity extends Activity implements PropertyChangeListener {
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState ) {
+		
 		super.onCreate(savedInstanceState);
 		movil = Movil.getInstance();
-		myLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		myLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 1000, movil);
+		
+		// <chorch>
+		Criteria criteria = new Criteria();
+		criteria.setPowerRequirement(Criteria.POWER_LOW);
+		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+		criteria.setAltitudeRequired(false);
+		criteria.setBearingRequired(false);
+		String bestProvider = ((LocationManager) getSystemService(Context.LOCATION_SERVICE)).getBestProvider(criteria, false);
+		((LocationManager) getSystemService(Context.LOCATION_SERVICE)).requestLocationUpdates(bestProvider,60000, 1000, movil);
+		// </chorch>
+		
 		movil.addChangeListener(this);
+		
 	}
 
 	
