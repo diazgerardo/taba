@@ -18,7 +18,7 @@ import ar.com.scriptorum.taba.singletons.RutaParser;
 
 
 public class MyActivity extends Activity implements PropertyChangeListener {
-	static final File xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/campana-Lujan.xml");
+	protected File xml;
 	protected static Movil movil;
 	protected static TextView myVelocidadParcial;
 	protected static TextView myVelocidadReal;
@@ -28,7 +28,8 @@ public class MyActivity extends Activity implements PropertyChangeListener {
 	protected static TextView myTiempoEstimado;
 	protected static TextView myTiempoEstimadoFin;
 	protected static TextView myVelocidad;
-	protected static Ruta ruta = getRuta();
+	protected String mChosenFile;
+	protected Ruta ruta = getRuta();
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState ) {
@@ -51,8 +52,11 @@ public class MyActivity extends Activity implements PropertyChangeListener {
 	}
 
 	
-	private static Ruta getRuta() {
+	protected Ruta getRuta() {
 		Ruta ruta = new Ruta();
+		if(null == mChosenFile) return ruta;
+		
+		xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mChosenFile);
 		RutaParser dpe = RutaParser.getInstance();
 		dpe.runExample(xml);
 		ruta.setRuta(dpe.getRuta());
