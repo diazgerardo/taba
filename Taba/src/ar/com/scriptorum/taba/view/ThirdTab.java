@@ -56,6 +56,9 @@ public class ThirdTab extends MyActivity {
 			
 			@Override
 			public void onClick(View v) {
+				// clean public vars
+				mChosenFile = null;
+				ruta = null;
 				// pick file
 				showDialog(1);
 				// update ruta
