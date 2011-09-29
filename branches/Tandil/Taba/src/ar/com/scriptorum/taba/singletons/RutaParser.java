@@ -22,14 +22,13 @@ public class RutaParser {
 	static RutaParser rutaParser;
 
 
-	private RutaParser(){
-		ruta = new Ruta();
-	}
+	private RutaParser(){}
 	
 	public static RutaParser getInstance() {
 		if(null == rutaParser) {
 			rutaParser = new RutaParser();
 		}
+		ruta = new Ruta();
 		return rutaParser;
 	}
 

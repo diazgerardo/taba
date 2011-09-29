@@ -28,14 +28,15 @@ public class MyActivity extends Activity implements PropertyChangeListener {
 	protected static TextView myTiempoEstimado;
 	protected static TextView myTiempoEstimadoFin;
 	protected static TextView myVelocidad;
-	protected String mChosenFile;
-	protected Ruta ruta = getRuta();
+	protected static String mChosenFile;
+	protected static Ruta ruta;
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState ) {
 		
 		super.onCreate(savedInstanceState);
 		movil = Movil.getInstance();
+		getRuta();
 		
 		// <chorch>
 		Criteria criteria = new Criteria();
@@ -52,15 +53,18 @@ public class MyActivity extends Activity implements PropertyChangeListener {
 	}
 
 	
-	protected Ruta getRuta() {
-		Ruta ruta = new Ruta();
-		if(null == mChosenFile) return ruta;
+	protected void getRuta() {
+		
+		if(null == mChosenFile){
+			ruta = new Ruta();
+			return;
+		}
 		
 		xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mChosenFile);
 		RutaParser dpe = RutaParser.getInstance();
 		dpe.runExample(xml);
 		ruta.setRuta(dpe.getRuta());
-		return ruta;
+		
 	}
 
 
@@ -74,8 +78,7 @@ public class MyActivity extends Activity implements PropertyChangeListener {
 		if(null!= movil.getSiguiente()) 
 			mySiguiente.setText("Y: " +  movil.getSiguiente().toString());
 		ruta.update();
-		View v = this.getCurrentFocus();
-		v.postInvalidate();
+
 	}
 
 }
