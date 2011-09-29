@@ -6,3 +6,11 @@ http://www.cartesia.org/foro/viewtopic.php?t=6873
 Proyecto Mapear
 http://www.proyectomapear.com.ar/index.php
 proyectotaba/tup79bag
+
+
+Converting UTM to Latitude and Longitude (Or Vice Versa)
+Converting Between Decimal Degrees, Degrees, Minutes and Seconds, and Radians
+http://www.uwgb.edu/dutchs/usefuldata/utmformulas.htm
+
+Google Maps
+http://maps.google.com
