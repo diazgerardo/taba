@@ -1,6 +1,5 @@
 package ar.com.scriptorum.taba.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,8 +9,10 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import ar.com.scriptorum.taba.abstractions.Vertice;
+import ar.com.scriptorum.taba.cartografia.CartesianConverter;
 
-public class FourthTab extends Activity {
+public class FourthTab extends MyActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +33,8 @@ public class FourthTab extends Activity {
         	// on the nodes we select from the database based on the 
         	// location of the movil...
      
-        	Bitmap _scratch = BitmapFactory.decodeResource(getResources(), R.drawable.map);
-            canvas.drawBitmap(_scratch, 1, 1, null);
+        	Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map);
+            canvas.drawBitmap(bitmap, 1, 1, null);
             
             // from now on, we'll draw several circles, based on their xy coordinates. 
             // none of these points are of special interest right now, but they are
@@ -42,22 +43,40 @@ public class FourthTab extends Activity {
             // the traveler
             // right nexto to the circle, we'll write (draw, really) its description 
      
+            CartesianConverter cc = getCartesianConverter( bitmap );
+            
             Paint paint = new Paint();
             paint.setStyle(Paint.Style.FILL);
             paint.setAntiAlias(true);
-            paint.setTextSize(10);
-            float RADIUS = 3; 
-            float[][] xy = {{80,20},{25, 60},{90,35},{35, 64},{40,23},{2, 25},{80,60},{35, 50}};
+            paint.setTextSize(8);
+            float RADIUS = 2; 
+            int xy[];
             
-            for(int i=0;i<xy.length;i++) {
+            for(Vertice v : ruta.getRuta() ) {
             	
+            	xy = cc.getXY(v);
             	paint.setColor(Color.BLUE);
-            	canvas.drawCircle(xy[i][0],xy[i][1],RADIUS,paint);
+            	canvas.drawCircle(xy[0],xy[1],RADIUS,paint);
                 paint.setColor(Color.BLACK);
-                canvas.drawText(xy[i][0]+"/"+xy[i][1],xy[i][0],xy[i][1]+5, paint);
+                canvas.drawText(v.getNombre(),xy[0],xy[1]+5, paint);
                 
             }
             
         }
+
+		private CartesianConverter getCartesianConverter(Bitmap b) {
+			
+            return (CartesianConverter) new CartesianConverter().
+				latUpLeft(-31.05764). 			// La Falda  	y=0
+				longUpLeft(-64.507141). 		//  "   "    	x=0
+				latDownRight(-34.538812).		// Buenos Aires y=250
+				longDownRight(-58.475763).		//    "     "	y=600
+				imgHeight(b.getHeight()).
+				imgWidht(b.getWidth()).
+				build();		
+            
+		}
+		
     }
+    
 }

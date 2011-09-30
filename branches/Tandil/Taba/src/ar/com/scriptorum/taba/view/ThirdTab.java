@@ -25,7 +25,6 @@ public class ThirdTab extends MyActivity {
 	private String[] mFileList;
 	private File mPath = new File(Environment.getExternalStorageDirectory().getAbsolutePath());
 	private static final String FTYPE = ".xml";    
-	private static final int DIALOG_LOAD_FILE = 1000;
 
 	
 	@Override

@@ -1,8 +1,10 @@
 package ar.com.scriptorum.taba.cartografia;
 
+import ar.com.scriptorum.taba.abstractions.Vertice;
+
 /**
  * 
- * 	Instances of this class have to be initialized by one side with the coords of a geographical rectangle, 
+ * 	Instances inheriting this class have to be initialized by one side with the coords of a geographical rectangle, 
  * 	and with the dimension of the screen where points are going to be drawn on the other hand
  * 
  *  Once the initialization has been done, the methods getX and getY will be able to determine which points
@@ -11,7 +13,8 @@ package ar.com.scriptorum.taba.cartografia;
  * 	@author gd
  *
  */
-public class CoordConverter {
+
+public abstract class CoordConverter {
 
 	private int height;
 	private int width;
@@ -62,26 +65,42 @@ public class CoordConverter {
 		
 	}
 
-	public int getX(double latitude) {
-		
-		validateState();
-		// TODO delegate this calculus to Cartesian as there are a number 
-		// of considerations to take into account 
-		return (int) ((height / (latUpLeft + latDownRigth)) * latitude);
-		
+	public int getHeight() {
+		return height;
 	}
 
-	private void validateState() {
-
+	public int getWidth() {
+		return width;
 	}
 
-	public int getY(double longitude) {
-		
-		validateState();
-		// TODO delegate this calculus to Cartesian as there are a number 
-		// of considerations to take into account 
-		return (int) ((width / (longUpLeft + longDownRight)) * longitude);
-		
+	public double getLatUpLeft() {
+		return latUpLeft;
 	}
+
+	public double getLongUpLeft() {
+		return longUpLeft;
+	}
+
+	public double getLatDownRight() {
+		return latDownRigth;
+	}
+
+	public double getLongDownRight() {
+		return longDownRight;
+	}
+
+	// TODO delegate this calculus to CartesianConverter as there are a number 
+	// of considerations to take into account 
+	
+	public abstract int getX(double latitude);
+
+	public abstract int getY(double longitude);
+	
+	public abstract int[] getXY(Vertice v);
+	
+	public abstract void validate();
+	
+	public abstract Object build();
+
 	
 }
