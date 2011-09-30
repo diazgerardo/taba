@@ -10,7 +10,6 @@ import android.location.Criteria;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.View;
 import android.widget.TextView;
 import ar.com.scriptorum.taba.abstractions.Ruta;
 import ar.com.scriptorum.taba.singletons.Movil;
