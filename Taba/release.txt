@@ -1,22 +1,66 @@
-Release "Tandil"
+
+
+
+										RELEASE TANDIL
+										
 
 Features deseables para este release:
 
+
 - Poder salvar la Trayectoria asignandole un nuevo nombre
+
+	o Ya es posible salvar la trayectoria
+	o
+	
 -   " editar datos de nodo asignando una foto si asi se desea
+
+	o
+
 -   " cambiar el tiempo entre lecturas del GPS
+
+	o
+	
 -   " crear un nodo tomando información contextual
+
+	o
+
 -   " cambiar la trayectoria
+	
+	o Ya es posible cambiar de ruta
+	
+	o
+
 - Una documentación -aunque sea mínima- no estaría del todo mal :)
+	
+	o Se agregó la carpeta doc en la cuál se guardan links relativos a los features utilizados en el desarrollo
+	
 
 Mejoras técnicas
 
 - Garantizar q los "features" actuales continúan funcionando -> junit test cases :)
+
+	o Se agregó un proyecto de test que apunta al testeo de integración
+	o Se agregó la clase InstrumentationTestRunner, que permite crear tests JUnit normales para las pruebas unitarias
+	
 - Efectuar un refactor haciendo más claro el diseño (o la falta del mismo, bah)
- 	* Eliminar clases estáticas
- 	* Mejorar la semántica
- 	* Eliminar clases innecesarias
  	
- Mejoras de usabilidad
+ 	* Eliminar clases estáticas
+ 		
+ 		o
+ 	
+ 	* Mejorar la semántica
+ 	
+ 		o Se identificaron las clases más importantes del sistema: Ruta, Vertice, Trayectoria, Movil
+ 		o Se hizo un refactor de paquetes para que estos coincidan con la url del sitio web y el svn
+ 		o Se comenzó el proceso de mover comportamiento de pocas clases muy grandes (muchas responsabilidades poco definidas) a clases más pequeñas y especializadas (menos responsabilidades mejor definidas)
+ 		o
+ 		
+ 	* Eliminar clases innecesarias
+ 		
+ 		o Se eliminaron clases, métodos y ficheros no utilizados
+ 		o 
+ 		
+- Mejoras de usabilidad
  
-- ?? 
+	o Se agregó el cuarto tab que permite ver la ruta y la trayectoria en forma gráfica
+	
