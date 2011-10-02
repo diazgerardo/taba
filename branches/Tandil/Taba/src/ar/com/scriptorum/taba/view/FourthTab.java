@@ -2,10 +2,7 @@ package ar.com.scriptorum.taba.view;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -18,8 +15,7 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import ar.com.scriptorum.taba.abstractions.Vertice;
-import ar.com.scriptorum.taba.cartografia.CartesianConverter;
+import ar.com.scriptorum.taba.cartografia.MapDrawer;
 
 public class FourthTab extends MyActivity implements OnTouchListener {
 
@@ -27,7 +23,6 @@ public class FourthTab extends MyActivity implements OnTouchListener {
 	// These matrices will be used to move and zoom image
 	Matrix matrix = new Matrix();
 	Matrix savedMatrix = new Matrix();
-	Bitmap updatedMap;
 
 	// We can be in one of these 3 states
 	static final int NONE = 0;
@@ -49,14 +44,16 @@ public class FourthTab extends MyActivity implements OnTouchListener {
         Bitmap mapBackground = BitmapFactory.decodeResource(getResources(), R.drawable.map);
 
         // new mutable Bitmap, to be used as target for path representation 
-        updatedMap = Bitmap.createBitmap(mapBackground.getWidth(), mapBackground.getHeight(), mapBackground.getConfig());
+        Bitmap updatedMap = Bitmap.createBitmap(mapBackground.getWidth(), mapBackground.getHeight(), mapBackground.getConfig());
 
-        // draws path, movil, etc
-        redraw();
-
-        // make a Drawable from Bitmap to allow to set the BitMap
-        // to the ImageView, ImageButton or what ever
-        BitmapDrawable bmd = new BitmapDrawable(updatedMap);
+        // draw a path, (or movil, or something else) onto the map,
+        // make it a Drawable object and retur int to be added to 
+        // the ImageView, ImageButton or what ever else fits your 
+        // particular needs
+        BitmapDrawable bmd = new MapDrawer().
+        						ruta(ruta).
+        						drawOn(updatedMap).
+        						asDrawable();
 
         // create ImageView to support the drawable image
         ImageView imageView = new ImageView(this);
@@ -67,7 +64,7 @@ public class FourthTab extends MyActivity implements OnTouchListener {
         // allow resize
         imageView.setScaleType(ScaleType.MATRIX);
 
-        // disable cache
+        // disable cache, not sure whether it is needed or not
         imageView.setDrawingCacheEnabled(false);
 
         // add listener for pinch and drag gestures
@@ -217,56 +214,5 @@ public class FourthTab extends MyActivity implements OnTouchListener {
 		point.set(x / 2, y / 2);
 
 	} 
-
-
-	public void redraw() {
-
-		Canvas canvas = new Canvas();
-		canvas.setBitmap(updatedMap);
-
-		// draws a mock map arbitrarily selected from a bigger one.
-		// the real implementation should draw a vectorial map based
-		// on the nodes we select from the database based on the
-		// location of the movil...
-		canvas.drawBitmap(updatedMap, 1, 1, null);
-
-		// from now on, we'll draw several circles, based on their xy
-		// coordinates. none of these points are of special interest 
-		// right now, but they are drawn as a proof of concept. 
-		// they may be used to represent several things as towns, 
-		// filling stations, and other points of interest for the
-		// traveler right next to to the circle, we'll write (draw,
-		// really) its description
-		CartesianConverter cc = getCartesianConverter(updatedMap.getHeight(), updatedMap.getWidth());
-		Paint paint = new Paint();
-		paint.setStyle(Paint.Style.FILL);
-		paint.setAntiAlias(true);
-		paint.setTextSize(8);
-		float RADIUS = 2;
-		int xy[];
-
-		for (Vertice vertice : ruta.getRuta()) {
-
-			xy = cc.getXY(vertice);
-			paint.setColor(Color.BLUE);
-			canvas.drawCircle(xy[0], xy[1], RADIUS, paint);
-			paint.setColor(Color.WHITE);
-			canvas.drawText(vertice.getNombre(), xy[0], xy[1] + 5, paint);
-
-		}
-
-	}
-
-	private CartesianConverter getCartesianConverter(int height, int width) {
-
-		return (CartesianConverter) new CartesianConverter()
-				.latUpLeft(-30.0000). 		// La Falda 		set Y
-				longUpLeft(-65.0000). 		// "   "    		set X
-				latDownRight(-35.0000). 	// Buenos Aires  	set Y
-				longDownRight(-57.0000). 	// "     " 			set X
-				imgHeight(height).imgWidht(width).build();
-
-	}
-
 	
 }
