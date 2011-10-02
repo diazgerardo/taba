@@ -6,3 +6,6 @@ http://www.vogella.de/articles/AndroidGestures/article.html
 
 Android Advanced Gestures: Multitouch Gestures
 http://www.zdnet.com/blog/burnette/how-to-use-multi-touch-in-android-2/1747
+
+Android Development Community
+http://www.anddev.org/resize_and_rotate_image_-_example-t621.html

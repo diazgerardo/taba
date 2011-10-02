@@ -1,82 +1,272 @@
 package ar.com.scriptorum.taba.view;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PointF;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.FloatMath;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
+import android.view.View.OnTouchListener;
+import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import ar.com.scriptorum.taba.abstractions.Vertice;
 import ar.com.scriptorum.taba.cartografia.CartesianConverter;
 
-public class FourthTab extends MyActivity {
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(new Panel(this));
-    }
- 
-    class Panel extends View {
-        public Panel(Context context) {
-            super(context);
-        }
- 
-        @Override
-        public void onDraw(Canvas canvas) {
-        	
-        	// draws a mock map arbitrarily selected from a bigger one.
-        	// the real implementation should draw a vectorial map based
-        	// on the nodes we select from the database based on the 
-        	// location of the movil...
-     
-        	Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.map);
-            canvas.drawBitmap(bitmap, 1, 1, null);
-            
-            // from now on, we'll draw several circles, based on their xy coordinates. 
-            // none of these points are of special interest right now, but they are
-            // drawn as a proof of concept. they may be used to represent several 
-            // things as towns, filling stations, and other points of interest for
-            // the traveler
-            // right nexto to the circle, we'll write (draw, really) its description 
-     
-            CartesianConverter cc = getCartesianConverter( bitmap );
-            
-            Paint paint = new Paint();
-            paint.setStyle(Paint.Style.FILL);
-            paint.setAntiAlias(true);
-            paint.setTextSize(8);
-            float RADIUS = 2; 
-            int xy[];
-            
-            for(Vertice v : ruta.getRuta() ) {
-            	
-            	xy = cc.getXY(v);
-            	paint.setColor(Color.BLUE);
-            	canvas.drawCircle(xy[0],xy[1],RADIUS,paint);
-                paint.setColor(Color.BLACK);
-                canvas.drawText(v.getNombre(),xy[0],xy[1]+5, paint);
-                
-            }
-            
-        }
+public class FourthTab extends MyActivity implements OnTouchListener {
 
-		private CartesianConverter getCartesianConverter(Bitmap b) {
-			
-            return (CartesianConverter) new CartesianConverter().
-				latUpLeft(-31.05764). 			// La Falda  	y=0
-				longUpLeft(-64.507141). 		//  "   "    	x=0
-				latDownRight(-34.538812).		// Buenos Aires y=250
-				longDownRight(-58.475763).		//    "     "	y=600
-				imgHeight(b.getHeight()).
-				imgWidht(b.getWidth()).
-				build();		
-            
+	private static final String TAG = "Touch";
+	// These matrices will be used to move and zoom image
+	Matrix matrix = new Matrix();
+	Matrix savedMatrix = new Matrix();
+	Bitmap updatedMap;
+
+	// We can be in one of these 3 states
+	static final int NONE = 0;
+	static final int DRAG = 1;
+	static final int ZOOM = 2;
+	int mode = NONE;
+
+	// Remember some things for zooming
+	PointF start = new PointF();
+	PointF mid = new PointF();
+	float oldDist = 1f;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+
+		super.onCreate(savedInstanceState);
+
+        // load the original Map from SD 
+        Bitmap mapBackground = BitmapFactory.decodeResource(getResources(), R.drawable.map);
+
+        // new mutable Bitmap, to be used as target for path representation 
+        updatedMap = Bitmap.createBitmap(mapBackground.getWidth(), mapBackground.getHeight(), mapBackground.getConfig());
+
+        // draws path, movil, etc
+        redraw();
+
+        // make a Drawable from Bitmap to allow to set the BitMap
+        // to the ImageView, ImageButton or what ever
+        BitmapDrawable bmd = new BitmapDrawable(updatedMap);
+
+        // create ImageView to support the drawable image
+        ImageView imageView = new ImageView(this);
+
+        // set the Drawable on the ImageView
+        imageView.setImageDrawable(bmd);
+     
+        // allow resize
+        imageView.setScaleType(ScaleType.MATRIX);
+
+        // disable cache
+        imageView.setDrawingCacheEnabled(false);
+
+        // add listener for pinch and drag gestures
+        imageView.setOnTouchListener(this);
+
+        // create layout
+        LinearLayout linLayout = new LinearLayout(this);
+
+		// add ImageView to the Layout
+        linLayout.addView(imageView, new LinearLayout.LayoutParams(
+                      LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+
+        // set LinearLayout as ContentView
+        setContentView(linLayout);
+
+        // done ? :)
+
+	}
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+
+		ImageView view = (ImageView) v;
+
+		// Dump touch event to log
+		dumpEvent(event);
+
+		// Handle touch events here...
+		switch (event.getAction() & MotionEvent.ACTION_MASK) {
+		case MotionEvent.ACTION_DOWN:
+			savedMatrix.set(matrix);
+			start.set(event.getX(), event.getY());
+			Log.d(TAG, "mode=DRAG");
+			mode = DRAG;
+			break;
+
+		case MotionEvent.ACTION_POINTER_DOWN:
+
+			oldDist = spacing(event);
+			Log.d(TAG, "oldDist=" + oldDist);
+
+			if (oldDist > 10f) {
+
+				savedMatrix.set(matrix);
+				midPoint(mid, event);
+				mode = ZOOM;
+				Log.d(TAG, "mode=ZOOM");
+
+			}
+
+			break;
+
+		case MotionEvent.ACTION_UP:
+
+		case MotionEvent.ACTION_POINTER_UP:
+
+			mode = NONE;
+			Log.d(TAG, "mode=NONE");
+			break;
+
+		case MotionEvent.ACTION_MOVE:
+
+			if (mode == DRAG) {
+
+				// ...
+				matrix.set(savedMatrix);
+				matrix.postTranslate(event.getX() - start.x, event.getY()
+						- start.y);
+
+			} else if (mode == ZOOM) {
+
+				float newDist = spacing(event);
+				Log.d(TAG, "newDist=" + newDist);
+
+				if (newDist > 10f) {
+
+					matrix.set(savedMatrix);
+					float scale = newDist / oldDist;
+					matrix.postScale(scale, scale, mid.x, mid.y);
+
+				}
+
+			}
+
+			break;
+
 		}
-		
-    }
-    
+
+		view.setImageMatrix(matrix);
+
+		return true; // indicate event was handled
+
+	}
+
+	/** Show an event in the LogCat view, for debugging */
+	private void dumpEvent(MotionEvent event) {
+
+		String names[] = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE",
+				"POINTER_DOWN", "POINTER_UP", "7?", "8?", "9?" };
+		StringBuilder sb = new StringBuilder();
+		int action = event.getAction();
+		int actionCode = action & MotionEvent.ACTION_MASK;
+		sb.append("event ACTION_").append(names[actionCode]);
+
+		if (actionCode == MotionEvent.ACTION_POINTER_DOWN
+				|| actionCode == MotionEvent.ACTION_POINTER_UP) {
+
+			sb.append("(pid ").append(
+					action >> MotionEvent.ACTION_POINTER_ID_SHIFT);
+			sb.append(")");
+
+		}
+
+		sb.append("[");
+
+		for (int i = 0; i < event.getPointerCount(); i++) {
+
+			sb.append("#").append(i);
+			sb.append("(pid ").append(event.getPointerId(i));
+			sb.append(")=").append((int) event.getX(i));
+			sb.append(",").append((int) event.getY(i));
+
+			if (i + 1 < event.getPointerCount())
+				sb.append(";");
+
+		}
+
+		sb.append("]");
+		Log.d(TAG, sb.toString());
+
+	}
+
+	/** Determine the space between the first two fingers */
+	private float spacing(MotionEvent event) {
+
+		float x = event.getX(0) - event.getX(1);
+		float y = event.getY(0) - event.getY(1);
+		return FloatMath.sqrt(x * x + y * y);
+
+	}
+
+	/** Calculate the mid point of the first two fingers */
+	private void midPoint(PointF point, MotionEvent event) {
+
+		float x = event.getX(0) + event.getX(1);
+		float y = event.getY(0) + event.getY(1);
+		point.set(x / 2, y / 2);
+
+	} 
+
+
+	public void redraw() {
+
+		Canvas canvas = new Canvas();
+		canvas.setBitmap(updatedMap);
+
+		// draws a mock map arbitrarily selected from a bigger one.
+		// the real implementation should draw a vectorial map based
+		// on the nodes we select from the database based on the
+		// location of the movil...
+		canvas.drawBitmap(updatedMap, 1, 1, null);
+
+		// from now on, we'll draw several circles, based on their xy
+		// coordinates. none of these points are of special interest 
+		// right now, but they are drawn as a proof of concept. 
+		// they may be used to represent several things as towns, 
+		// filling stations, and other points of interest for the
+		// traveler right next to to the circle, we'll write (draw,
+		// really) its description
+		CartesianConverter cc = getCartesianConverter(updatedMap.getHeight(), updatedMap.getWidth());
+		Paint paint = new Paint();
+		paint.setStyle(Paint.Style.FILL);
+		paint.setAntiAlias(true);
+		paint.setTextSize(8);
+		float RADIUS = 2;
+		int xy[];
+
+		for (Vertice vertice : ruta.getRuta()) {
+
+			xy = cc.getXY(vertice);
+			paint.setColor(Color.BLUE);
+			canvas.drawCircle(xy[0], xy[1], RADIUS, paint);
+			paint.setColor(Color.WHITE);
+			canvas.drawText(vertice.getNombre(), xy[0], xy[1] + 5, paint);
+
+		}
+
+	}
+
+	private CartesianConverter getCartesianConverter(int height, int width) {
+
+		return (CartesianConverter) new CartesianConverter()
+				.latUpLeft(-30.0000). 		// La Falda 		set Y
+				longUpLeft(-65.0000). 		// "   "    		set X
+				latDownRight(-35.0000). 	// Buenos Aires  	set Y
+				longDownRight(-57.0000). 	// "     " 			set X
+				imgHeight(height).imgWidht(width).build();
+
+	}
+
+	
 }
