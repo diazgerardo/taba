@@ -15,10 +15,10 @@ public class CoordConverterTest extends TestCase {
 
     	   LinkedList<Vertice> ruta = getRuta();
                CoordConverter c = new CartesianConverter().
-					latUpLeft(-31.05764). 		// La Falda  	y=0
-					longUpLeft(-64.507141). 	//  "   "    	x=0
-					latDownRight(-34.538812).	// Buenos Aires y=250
-					longDownRight(-58.475763).	//    "     "	y=600
+					yUpLeft(-31.05764). 	// La Falda  	y=0
+					xUpLeft(-64.507141). 	//  "   "    	x=0
+					yDownRight(-34.538812).	// Buenos Aires y=250
+					xDownRight(-58.475763).	//    "     "	y=600
 					imgHeight(IMG_SIZE).
 					imgWidht(IMG_SIZE);
                
@@ -36,7 +36,7 @@ public class CoordConverterTest extends TestCase {
 		
 		File xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/buenosAires-Cordoba.xml");
 		RutaParser dpe = RutaParser.getInstance();
-		dpe.runExample(xml);
+		dpe.parse(xml);
 		return dpe.getRuta();
 
 	}

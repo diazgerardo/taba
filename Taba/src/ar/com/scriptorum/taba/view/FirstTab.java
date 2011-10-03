@@ -19,7 +19,7 @@ public class FirstTab extends MyActivity {
 		super.onCreate(savedInstanceState);
 		root = new LinearLayout(this);
 		lv = new ListView(this);
-		lv.setAdapter(new ArrayAdapter<Vertice>(this, R.layout.list_item,ruta.getRuta()));
+		lv.setAdapter(new ArrayAdapter<Vertice>(this, R.layout.list_item,getRuta().getVertices()));
 		lv.setBackgroundColor(Color.WHITE);
 		root.addView(lv);
 		root.setBackgroundColor(Color.BLACK);

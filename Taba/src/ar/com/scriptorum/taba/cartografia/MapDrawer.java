@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import ar.com.scriptorum.taba.abstractions.Ruta;
 import ar.com.scriptorum.taba.abstractions.Vertice;
+import ar.com.scriptorum.taba.managers.RutaManager;
 
 public class MapDrawer { 
 
@@ -48,7 +49,7 @@ public class MapDrawer {
 		float RADIUS = 2;
 		int xy[];
 
-		for (Vertice vertice : ruta.getRuta()) {
+		for (Vertice vertice : ruta.getVertices()) {
 
 			xy = cc.getXY(vertice);
 			paint.setColor(Color.BLUE);
@@ -73,14 +74,12 @@ public class MapDrawer {
 	
 	private CartesianConverter getCartesianConverter(int height, int width) {
 
-		// TODO remove these magic numbers replacing them with dynamic maximum/minimum
-		// values taken from the path (Ruta) being drawn...
-		return (CartesianConverter) new CartesianConverter()
-				.latUpLeft(-30.0000). 		
-				longUpLeft(-65.0000). 		
-				latDownRight(-35.0000). 	
-				longDownRight(-57.0000). 	
-				imgHeight(height).imgWidht(width).build();
+				return (CartesianConverter) new CartesianConverter().
+					yUpLeft(RutaManager.getInstance().getNorthernMost()). 		
+					xUpLeft(RutaManager.getInstance().getWesternMost()). 		
+					yDownRight(RutaManager.getInstance().getSouthernMost()). 	
+					xDownRight(RutaManager.getInstance().getEasternMost()). 	
+					imgHeight(height).imgWidht(width).build();
 
 	}
 

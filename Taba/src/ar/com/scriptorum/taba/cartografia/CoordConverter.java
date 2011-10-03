@@ -37,28 +37,28 @@ public abstract class CoordConverter {
 		
 	}
 
-	public CoordConverter latUpLeft(double latUpLeft) {
+	public CoordConverter yUpLeft(double latUpLeft) {
 
 		this.latUpLeft = latUpLeft;
 		return this;
 		
 	}
 
-	public CoordConverter longUpLeft(double longUpLeft) {
+	public CoordConverter xUpLeft(double longUpLeft) {
 		
 		this.longUpLeft = longUpLeft;
 		return this;
 		
 	}
 
-	public CoordConverter latDownRight(double latDownRigth) {
+	public CoordConverter yDownRight(double latDownRigth) {
 		
 		this.latDownRigth = latDownRigth;
 		return this;
 		
 	}
 
-	public CoordConverter longDownRight(double longDownRight) {
+	public CoordConverter xDownRight(double longDownRight) {
 		
 		this.longDownRight = longDownRight;
 		return this;

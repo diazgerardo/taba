@@ -51,7 +51,7 @@ public class FourthTab extends MyActivity implements OnTouchListener {
         // the ImageView, ImageButton or what ever else fits your 
         // particular needs
         BitmapDrawable bmd = new MapDrawer().
-        						ruta(ruta).
+        						ruta(getRuta()).
         						drawOn(updatedMap).
         						asDrawable();
 

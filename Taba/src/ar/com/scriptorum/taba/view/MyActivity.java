@@ -2,22 +2,20 @@ package ar.com.scriptorum.taba.view;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.File;
 
 import android.app.Activity;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.widget.TextView;
 import ar.com.scriptorum.taba.abstractions.Ruta;
+import ar.com.scriptorum.taba.managers.RutaManager;
 import ar.com.scriptorum.taba.singletons.Movil;
-import ar.com.scriptorum.taba.singletons.RutaParser;
 
 
 public class MyActivity extends Activity implements PropertyChangeListener {
-	protected File xml;
+
 	protected static Movil movil;
 	protected static TextView myVelocidadParcial;
 	protected static TextView myVelocidadReal;
@@ -52,17 +50,9 @@ public class MyActivity extends Activity implements PropertyChangeListener {
 	}
 
 	
-	protected void getRuta() {
-		
-		if(null == mChosenFile){
-			ruta = new Ruta();
-			return;
-		}
-		
-		xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + mChosenFile);
-		RutaParser dpe = RutaParser.getInstance();
-		dpe.runExample(xml);
-		ruta.setRuta(dpe.getRuta());
+	protected Ruta getRuta() {
+		// delegates into RutaManager
+		return RutaManager.getInstance().getRuta(mChosenFile);
 		
 	}
 
