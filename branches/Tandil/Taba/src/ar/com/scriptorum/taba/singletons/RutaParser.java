@@ -32,7 +32,7 @@ public class RutaParser {
 		return rutaParser;
 	}
 
-	public void runExample(File xml) {
+	public void parse(File xml) {
 		parseXmlFile(xml);
 		parseDocument();
 	}
@@ -60,7 +60,7 @@ public class RutaParser {
 			for(int i = 0 ; i < nl.getLength();i++) {
 				Element el = (Element)nl.item(i);
 				Vertice e = getVertice(el);
-				ruta.getRuta().add(e);
+				ruta.getVertices().add(e);
 			}
 		}
 	}
@@ -87,6 +87,6 @@ public class RutaParser {
 
 	
 	public LinkedList<Vertice> getRuta() {
-		return ruta.getRuta();
+		return ruta.getVertices();
 	}
 }

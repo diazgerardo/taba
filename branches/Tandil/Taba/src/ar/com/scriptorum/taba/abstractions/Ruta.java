@@ -9,9 +9,13 @@ import ar.com.scriptorum.taba.singletons.Movil;
 
 public class Ruta {
 
-	protected LinkedList<Vertice> ruta = new LinkedList<Vertice>();
+	protected LinkedList<Vertice> vertices;
 
 	private static final long serialVersionUID = -6633290557437173334L;
+	
+	public Ruta() {
+		 vertices = new LinkedList<Vertice>();
+	}
 
 	public void update() {
 		Movil movil = Movil.getInstance();
@@ -20,7 +24,7 @@ public class Ruta {
 		// TODO esta cocinada usando flags es horrorosa y hay q eliminarla 
 		boolean inicio=true, cambio=true, cambioAnterior=true;
 		Vertice rutaLocationAnterior = null;
-		for ( Vertice rutaLocation : ruta) {
+		for ( Vertice rutaLocation : vertices) {
 			Location.distanceBetween(movilLocation.getLatitude(),movilLocation.getLongitude(), rutaLocation.getLatitud().doubleValue(),rutaLocation.getLongitud().doubleValue(), results);
 			rutaLocation.setDistanciaAlMovil(new BigDecimal(results[0]));
 			if (null!=movil.getVelocidadPromedioReal() && movil.getVelocidadPromedioReal().doubleValue()>0) {
@@ -54,12 +58,12 @@ public class Ruta {
 		return tiempoEstimadoEnMillis;
 	}
 
-	public LinkedList<Vertice> getRuta() {
-		return ruta;
+	public LinkedList<Vertice> getVertices() {
+		return vertices;
 	}
 
-	public void setRuta(LinkedList<Vertice> ruta) {
-		this.ruta = ruta;
+	public void setVertices(LinkedList<Vertice> vertices) {
+		this.vertices = vertices;
 	}
 
 }

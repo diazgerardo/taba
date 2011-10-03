@@ -60,8 +60,6 @@ public class ThirdTab extends MyActivity {
 				ruta = null;
 				// pick file
 				showDialog(1);
-				// update ruta
-				getRuta();
 				
 			}
 		});
