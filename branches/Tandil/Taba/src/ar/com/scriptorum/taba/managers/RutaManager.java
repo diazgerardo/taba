@@ -58,13 +58,13 @@ public class RutaManager extends AbstractManager {
 		
 		if(null == fileName){
 		
-			return ruta;
+			return new Ruta();
 		
 		}
 		
 		File xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + fileName);
 		RutaParser.getInstance().parse(xml);
-		ruta.setVertices(RutaParser.getInstance().getRuta());
+		ruta = (RutaParser.getInstance().getRuta());
 		Double latitude, longitude;
 		for(Vertice v: ruta.getVertices()) {
 			
