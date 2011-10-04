@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import junit.framework.TestCase;
 import android.os.Environment;
+import ar.com.scriptorum.taba.abstractions.Ruta;
 import ar.com.scriptorum.taba.abstractions.Vertice;
 import ar.com.scriptorum.taba.singletons.RutaParser;
 
@@ -13,7 +14,7 @@ public class CoordConverterTest extends TestCase {
 
        public void testConv() {
 
-    	   LinkedList<Vertice> ruta = getRuta();
+    	   LinkedList<Vertice> ruta = getRuta().getVertices();
                CoordConverter c = new CartesianConverter().
 					yUpLeft(-31.05764). 	// La Falda  	y=0
 					xUpLeft(-64.507141). 	//  "   "    	x=0
@@ -32,8 +33,8 @@ public class CoordConverterTest extends TestCase {
                }               
        }
 
-	private LinkedList<Vertice> getRuta() {
-		
+	private Ruta getRuta() {
+		// TODO Replace this method with a delegation to RutaManager..
 		File xml = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/buenosAires-Cordoba.xml");
 		RutaParser dpe = RutaParser.getInstance();
 		dpe.parse(xml);

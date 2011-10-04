@@ -1,7 +1,6 @@
 package ar.com.scriptorum.taba.singletons;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,13 +21,15 @@ public class RutaParser {
 	static RutaParser rutaParser;
 
 
-	private RutaParser(){}
+	private RutaParser(){
+		
+		ruta = new Ruta();
+	}
 	
 	public static RutaParser getInstance() {
 		if(null == rutaParser) {
 			rutaParser = new RutaParser();
 		}
-		ruta = new Ruta();
 		return rutaParser;
 	}
 
@@ -86,7 +87,7 @@ public class RutaParser {
 	
 
 	
-	public LinkedList<Vertice> getRuta() {
-		return ruta.getVertices();
+	public Ruta getRuta() {
+		return ruta;
 	}
 }
