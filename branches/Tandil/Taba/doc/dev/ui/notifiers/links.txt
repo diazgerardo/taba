@@ -7,10 +7,14 @@ If the application is running in the background and needs the user's attention, 
 If the application is performing work that the user must wait for (such as loading a file), the application should show a hovering progress wheel or bar. 
 Each of these notification tasks can be achieved using a different technique:
 
-A Toast Notification, for brief messages that come from the background. 
-A Status Bar Notification, for persistent reminders that come from the background and request the user's response. 
-A Dialog Notification, for Activity-related notifications. 
+* A Toast Notification, for brief messages that come from the background. 
+* A Status Bar Notification, for persistent reminders that come from the background and request the user's response. 
+* A Dialog Notification, for Activity-related notifications. 
+
+
 This document summarizes each of these techniques for notifying the user and includes links to full documentation.
 
 
 http://developer.android.com/guide/topics/ui/notifiers/index.html
+
+
