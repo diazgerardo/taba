@@ -15,6 +15,11 @@ http://www.uwgb.edu/dutchs/usefuldata/utmformulas.htm
 Google Maps
 http://maps.google.com
 
-Obtaining User Location
+Concepts about Obtaining User Location
 http://developer.android.com/guide/topics/location/obtaining-user-location.html
+ 
+Where Are My Friends 
+(app plots your contact's addresses on a map)
+http://blogoscoped.com/archive/2008-12-15-n14.html
+
  
