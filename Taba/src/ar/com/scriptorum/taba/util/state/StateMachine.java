@@ -3,27 +3,33 @@ package ar.com.scriptorum.taba.util.state;
 import java.util.List;
 import java.util.Set;
 
+import ar.com.scriptorum.taba.interfaces.Condition;
+import ar.com.scriptorum.taba.interfaces.State;
+import ar.com.scriptorum.taba.interfaces.Transition;
+
 class StateMachine {
-    List<Transition> transitions;
-    State current;
+	
+	State current;
+	List<Transition> transitions;
 
-    StateMachine(State start, List<Transition> transitions) {
-        this.current = start;
-        this.transitions = transitions;
-    }
+	StateMachine(State start, List<Transition> transitions) {
+		this.current = start;
+		this.transitions = transitions;
+	}
 
-    void apply(Set<Condition> conditions) {
-        current = getNextState(conditions);
-    }
+	void apply(Set<Condition> conditions) {
+		current = getNextState(conditions);
+	}
 
-    State getNextState(Set<Condition> conditions) {
-        for(Transition transition : transitions) {
-            boolean currentStateMatches = transition.from.equals(current);
-            boolean conditionsMatch = transition.conditions.equals(conditions);
-            if(currentStateMatches && conditionsMatch) {
-                return transition.to;
-            }
-        }
-        return null;
-    }
+	State getNextState(Set<Condition> conditions) {
+		for (Transition transition : transitions) {
+			boolean currentStateMatches = transition.from().equals(current);
+			boolean conditionsMatch = transition.conditions()
+					.equals(conditions);
+			if (currentStateMatches && conditionsMatch) {
+				return transition.to();
+			}
+		}
+		return current;
+	}
 }
