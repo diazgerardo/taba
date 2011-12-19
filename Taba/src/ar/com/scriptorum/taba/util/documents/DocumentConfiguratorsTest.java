@@ -44,8 +44,6 @@ public class DocumentConfiguratorsTest extends TestCase {
 		assertTrue(Constants.OPERACIONES.equals(ot.getDepartment()));
 		assertTrue(Constants.ORDEN_DE_TRABAJO.equals(ot.getDocName()));
 	}
-	
-	
 
 }
 
