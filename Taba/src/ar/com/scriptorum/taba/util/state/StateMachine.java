@@ -7,12 +7,12 @@ import ar.com.scriptorum.taba.interfaces.Condition;
 import ar.com.scriptorum.taba.interfaces.State;
 import ar.com.scriptorum.taba.interfaces.Transition;
 
-class StateMachine {
+public class StateMachine {
 	
 	State current;
 	List<Transition> transitions;
 
-	StateMachine(State start, List<Transition> transitions) {
+	public StateMachine(State start, List<Transition> transitions) {
 		this.current = start;
 		this.transitions = transitions;
 	}

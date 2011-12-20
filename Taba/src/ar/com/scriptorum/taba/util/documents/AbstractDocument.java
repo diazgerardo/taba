@@ -1,6 +1,6 @@
 package ar.com.scriptorum.taba.util.documents;
 
-import ar.com.scriptorum.taba.util.state.Workflow;
+import ar.com.scriptorum.taba.interfaces.Workflow;
 
 public abstract class AbstractDocument {
 	
