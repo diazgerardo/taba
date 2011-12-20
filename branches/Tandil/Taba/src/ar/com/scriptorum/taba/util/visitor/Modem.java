@@ -1,6 +1,6 @@
 package ar.com.scriptorum.taba.util.visitor;
 
-public interface Modem
+public interface Modem 
 {
 public void dial(String pno);
 public void hangup();

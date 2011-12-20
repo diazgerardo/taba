@@ -1,6 +1,9 @@
 package ar.com.scriptorum.taba.util.visitor;
 
-public class ZoomModem implements Modem {
+public class ZoomModem extends BaseModem implements Modem {
+
+	int configurationValue = 0;
+
 	public void dial(String pno) {
 	}
 
@@ -15,12 +18,7 @@ public class ZoomModem implements Modem {
 	}
 
 	public void accept(ModemVisitor v) {
-		try {
-			ZoomModemVisitor zv = (ZoomModemVisitor) v;
-			zv.visit(this);
-		} catch (ClassCastException e) {
-		}
+		v.visit(this);
 	}
 
-	int configurationValue = 42;
 }

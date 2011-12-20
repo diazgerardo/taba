@@ -1,12 +1,11 @@
 package ar.com.scriptorum.taba.util.documents;
 
+import ar.com.scriptorum.taba.factories.DocumentFactory;
 import junit.framework.TestCase;
 
 
 public class DocumentConfiguratorsTest extends TestCase {
 
-	private IngenieriaConfigurator ic;
-	private OperacionesConfigurator oc;
 	private AutorizacionIngreso ai;
 	private OrdenTrabajo ot;
 	
@@ -14,33 +13,26 @@ public class DocumentConfiguratorsTest extends TestCase {
 		super(test);
 	}
 
-	public void setUp() {
-		ic = new IngenieriaConfigurator();
-		oc = new OperacionesConfigurator();
-		ai = new AutorizacionIngreso();
-		ot = new OrdenTrabajo();
-	}
-	
 	public void testAutorizacionIngresoConfiguradaPorIngenieria() {
-		ai.accept(ic);
+		ai = DocumentFactory.newAutorizacionIngreso(new IngenieriaDocumentVisitor());
 		assertTrue(Constants.INGENIERIA.equals(ai.getDepartment()));
 		assertTrue(Constants.AUTORIZACION_DE_INGRESO.equals(ai.getDocName()));
 	}
 
 	public void testAutorizacionIngresoConfiguradaPorOperaciones() {
-		ai.accept(oc);
+		ai = DocumentFactory.newAutorizacionIngreso(new OperacionesDocumentVisitor());
 		assertTrue(Constants.OPERACIONES.equals(ai.getDepartment()));
 		assertTrue(Constants.AUTORIZACION_DE_INGRESO.equals(ai.getDocName()));
 	}
 	
 	public void testOrdenTrabajoConfiguradaPorIngenieria() {
-		ot.accept(ic);
+		ot = DocumentFactory.newOrdenTrabajo(new IngenieriaDocumentVisitor());
 		assertTrue(Constants.INGENIERIA.equals(ot.getDepartment()));
 		assertTrue(Constants.ORDEN_DE_TRABAJO.equals(ot.getDocName()));
 	}
 
 	public void testOrdenTrabajoConfiguradaPorOperaciones() {
-		ot.accept(oc);
+		ot = DocumentFactory.newOrdenTrabajo(new OperacionesDocumentVisitor());
 		assertTrue(Constants.OPERACIONES.equals(ot.getDepartment()));
 		assertTrue(Constants.ORDEN_DE_TRABAJO.equals(ot.getDocName()));
 	}
