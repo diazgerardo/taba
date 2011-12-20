@@ -1,9 +1,7 @@
-package ar.com.scriptorum.taba.util.state;
+package ar.com.scriptorum.taba.interfaces;
 
 import java.util.List;
 
-import ar.com.scriptorum.taba.interfaces.State;
-import ar.com.scriptorum.taba.interfaces.Transition;
 
 public interface Workflow {
 
@@ -11,5 +9,6 @@ public interface Workflow {
 	public void add(Transition t);
 	public State getCurrentState();
 	public Transition getLastTransition();
+	public boolean transicionate();
 
 }
