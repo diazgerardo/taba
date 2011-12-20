@@ -8,7 +8,7 @@ import ar.com.scriptorum.taba.interfaces.Transition;
 public class WorkflowImpl implements Workflow {
 
 	@Override
-	public List<Transition> getTransitions() {
+	public List<Transition> getWorkflow() {
 		throw new Error("unimplemented");
 	}
 

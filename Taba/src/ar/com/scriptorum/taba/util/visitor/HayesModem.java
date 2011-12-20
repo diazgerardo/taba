@@ -1,6 +1,9 @@
 package ar.com.scriptorum.taba.util.visitor;
 
-public class HayesModem implements Modem {
+public class HayesModem extends BaseModem implements Modem {
+
+	String configurationString;
+
 	public void dial(String pno) {
 	}
 
@@ -16,11 +19,9 @@ public class HayesModem implements Modem {
 
 	public void accept(ModemVisitor v) {
 		try {
-			HayesModemVisitor hv = (HayesModemVisitor) v;
-			hv.visit(this);
+			v.visit(this);
 		} catch (ClassCastException e) {
 		}
 	}
 
-	String configurationString = "&s1=4&D=3";
 }

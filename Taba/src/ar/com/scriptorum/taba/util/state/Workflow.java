@@ -7,7 +7,7 @@ import ar.com.scriptorum.taba.interfaces.Transition;
 
 public interface Workflow {
 
-	public List<Transition> getTransitions();
+	public List<Transition> getWorkflow();
 	public void add(Transition t);
 	public State getCurrentState();
 	public Transition getLastTransition();
