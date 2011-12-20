@@ -20,17 +20,14 @@ public class TransitionImpl extends NullTransition implements Transition {
 		return from + conditions.toString() + to;
 	}
 
-	@Override
 	public State from() {
 		return this.from;
 	}
 
-	@Override
 	public State to() {
 		return this.to;
 	}
 
-	@Override
 	public CustomSet<Condition> conditions() {
 		return this.conditions;
 	}
