@@ -1,8 +1,7 @@
 package ar.com.scriptorum.taba.util.state;
 
-import ar.com.scriptorum.taba.interfaces.State;
 
-public class NullCondition implements State {
+public class NullCondition {
 	
 	public String toString() {
 		return this.getClass().getSimpleName();

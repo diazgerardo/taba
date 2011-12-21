@@ -1,6 +1,6 @@
 package ar.com.scriptorum.taba.util.state;
 
-class State {
+public class State extends NullState {
     public State(String state) {
 		this.state=state;
 	}

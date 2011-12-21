@@ -7,7 +7,6 @@ import ar.com.scriptorum.taba.factories.ConditionFactory;
 import ar.com.scriptorum.taba.factories.StateFactory;
 import ar.com.scriptorum.taba.factories.TransitionFactory;
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.State;
 import ar.com.scriptorum.taba.interfaces.Transition;
 
 public class StateMachineTest extends TestCase {

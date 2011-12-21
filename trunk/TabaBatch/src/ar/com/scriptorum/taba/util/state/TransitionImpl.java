@@ -1,7 +1,6 @@
 package ar.com.scriptorum.taba.util.state;
 
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.State;
 import ar.com.scriptorum.taba.interfaces.Transition;
 
 public class TransitionImpl extends NullTransition implements Transition {
