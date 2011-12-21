@@ -21,9 +21,9 @@ public class IngenieriaDocWkfl implements Workflow {
 	
 
 	State first, second, third, fourth;
-	Condition condition1, condition2;
-	CustomSet<Condition> set1, set2;
-	LinkedList <CustomSet<Condition>> sets;
+	Condition condition1, condition2, condition3;
+	CustomSet<Condition> set1, set2, set3;
+	static LinkedList <CustomSet<Condition>> sets;
 	StateMachine machine;
 	
 	public IngenieriaDocWkfl() {
@@ -32,19 +32,30 @@ public class IngenieriaDocWkfl implements Workflow {
 		condition1 = ConditionFactory.newSimpleCondition("initial");
 		set1 = new CustomSet<Condition>();
 		set1.add(condition1);
-		validTransitions.addAll(TransitionFactory.newSimpleTransition(first, set1, second));
 		
 		second = StateFactory.newState("checker");
 		condition2 = ConditionFactory.newSimpleCondition("maker");
 		set2 = new CustomSet<Condition>();
 		set2.add(condition2);
-		validTransitions.addAll(TransitionFactory.newSimpleTransition(second, set2, third));
-
-		machine = new StateMachine(first,validTransitions);
 		
+		third = StateFactory.newState("validated");
+		condition3 = ConditionFactory.newSimpleCondition("checker");
+		set3 = new CustomSet<Condition>();
+		set3.add(condition3);
+
 		sets = new LinkedList<CustomSet<Condition>>();
 		sets.add(set1);
 		sets.add(set2);
+		sets.add(set3);
+
+		fourth = StateFactory.newState("finalized");
+
+		validTransitions.addAll(TransitionFactory.newSimpleTransition(first, set1, second));
+		validTransitions.addAll(TransitionFactory.newSimpleTransition(second, set2, third));
+		validTransitions.addAll(TransitionFactory.newSimpleTransition(third, set3, fourth));
+
+		machine = new StateMachine(first,validTransitions);
+		
 
 	}
 	
@@ -65,7 +76,9 @@ public class IngenieriaDocWkfl implements Workflow {
 	}
 
 	public boolean transicionate() {
-		return machine.apply(sets.iterator().next());
+		CustomSet<Condition> conditions = sets.iterator().next();
+		System.out.println(conditions);
+		return machine.apply(conditions);
 	}
 
 }
