@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.sound.sampled.Line;
-
 import ar.com.scriptorum.taba.util.FileUtils;
 import ar.com.scriptorum.taba.util.Record;
 

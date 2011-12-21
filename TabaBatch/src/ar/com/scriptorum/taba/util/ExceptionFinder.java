@@ -65,13 +65,13 @@ public class ExceptionFinder {
 	};
 	
 	private static ExceptionFinder exceptionFinder;
-	private static HashMap<String, List> hm;
+	private static HashMap<String, List<Boolean>> hm;
 	private ExceptionFinder () {
-		hm = new HashMap<String, List>();
+		hm = new HashMap<String, List<Boolean>>();
 		hm.put("REC|",Arrays.asList(rec));
-		hm.put("MOT|",Arrays.asList(rec));
-		hm.put("IND|",Arrays.asList(rec));
-		hm.put("MOB|",Arrays.asList(rec));
+		hm.put("MOT|",Arrays.asList(mot));
+		hm.put("IND|",Arrays.asList(ind));
+		hm.put("MOB|",Arrays.asList(mob));
 	}
 	public static ExceptionFinder getInstance() {
 		if(exceptionFinder == null) {
