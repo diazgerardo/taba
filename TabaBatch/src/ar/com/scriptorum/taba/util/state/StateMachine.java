@@ -17,6 +17,7 @@ public class StateMachine {
 	}
 
 	public boolean apply(Set<Condition> conditions) {
+		System.out.println(current);
 		State previousCurrent = current;
 		current = getNextState(conditions);
 		return !previousCurrent.equals(current);
