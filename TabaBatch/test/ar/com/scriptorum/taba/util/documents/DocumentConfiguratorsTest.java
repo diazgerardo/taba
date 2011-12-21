@@ -6,35 +6,38 @@ import junit.framework.TestCase;
 
 public class DocumentConfiguratorsTest extends TestCase {
 
-	private AutorizacionIngreso ai;
-	private OrdenTrabajo ot;
+	protected AutorizacionIngreso aiIng, aiOpe;
+	private OrdenTrabajo otIng, otOpe;
 	
 	public DocumentConfiguratorsTest(String test) {
 		super(test);
 	}
 
+	public void setUp() {
+		aiIng = DocumentFactory.newAutorizacionIngreso(new IngenieriaDocumentVisitor());
+		aiOpe = DocumentFactory.newAutorizacionIngreso(new OperacionesDocumentVisitor());
+		otIng = DocumentFactory.newOrdenTrabajo(new IngenieriaDocumentVisitor());
+		otOpe = DocumentFactory.newOrdenTrabajo(new OperacionesDocumentVisitor());
+	}
+	
 	public void testAutorizacionIngresoConfiguradaPorIngenieria() {
-		ai = DocumentFactory.newAutorizacionIngreso(new IngenieriaDocumentVisitor());
-		assertTrue(Constants.INGENIERIA.equals(ai.getDepartment()));
-		assertTrue(Constants.AUTORIZACION_DE_INGRESO.equals(ai.getDocName()));
+		assertTrue(Constants.INGENIERIA.equals(aiIng.getDepartment()));
+		assertTrue(Constants.AUTORIZACION_DE_INGRESO.equals(aiIng.getDocName()));
 	}
 
 	public void testAutorizacionIngresoConfiguradaPorOperaciones() {
-		ai = DocumentFactory.newAutorizacionIngreso(new OperacionesDocumentVisitor());
-		assertTrue(Constants.OPERACIONES.equals(ai.getDepartment()));
-		assertTrue(Constants.AUTORIZACION_DE_INGRESO.equals(ai.getDocName()));
+		assertTrue(Constants.OPERACIONES.equals(aiOpe.getDepartment()));
+		assertTrue(Constants.AUTORIZACION_DE_INGRESO.equals(aiOpe.getDocName()));
 	}
 	
 	public void testOrdenTrabajoConfiguradaPorIngenieria() {
-		ot = DocumentFactory.newOrdenTrabajo(new IngenieriaDocumentVisitor());
-		assertTrue(Constants.INGENIERIA.equals(ot.getDepartment()));
-		assertTrue(Constants.ORDEN_DE_TRABAJO.equals(ot.getDocName()));
+		assertTrue(Constants.INGENIERIA.equals(otIng.getDepartment()));
+		assertTrue(Constants.ORDEN_DE_TRABAJO.equals(otIng.getDocName()));
 	}
 
 	public void testOrdenTrabajoConfiguradaPorOperaciones() {
-		ot = DocumentFactory.newOrdenTrabajo(new OperacionesDocumentVisitor());
-		assertTrue(Constants.OPERACIONES.equals(ot.getDepartment()));
-		assertTrue(Constants.ORDEN_DE_TRABAJO.equals(ot.getDocName()));
+		assertTrue(Constants.OPERACIONES.equals(otOpe.getDepartment()));
+		assertTrue(Constants.ORDEN_DE_TRABAJO.equals(otOpe.getDocName()));
 	}
 
 }
