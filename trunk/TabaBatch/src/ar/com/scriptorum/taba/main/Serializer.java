@@ -10,6 +10,7 @@ public class Serializer {
 		SimpleBean sb = new SimpleBean();
 		sb.setDescripcion("abc");
 		String s = toXMLString(sb);
+		System.out.println("s="+s);
 	}
 	public static String toXMLString(SimpleBean s) {
 		StringBuffer xmlString = new StringBuffer();
