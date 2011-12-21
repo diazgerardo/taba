@@ -8,10 +8,10 @@ import ar.com.scriptorum.taba.factories.ConditionFactory;
 import ar.com.scriptorum.taba.factories.StateFactory;
 import ar.com.scriptorum.taba.factories.TransitionFactory;
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.State;
 import ar.com.scriptorum.taba.interfaces.Transition;
 import ar.com.scriptorum.taba.interfaces.Workflow;
 import ar.com.scriptorum.taba.util.state.CustomSet;
+import ar.com.scriptorum.taba.util.state.State;
 import ar.com.scriptorum.taba.util.state.StateMachine;
 
 public class IngenieriaDocWkfl implements Workflow {

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.State;
 import ar.com.scriptorum.taba.interfaces.Transition;
 import ar.com.scriptorum.taba.util.state.CustomSet;
+import ar.com.scriptorum.taba.util.state.State;
 import ar.com.scriptorum.taba.util.state.TransitionImpl;
 
 public class TransitionFactory {

@@ -1,6 +1,6 @@
 package ar.com.scriptorum.taba.util.visitor;
 
-import ar.com.scriptorum.taba.interfaces.State;
+import ar.com.scriptorum.taba.util.state.State;
 
 public class BaseModem {
 	private State state;

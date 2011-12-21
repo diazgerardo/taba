@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.State;
 import ar.com.scriptorum.taba.interfaces.Transition;
 
 public class StateMachine {

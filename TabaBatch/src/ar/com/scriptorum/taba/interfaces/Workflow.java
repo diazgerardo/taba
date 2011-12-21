@@ -2,6 +2,8 @@ package ar.com.scriptorum.taba.interfaces;
 
 import java.util.List;
 
+import ar.com.scriptorum.taba.util.state.State;
+
 
 public interface Workflow {
 
