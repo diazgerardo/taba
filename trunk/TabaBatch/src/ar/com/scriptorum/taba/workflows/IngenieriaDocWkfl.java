@@ -23,6 +23,7 @@ public class IngenieriaDocWkfl implements Workflow {
 	State first, second, third, fourth;
 	Condition condition1, condition2;
 	CustomSet<Condition> set1, set2;
+	LinkedList <CustomSet<Condition>> sets;
 	StateMachine machine;
 	
 	public IngenieriaDocWkfl() {
@@ -40,6 +41,10 @@ public class IngenieriaDocWkfl implements Workflow {
 		validTransitions.addAll(TransitionFactory.newSimpleTransition(second, set2, third));
 
 		machine = new StateMachine(first,validTransitions);
+		
+		sets = new LinkedList<CustomSet<Condition>>();
+		sets.add(set1);
+		sets.add(set2);
 
 	}
 	
@@ -60,8 +65,7 @@ public class IngenieriaDocWkfl implements Workflow {
 	}
 
 	public boolean transicionate() {
-		machine.apply(set2);
-		return !true;
+		return machine.apply(sets.iterator().next());
 	}
 
 }
