@@ -17,11 +17,11 @@ public class StateMachine {
 		this.transitions = transitions;
 	}
 
-	void apply(Set<Condition> conditions) {
+	public void apply(Set<Condition> conditions) {
 		current = getNextState(conditions);
 	}
 
-	State getNextState(Set<Condition> conditions) {
+	public State getNextState(Set<Condition> conditions) {
 		for (Transition transition : transitions) {
 			boolean currentStateMatches = transition.from().equals(current);
 			boolean conditionsMatch = transition.conditions()
