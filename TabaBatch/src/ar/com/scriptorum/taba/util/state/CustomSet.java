@@ -2,13 +2,19 @@ package ar.com.scriptorum.taba.util.state;
 
 import java.util.HashSet;
 
+import ar.com.scriptorum.taba.interfaces.Condition;
+
 public class CustomSet<T> extends HashSet<T> {
 
 	private static final long serialVersionUID = -3684776133520428553L;
 
 	private String className;
+	
+	public CustomSet(T t) {
+		super();
+		add(t);
+	}
 
-	@Override
 	public boolean add(T t) {
 		boolean result = super.add(t);
 		this.className = t.getClass().getSimpleName();

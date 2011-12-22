@@ -30,12 +30,10 @@ public class StateMachineTest extends TestCase {
 		sunny = ConditionFactory.newSimpleCondition("Sunny");
 
 		// sets
-		sunnySundaySet = new CustomSet<Condition>();
-		sunnySundaySet.add(sunday);
+		sunnySundaySet = new CustomSet<Condition>(sunday);
 		sunnySundaySet.add(sunny);
 
-		rainySundaySet = new CustomSet<Condition>();
-		rainySundaySet.add(sunday);
+		rainySundaySet = new CustomSet<Condition>(sunday);
 		rainySundaySet.add(rainy);
 
 		// transitions
@@ -48,17 +46,20 @@ public class StateMachineTest extends TestCase {
 	
 	public void testPaintInSunnyDay() {
 
-		// of course we can paint in a sunny sunday! 
-		machine.apply(sunnySundaySet);
-		assertTrue("pintando".equals(machine.current.toString()));
+		State current = machine.current;
+		assertNotNull(current);
+		State next = machine.apply(sunnySundaySet);
+		assertFalse(current.equals(next)); // ok, starts painting 
 
 	}
 	
 	public void testPaintInRainyDay() {
 
-		// cannot paint in a rainy sunday 
-		machine.apply(rainySundaySet);
-		assertFalse("pintando".equals(machine.current.toString()));
+
+		State current = machine.current;
+		assertNotNull(current);
+		State next = machine.apply(rainySundaySet);
+		assertTrue(current.equals(next)); // => cannot paint
 	
 	}
 
