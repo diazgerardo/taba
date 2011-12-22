@@ -16,11 +16,8 @@ public class StateMachine {
 		this.transitions = transitions;
 	}
 
-	public boolean apply(Set<Condition> conditions) {
-		System.out.println(current);
-		State previousCurrent = current;
-		current = getNextState(conditions);
-		return !previousCurrent.equals(current);
+	public State apply(Set<Condition> conditions) {
+		return getNextState(conditions);
 	}
 
 	public State getNextState(Set<Condition> conditions) {
