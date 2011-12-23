@@ -1,6 +1,6 @@
 package ar.com.scriptorum.taba.util.state;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Set;
 
 import ar.com.scriptorum.taba.interfaces.Condition;
@@ -9,11 +9,11 @@ import ar.com.scriptorum.taba.interfaces.Transition;
 public class StateMachine {
 	
 	State current;
-	List<Transition> transitions;
+	HashMap<State, Transition> transitions;
 
-	public StateMachine(State start, List<Transition> transitions) {
+	public StateMachine(State start, HashMap<State, Transition> validTransitions) {
 		this.current = start;
-		this.transitions = transitions;
+		this.transitions = validTransitions;
 	}
 
 	public State apply(Set<Condition> conditions) {
@@ -21,14 +21,16 @@ public class StateMachine {
 	}
 
 	public State getNextState(Set<Condition> conditions) {
-		for (Transition transition : transitions) {
-			boolean currentStateMatches = transition.from().equals(current);
-			boolean conditionsMatch = transition.conditions()
-					.equals(conditions);
-			if (currentStateMatches && conditionsMatch) {
-				return transition.to();
-			}
+
+		try {
+		Transition transition = transitions.get(current); 
+		if(transition.conditions().equals(conditions))
+			return transition.to();
+		} catch(Exception e) {
+			// not found? anything else? just print stacktrace and shutup
+			e.printStackTrace();
 		}
+		
 		return current;
 	}
 }

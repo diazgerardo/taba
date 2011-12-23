@@ -1,6 +1,5 @@
 package ar.com.scriptorum.taba.workflows;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,10 +17,10 @@ import ar.com.scriptorum.taba.util.state.StateMachine;
 public class IngenieriaDocWkfl implements Workflow {
 
 	LinkedList <Transition> workflows = new LinkedList<Transition>();
-	List<Transition> validTransitions = new ArrayList<Transition>();
+	HashMap<State, Transition> validTransitions;
 	
 	State first, second, third, fourth;
-	static HashMap<State, CustomSet<Condition>> conditionsForEachState;
+	HashMap<State, CustomSet<Condition>> conditionsForState;
 	StateMachine stateMachine;
 	State currentState;
 	public IngenieriaDocWkfl() {
@@ -33,15 +32,16 @@ public class IngenieriaDocWkfl implements Workflow {
 		fourth = StateFactory.newState("finalized");
 		
 		// 2nd, setup their associated conditions
-		conditionsForEachState = new HashMap<State, CustomSet<Condition>>();
-		conditionsForEachState.put(first, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("initial")));
-		conditionsForEachState.put(second, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("maker")));
-		conditionsForEachState.put(third, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("checker")));
+		conditionsForState = new HashMap<State, CustomSet<Condition>>();
+		conditionsForState.put(first, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("initial")));
+		conditionsForState.put(second, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("maker")));
+		conditionsForState.put(third, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("checker")));
 		
-		// 3rd, setup transitions based on states and conditions 
-		validTransitions.addAll(TransitionFactory.newSimpleTransition(first, conditionsForEachState.get(first), second));
-		validTransitions.addAll(TransitionFactory.newSimpleTransition(second, conditionsForEachState.get(second), third));
-		validTransitions.addAll(TransitionFactory.newSimpleTransition(third, conditionsForEachState.get(third), fourth));
+		// 3rd, setup transitions based on states and conditions
+		validTransitions = new HashMap<State, Transition>();
+		validTransitions.put(first, TransitionFactory.newSimpleTransition(first, conditionsForState.get(first), second));
+		validTransitions.put(second, TransitionFactory.newSimpleTransition(second, conditionsForState.get(second), third));
+		validTransitions.put(third, TransitionFactory.newSimpleTransition(third, conditionsForState.get(third), fourth));
 		
 		// 4th, create the state machine with all previous data
 		stateMachine = new StateMachine(first,validTransitions);
@@ -68,9 +68,9 @@ public class IngenieriaDocWkfl implements Workflow {
 	}
 
 	public boolean transicionate() {
-		State previous = getCurrentState();
-		this.currentState = stateMachine.apply(conditionsForEachState.get(getCurrentState()));
-		return !previous.equals(currentState);
+		State previous = this.currentState;
+		this.currentState = stateMachine.apply(conditionsForState.get(previous));
+		return !previous.equals(this.currentState);
 	}
 
 }

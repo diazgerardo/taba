@@ -2,8 +2,6 @@ package ar.com.scriptorum.taba.util.state;
 
 import java.util.HashSet;
 
-import ar.com.scriptorum.taba.interfaces.Condition;
-
 public class CustomSet<T> extends HashSet<T> {
 
 	private static final long serialVersionUID = -3684776133520428553L;
