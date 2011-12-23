@@ -16,7 +16,7 @@ public class TransitionImpl extends NullTransition implements Transition {
 	}
 
 	public String toString() {
-		return from + conditions.toString() + to;
+		return "[From=" + from + "] " + "[Condition="+conditions.toString() + "] [To="+to+"] " ;
 	}
 
 	public State from() {

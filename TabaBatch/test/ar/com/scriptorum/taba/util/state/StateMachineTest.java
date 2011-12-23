@@ -1,6 +1,6 @@
 package ar.com.scriptorum.taba.util.state;
 
-import java.util.List;
+import java.util.HashMap;
 
 import junit.framework.TestCase;
 import ar.com.scriptorum.taba.factories.ConditionFactory;
@@ -13,8 +13,8 @@ public class StateMachineTest extends TestCase {
 
 	State first, second, third, fourth;
 	Condition sunday, rainy, sunny;
-	List<Transition> transitions;
-	CustomSet<Condition> sunnySundaySet, rainySundaySet;
+	HashMap<State, Transition> transitions;
+	HashMap<State, CustomSet<Condition>> sunnySundaySet, rainySundaySet;
 	StateMachine machine;
 	
 	@Override
@@ -30,14 +30,17 @@ public class StateMachineTest extends TestCase {
 		sunny = ConditionFactory.newSimpleCondition("Sunny");
 
 		// sets
-		sunnySundaySet = new CustomSet<Condition>(sunday);
-		sunnySundaySet.add(sunny);
+		sunnySundaySet = new HashMap<State, CustomSet<Condition>>();
+		sunnySundaySet.put(first, new CustomSet<Condition>(sunday));
+		sunnySundaySet.get(first).add(sunny);
 
-		rainySundaySet = new CustomSet<Condition>(sunday);
-		rainySundaySet.add(rainy);
+		rainySundaySet = new HashMap<State, CustomSet<Condition>>();
+		rainySundaySet.put(first, new CustomSet<Condition>(sunday));
+		rainySundaySet.get(first).add(rainy);
 
 		// transitions
-		transitions = TransitionFactory.newSimpleTransition(first, sunnySundaySet, second);
+		transitions = new HashMap<State, Transition>();
+		transitions.put(first, TransitionFactory.newSimpleTransition(first, sunnySundaySet.get(first), second));
 		
 		// machine creation
 		machine = new StateMachine(first, transitions);
@@ -48,17 +51,16 @@ public class StateMachineTest extends TestCase {
 
 		State current = machine.current;
 		assertNotNull(current);
-		State next = machine.apply(sunnySundaySet);
+		State next = machine.apply(sunnySundaySet.get(machine.current));
 		assertFalse(current.equals(next)); // ok, starts painting 
 
 	}
 	
 	public void testPaintInRainyDay() {
 
-
 		State current = machine.current;
 		assertNotNull(current);
-		State next = machine.apply(rainySundaySet);
+		State next = machine.apply(rainySundaySet.get(current));
 		assertTrue(current.equals(next)); // => cannot paint
 	
 	}

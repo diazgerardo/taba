@@ -9,6 +9,7 @@ public class DocumentTransitionTest extends DocumentConfiguratorsTest {
 	public void testAutorizacionIngresoTransition() {
 		assertTrue(aiIng.getWorkflow().transicionate());
 		assertTrue(aiIng.getWorkflow().transicionate());
+		assertTrue(aiIng.getWorkflow().transicionate());
 	}
 
 }
