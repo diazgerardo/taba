@@ -26,16 +26,16 @@ public class IngenieriaDocWkfl implements Workflow {
 	public IngenieriaDocWkfl() {
 		
 		// 1st, setup all states known
-		first = StateFactory.newState("maker");
-		second = StateFactory.newState("checker");
+		first = StateFactory.newState("edited");
+		second = StateFactory.newState("checked");
 		third = StateFactory.newState("validated");
 		fourth = StateFactory.newState("finalized");
 		
 		// 2nd, setup their associated conditions
 		conditionsForState = new HashMap<State, CustomSet<Condition>>();
-		conditionsForState.put(first, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("initial")));
-		conditionsForState.put(second, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("maker")));
-		conditionsForState.put(third, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("checker")));
+		conditionsForState.put(first, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("canCheck")));
+		conditionsForState.put(second, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("canValidate")));
+		conditionsForState.put(third, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("canFinalize")));
 		
 		// 3rd, setup transitions based on states and conditions
 		validTransitions = new HashMap<State, Transition>();

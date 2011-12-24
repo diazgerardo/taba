@@ -17,7 +17,8 @@ public class StateMachine {
 	}
 
 	public State apply(Set<Condition> conditions) {
-		return getNextState(conditions);
+		current = getNextState(conditions); 
+		return current;
 	}
 
 	public State getNextState(Set<Condition> conditions) {

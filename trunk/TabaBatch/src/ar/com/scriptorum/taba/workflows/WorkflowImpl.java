@@ -1,8 +1,10 @@
-package ar.com.scriptorum.taba.util.state;
+package ar.com.scriptorum.taba.workflows;
 
 import java.util.List;
 
 import ar.com.scriptorum.taba.interfaces.Transition;
+import ar.com.scriptorum.taba.util.state.State;
+import ar.com.scriptorum.taba.util.state.Workflow;
 
 public class WorkflowImpl implements Workflow {
 
