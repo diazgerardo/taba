@@ -2,19 +2,20 @@ package ar.com.scriptorum.taba.workflows;
 
 import java.util.List;
 
-import ar.com.scriptorum.taba.interfaces.Transition;
+import ar.com.scriptorum.taba.interfaces.SimpleTransition;
+import ar.com.scriptorum.taba.interfaces.Workflow;
+import ar.com.scriptorum.taba.util.documents.AbstractDocument;
 import ar.com.scriptorum.taba.util.state.State;
-import ar.com.scriptorum.taba.util.state.Workflow;
 
-public class WorkflowImpl implements Workflow {
+public class WorkflowImpl implements Workflow<AbstractDocument> {
 
 	@Override
-	public List<Transition> getWorkflow() {
+	public List<SimpleTransition> getWorkflow() {
 		throw new Error("unimplemented");
 	}
 
 	@Override
-	public void add(Transition t) {
+	public void add(SimpleTransition t) {
 		throw new Error("unimplemented");
 	}
 
@@ -24,7 +25,17 @@ public class WorkflowImpl implements Workflow {
 	}
 
 	@Override
-	public Transition getLastTransition() {
+	public SimpleTransition getLastTransition() {
+		throw new Error("unimplemented");
+	}
+
+	@Override
+	public boolean transicionate() {
+		throw new Error("unimplemented");
+	}
+
+	@Override
+	public AbstractDocument getTarget() {
 		throw new Error("unimplemented");
 	}
 

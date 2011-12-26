@@ -4,16 +4,16 @@ import java.util.HashMap;
 
 import junit.framework.TestCase;
 import ar.com.scriptorum.taba.factories.ConditionFactory;
-import ar.com.scriptorum.taba.factories.StateFactory;
+import ar.com.scriptorum.taba.factories.StateBuilder;
 import ar.com.scriptorum.taba.factories.TransitionFactory;
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.Transition;
+import ar.com.scriptorum.taba.interfaces.SimpleTransition;
 
 public class StateMachineTest extends TestCase {
 
 	State first, second, third, fourth;
 	Condition sunday, rainy, sunny;
-	HashMap<State, Transition> transitions;
+	HashMap<State, SimpleTransition> transitions;
 	HashMap<State, CustomSet<Condition>> sunnySundaySet, rainySundaySet;
 	StateMachine machine;
 	
@@ -21,8 +21,8 @@ public class StateMachineTest extends TestCase {
 	public void setUp() {
 
 		// states
-		first = StateFactory.newState("preparando");
-		second = StateFactory.newState("pintando");
+		first = new StateBuilder().createState("preparando").build();
+		second = new StateBuilder().createState("pintando").build();
 
 		// conditions
 		sunday = ConditionFactory.newSimpleCondition("Sunday");
@@ -39,7 +39,7 @@ public class StateMachineTest extends TestCase {
 		rainySundaySet.get(first).add(rainy);
 
 		// transitions
-		transitions = new HashMap<State, Transition>();
+		transitions = new HashMap<State, SimpleTransition>();
 		transitions.put(first, TransitionFactory.newSimpleTransition(first, sunnySundaySet.get(first), second));
 		
 		// machine creation

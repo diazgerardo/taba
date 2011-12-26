@@ -4,7 +4,7 @@ import ar.com.scriptorum.taba.util.state.CustomSet;
 import ar.com.scriptorum.taba.util.state.State;
 
 
-public interface Transition {
+public interface SimpleTransition {
 
 	public State from();
 	public State to();

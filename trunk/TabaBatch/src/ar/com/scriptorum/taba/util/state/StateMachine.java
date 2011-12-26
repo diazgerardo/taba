@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Set;
 
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.Transition;
+import ar.com.scriptorum.taba.interfaces.SimpleTransition;
 
 public class StateMachine {
 	
 	State current;
-	HashMap<State, Transition> transitions;
+	HashMap<State, SimpleTransition> transitions;
 
-	public StateMachine(State start, HashMap<State, Transition> validTransitions) {
+	public StateMachine(State start, HashMap<State, SimpleTransition> validTransitions) {
 		this.current = start;
 		this.transitions = validTransitions;
 	}
@@ -24,9 +24,10 @@ public class StateMachine {
 	public State getNextState(Set<Condition> conditions) {
 
 		try {
-		Transition transition = transitions.get(current); 
-		if(transition.conditions().equals(conditions))
-			return transition.to();
+			SimpleTransition transition = transitions.get(current); 
+			if(transition.conditions().equals(conditions)) {
+				return transition.to();
+			}
 		} catch(Exception e) {
 			// not found? anything else? just print stacktrace and shutup
 			e.printStackTrace();

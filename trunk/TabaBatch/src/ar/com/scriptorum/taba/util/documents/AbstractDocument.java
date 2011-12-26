@@ -4,7 +4,7 @@ import ar.com.scriptorum.taba.interfaces.Workflow;
 
 public abstract class AbstractDocument {
 	
-	private Workflow workflow;
+	private Workflow<AbstractDocument> workflow;
 	private String docName;
 	private String department;
 	
@@ -21,10 +21,10 @@ public abstract class AbstractDocument {
 		this.department = deparment;
 	}
 	
-	public Workflow getWorkflow() {
+	public Workflow<AbstractDocument> getWorkflow() {
 		return workflow;
 	}
-	public void setWorkflow(Workflow workflow) {
+	public void setWorkflow(Workflow<AbstractDocument> workflow) {
 		this.workflow = workflow;
 	}
 
