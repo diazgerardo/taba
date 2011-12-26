@@ -5,12 +5,13 @@ import java.util.List;
 import ar.com.scriptorum.taba.util.state.State;
 
 
-public interface Workflow {
-
-	public List<Transition> getWorkflow();
-	public void add(Transition t);
+public interface Workflow <T>{
+	
+	public T getTarget();
+	public List<SimpleTransition> getWorkflow();
+	public void add(SimpleTransition t);
 	public State getCurrentState();
-	public Transition getLastTransition();
+	public SimpleTransition getLastTransition();
 	public boolean transicionate();
 
 }

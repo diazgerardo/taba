@@ -18,5 +18,6 @@ public class State extends NullState {
 		State state = (State)o;
 		return this.state.equals(state.toString());
 	}
+
 }
 

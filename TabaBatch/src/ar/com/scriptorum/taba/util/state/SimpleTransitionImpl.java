@@ -1,15 +1,15 @@
 package ar.com.scriptorum.taba.util.state;
 
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.Transition;
+import ar.com.scriptorum.taba.interfaces.SimpleTransition;
 
-public class TransitionImpl extends NullTransition implements Transition {
+public class SimpleTransitionImpl extends NullTransition implements SimpleTransition {
 
 	private State from;
 	private CustomSet<Condition> conditions;
 	private State to;
 
-	public TransitionImpl(State from, CustomSet<Condition> conditions, State to) {
+	public SimpleTransitionImpl(State from, CustomSet<Condition> conditions, State to) {
 		this.from = from;
 		this.conditions = conditions;
 		this.to = to;

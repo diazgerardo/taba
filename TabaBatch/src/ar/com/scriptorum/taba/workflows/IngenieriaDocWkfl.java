@@ -5,31 +5,37 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ar.com.scriptorum.taba.factories.ConditionFactory;
-import ar.com.scriptorum.taba.factories.StateFactory;
+import ar.com.scriptorum.taba.factories.StateBuilder;
 import ar.com.scriptorum.taba.factories.TransitionFactory;
+import ar.com.scriptorum.taba.interfaces.Asignador;
 import ar.com.scriptorum.taba.interfaces.Condition;
-import ar.com.scriptorum.taba.interfaces.Transition;
+import ar.com.scriptorum.taba.interfaces.SimpleTransition;
 import ar.com.scriptorum.taba.interfaces.Workflow;
+import ar.com.scriptorum.taba.util.documents.AbstractDocument;
+import ar.com.scriptorum.taba.util.state.Action;
+import ar.com.scriptorum.taba.util.state.AsignadorImpl;
 import ar.com.scriptorum.taba.util.state.CustomSet;
 import ar.com.scriptorum.taba.util.state.State;
 import ar.com.scriptorum.taba.util.state.StateMachine;
 
-public class IngenieriaDocWkfl implements Workflow {
+public class IngenieriaDocWkfl implements Workflow<AbstractDocument> {
 
-	LinkedList <Transition> workflows = new LinkedList<Transition>();
-	HashMap<State, Transition> validTransitions;
+	LinkedList <SimpleTransition> workflows = new LinkedList<SimpleTransition>();
+	HashMap<State, SimpleTransition> validTransitions;
 	
 	State first, second, third, fourth;
 	HashMap<State, CustomSet<Condition>> conditionsForState;
 	StateMachine stateMachine;
 	State currentState;
-	public IngenieriaDocWkfl() {
+	private AbstractDocument target;
+	public IngenieriaDocWkfl(AbstractDocument target) {
 		
+		this.target = target;
 		// 1st, setup all states known
-		first = StateFactory.newState("edited");
-		second = StateFactory.newState("checked");
-		third = StateFactory.newState("validated");
-		fourth = StateFactory.newState("finalized");
+		first = new StateBuilder().createState("edited").build();
+		second = new StateBuilder().createState("checked").build();
+		third = new StateBuilder().createState("validated").build();
+		fourth = new StateBuilder().createState("finalized").build();
 		
 		// 2nd, setup their associated conditions
 		conditionsForState = new HashMap<State, CustomSet<Condition>>();
@@ -38,10 +44,10 @@ public class IngenieriaDocWkfl implements Workflow {
 		conditionsForState.put(third, new CustomSet<Condition>(ConditionFactory.newSimpleCondition("canFinalize")));
 		
 		// 3rd, setup transitions based on states and conditions
-		validTransitions = new HashMap<State, Transition>();
-		validTransitions.put(first, TransitionFactory.newSimpleTransition(first, conditionsForState.get(first), second));
+		validTransitions = new HashMap<State, SimpleTransition>();
+		validTransitions.put(first, TransitionFactory.newActionTransition(first, conditionsForState.get(first), null, second));
 		validTransitions.put(second, TransitionFactory.newSimpleTransition(second, conditionsForState.get(second), third));
-		validTransitions.put(third, TransitionFactory.newSimpleTransition(third, conditionsForState.get(third), fourth));
+		validTransitions.put(third, TransitionFactory.newActionTransition(third, conditionsForState.get(third), new CustomSet<Action>(new AsignadorImpl<Asignador>()), fourth));
 		
 		// 4th, create the state machine with all previous data
 		stateMachine = new StateMachine(first,validTransitions);
@@ -51,11 +57,11 @@ public class IngenieriaDocWkfl implements Workflow {
 		
 	}
 	
-	public List<Transition> getWorkflow() {
+	public List<SimpleTransition> getWorkflow() {
 		return workflows;
 	}
 
-	public void add(Transition t) {
+	public void add(SimpleTransition t) {
 		workflows.add(t);
 	}
 
@@ -63,7 +69,7 @@ public class IngenieriaDocWkfl implements Workflow {
 		return this.currentState;
 	}
 
-	public Transition getLastTransition() {
+	public SimpleTransition getLastTransition() {
 		return workflows.getLast();
 	}
 
@@ -71,6 +77,11 @@ public class IngenieriaDocWkfl implements Workflow {
 		State previous = this.currentState;
 		this.currentState = stateMachine.apply(conditionsForState.get(previous));
 		return !previous.equals(this.currentState);
+	}
+
+	@Override
+	public AbstractDocument getTarget() {
+		return target;
 	}
 
 }
