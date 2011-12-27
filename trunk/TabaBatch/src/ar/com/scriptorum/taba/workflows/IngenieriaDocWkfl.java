@@ -7,7 +7,6 @@ import java.util.List;
 import ar.com.scriptorum.taba.factories.ConditionFactory;
 import ar.com.scriptorum.taba.factories.StateBuilder;
 import ar.com.scriptorum.taba.factories.TransitionFactory;
-import ar.com.scriptorum.taba.interfaces.Asignador;
 import ar.com.scriptorum.taba.interfaces.Condition;
 import ar.com.scriptorum.taba.interfaces.SimpleTransition;
 import ar.com.scriptorum.taba.interfaces.Workflow;
@@ -47,7 +46,7 @@ public class IngenieriaDocWkfl implements Workflow<AbstractDocument> {
 		validTransitions = new HashMap<State, SimpleTransition>();
 		validTransitions.put(first, TransitionFactory.newActionTransition(first, conditionsForState.get(first), null, second));
 		validTransitions.put(second, TransitionFactory.newSimpleTransition(second, conditionsForState.get(second), third));
-		validTransitions.put(third, TransitionFactory.newActionTransition(third, conditionsForState.get(third), new CustomSet<Action>(new AsignadorImpl<Asignador>()), fourth));
+		validTransitions.put(third, TransitionFactory.newActionTransition(third, conditionsForState.get(third), new CustomSet<Action>(new AsignadorImpl<AbstractDocument>("boton", null, null, null, this.target)), fourth));
 		
 		// 4th, create the state machine with all previous data
 		stateMachine = new StateMachine(first,validTransitions);

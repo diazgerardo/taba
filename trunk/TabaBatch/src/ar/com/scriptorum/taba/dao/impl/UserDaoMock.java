@@ -2,12 +2,15 @@ package ar.com.scriptorum.taba.dao.impl;
 
 import java.util.HashMap;
 
+import ar.com.scriptorum.taba.beans.UserImpl;
 import ar.com.scriptorum.taba.dao.UserDao;
 import ar.com.scriptorum.taba.interfaces.User;
+import ar.com.scriptorum.taba.util.documents.AbstractDocument;
+import ar.com.scriptorum.taba.util.state.AsignadorImpl;
 
 public class UserDaoMock implements UserDao {
 
-	static HashMap<String, User> users = new HashMap<String,User>();
+	static HashMap<String, User> users;
 	private static UserDao _instance;
 	
 	@Override
@@ -43,4 +46,10 @@ public class UserDaoMock implements UserDao {
 		return _instance;
 	}
 
+	private UserDaoMock() {
+		users  = new HashMap<String,User>();
+		users.put("gerardo", new UserImpl("gerardo", "diaz", "pueyrredon 951", "gerardo.diaz@gmail.com"));
+		users.put("horacio", new UserImpl("horacio", "swidzinski", "ortiz de zarate 4567", "swidzinski@gmail.com"));
+		users.put("boton", new AsignadorImpl<AbstractDocument>("boton", "del orto", "algun lugar", "flordeboton@gmail.com", null));
+	}
 }
