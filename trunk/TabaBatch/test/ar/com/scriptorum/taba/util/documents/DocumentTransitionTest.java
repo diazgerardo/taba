@@ -1,6 +1,10 @@
 package ar.com.scriptorum.taba.util.documents;
 
+import ar.com.scriptorum.taba.dao.UserDao;
+import ar.com.scriptorum.taba.dao.impl.UserDaoMock;
 import ar.com.scriptorum.taba.factories.StateBuilder;
+import ar.com.scriptorum.taba.interfaces.Asignador;
+import ar.com.scriptorum.taba.interfaces.User;
 import ar.com.scriptorum.taba.interfaces.Workflow;
 import ar.com.scriptorum.taba.util.state.State;
 import ar.com.scriptorum.taba.workflows.IngenieriaDocWkfl;
@@ -35,6 +39,11 @@ public class DocumentTransitionTest extends DocumentConfiguratorsTest {
 		}
 		
 		State state = workflow.getCurrentState();
+		assertNotNull(state);
+		UserDao dao = UserDaoMock.getInstance();
+		User u = dao.findByName("boton");
+		Asignador a = (Asignador) u;
+		
 	}
 
 
