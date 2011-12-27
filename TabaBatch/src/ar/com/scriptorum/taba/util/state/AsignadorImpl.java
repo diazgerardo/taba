@@ -10,6 +10,14 @@ public class AsignadorImpl <T> implements Asignador <T>, Action {
 	private String surName;
 	private T asignee;
 
+	public AsignadorImpl(String name, String address, String emailAddress, String surName, T asignee) {
+		this.name = name;
+		this.address=address;
+		this.emailAddress = emailAddress;
+		this.surName=surName;
+		this.asignee = asignee;
+	}
+	
 	@Override
 	public String getName() {
 		return this.name;
@@ -50,7 +58,5 @@ public class AsignadorImpl <T> implements Asignador <T>, Action {
 	public boolean execute() {
 		return false;
 	}
-	
-	
 
 }
