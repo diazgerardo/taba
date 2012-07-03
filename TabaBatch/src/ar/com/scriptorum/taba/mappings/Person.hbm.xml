@@ -4,6 +4,7 @@
 <hibernate-mapping>
     <class name="ar.com.scriptorum.taba.beans.Person" table="Person">
         <id name="id" column="id" type="int">
+        	<generator class="native"/>
         </id>
         <property name="name" column="name" type="java.lang.String"/>
     </class>
