@@ -4,15 +4,26 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.junit.Test;
 
+import static org.junit.Assert.assertTrue;
 import ar.com.scriptorum.taba.beans.Person;
 
 /**
  * 
- * source : www.javabeat.net
  */
 public class TestPersonDao
 {
+
+	@Test
+	public void testFindByName() {
+	
+		PersonDaoImpl pdi = new PersonDaoImpl();
+		Person p = pdi.findByName("aaa");
+		assertTrue(p != null);
+		
+	}
+	
 	public static void main(String args[]) {
 		try {
 
@@ -33,4 +44,5 @@ public class TestPersonDao
 		}
 
 	}
+	
 }

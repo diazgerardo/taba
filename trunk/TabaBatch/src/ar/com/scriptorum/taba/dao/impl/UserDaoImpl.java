@@ -1,13 +1,25 @@
 package ar.com.scriptorum.taba.dao.impl;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+
 import ar.com.scriptorum.taba.dao.UserDao;
 import ar.com.scriptorum.taba.interfaces.User;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends GenericDao implements UserDao {
 
 	@Override
 	public User findByName(String name) {
-		// TODO Auto-generated method stub
+		try {
+			String queryString = "from User where name :name";
+			Query query = getCurrentSession().createQuery(queryString);
+			query.setString("name", name);
+			return (User) query.uniqueResult();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} finally {
+			getCurrentSession().close();
+		}
 		return null;
 	}
 
