@@ -18,9 +18,18 @@ public class TestPersonDao
 	@Test
 	public void testFindByName() {
 	
-		PersonDaoImpl pdi = new PersonDaoImpl();
+		PersonDaoImpl<Person> pdi = new PersonDaoImpl<Person>(new Person());
 		Person p = pdi.findByName("aaa");
 		assertTrue(p != null);
+		
+	}
+	
+	@Test
+	public void testDelete() {
+	
+		PersonDaoImpl<Person> pdi = new PersonDaoImpl<Person>(new Person());
+		Person p = pdi.findByName("aaa");
+		assertTrue(pdi.delete(p));
 		
 	}
 	

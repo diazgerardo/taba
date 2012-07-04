@@ -3,22 +3,37 @@ package ar.com.scriptorum.taba.dao.impl;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
-import ar.com.scriptorum.taba.beans.Person;
+public class PersonDaoImpl <T> extends GenericDao {
+	
+	private T t;
 
-public class PersonDaoImpl extends GenericDao {
+	public PersonDaoImpl(T t) {
+		this.t = t;
+	}
 
-	public Person findByName(String name) {
+	public T findByName(String name) {
 		try {
-			String queryString = "from Person where name = :name";
+			String queryString = "from "+t.getClass().getName()+" where name = :name";
 			Query query = getCurrentSession().createQuery(queryString);
 			query.setString("name", name);
-			return (Person) query.uniqueResult();
+			return (T) query.uniqueResult();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
 			getCurrentSession().close();
 		}
 		return null;
+	}
+	
+	public boolean delete(T t) {
+		boolean result = true;
+		try {
+			getCurrentSession().delete(t);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
 	}
 
 }
