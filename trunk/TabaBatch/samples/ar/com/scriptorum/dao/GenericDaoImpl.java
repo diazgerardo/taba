@@ -17,20 +17,21 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 
-import com.citigroup.ebo.persistence.PersistentEntity;
-import com.citigroup.ebo.util.SessionManager;
-import com.citigroup.ebo.util.StringUtil;
+import ar.com.scriptorum.interfaces.PersistentEntity;
+import ar.com.scriptorum.stringutils.StringUtilsExample;
 
-public class public class GenericDaoImpl {
+public class GenericDaoImpl {
     
-    private static GenericDaoImpl _instance = null;
+    private static final Object DUMMY_TRUE_WHERE_CLAUSE = null;
+	private static GenericDaoImpl _instance = null;
+    private static Logger _logger = Logger.getLogger(GenericDaoImpl.class);
 
 
     protected GenericDaoImpl()
     {
     }
 
-    static synchronized GenericMapper getInstance()
+    static synchronized GenericDaoImpl getInstance()
     {
         if ( _instance == null )
         {
@@ -54,9 +55,8 @@ public class public class GenericDaoImpl {
         catch ( HibernateException ex )
         {
         	_logger.debug("got HibernateException");
-            _logger.debug( "Failed insertion - Entity: " + StringUtil.getSimpleClassName( obj.getClass() ) + " Id: "
-                           + ( ( PersistentEntity ) obj ).getId() + " - Msg: "
-                           + ex.getMessage( ex.getThrowableCount() - 1 ) );
+            _logger.debug( "Failed insertion - Entity: " + StringUtilsExample.getSimpleClassName( obj.getClass() ) + " Id: "
+                           + ( ( PersistentEntity ) obj ).getId());
             outcome = false;
         }
         return outcome;
@@ -83,8 +83,7 @@ public class public class GenericDaoImpl {
         {
         	_logger.debug("got HibernateException");
             _logger.debug( "Failed update - Entity: " + obj.getClass().getSimpleName() + " Id: "
-                           + ( ( PersistentEntity ) obj ).getId() + " - Msg: "
-                           + ex.getMessage( ex.getThrowableCount() - 1 ) );
+                           + ( ( PersistentEntity ) obj ).getId());
             outcome = false;
         }
         return outcome;
@@ -112,8 +111,7 @@ public class public class GenericDaoImpl {
         	
         	_logger.debug("got HibernateException");
             _logger.debug( "Failed create/update - Entity: " + obj.getClass().getSimpleName()
-                           + " Id: " + ( ( PersistentEntity ) obj ).getId() + " - Msg: "
-                           + ex.getMessage( ex.getThrowableCount() - 1 ) );
+                           + " Id: " + ( ( PersistentEntity ) obj ).getId()  );
             outcome = false;
         }
         return outcome;
@@ -140,8 +138,7 @@ public class public class GenericDaoImpl {
         {
         	_logger.debug("got HibernateException");
             _logger.error( "Failed delete - Entity: " + obj.getClass().getSimpleName() + " Id: "
-                           + ( ( PersistentEntity ) obj ).getId() + " - Msg: "
-                           + ex.getMessage( ex.getThrowableCount() - 1 ) );
+                           + ( ( PersistentEntity ) obj ).getId() );
             outcome = false;
         }
         return outcome;
@@ -421,7 +418,7 @@ public class public class GenericDaoImpl {
 
     protected Session getSession()
     {
-        // Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = null;//HibernateUtil.getSessionFactory().getCurrentSession();
 
         // // clears first-level cache if it reachs the max number of cached entities allowed
         // SessionStatistics stats = session.getStatistics();
