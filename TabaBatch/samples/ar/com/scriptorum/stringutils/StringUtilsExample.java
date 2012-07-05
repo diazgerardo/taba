@@ -11,6 +11,11 @@ public class StringUtilsExample {
 		String st = sb.toString();
 		st = StringUtils.strip(st,";" );
 	}
+
+	public static String getSimpleClassName(Class<? extends Object> class1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
