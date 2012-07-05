@@ -1,6 +1,13 @@
 package ar.com.scriptorum.taba.dao.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.beanutils.BeanUtils;
 
 import ar.com.scriptorum.taba.beans.UserImpl;
 import ar.com.scriptorum.taba.dao.UserDao;
@@ -17,28 +24,6 @@ public class UserDaoMock implements UserDao {
 	public User findByName(String name) {
 		return users.get(name);
 	}
-
-	@Override
-	public boolean saveUser(User user) {
-		boolean result = false;
-		try {
-			users.put(user.getName(), user);
-			result = true;
-		}catch(Exception e) {
-			// don't do anything, just return false instead
-		}
-		return result;
-	}
-
-	@Override
-	public boolean modifyUser(User user) {
-		boolean result = false;
-		if(null!=users.remove(user.getName())) {
-			users.put(user.getName(),user);
-			result = true;
-		}
-		return result;
-	}
 	
 	public static UserDao getInstance() {
 		if(_instance == null)
@@ -51,5 +36,29 @@ public class UserDaoMock implements UserDao {
 		users.put("gerardo", new UserImpl("gerardo", "diaz", "pueyrredon 951", "gerardo.diaz@gmail.com"));
 		users.put("horacio", new UserImpl("horacio", "swidzinski", "ortiz de zarate 4567", "swidzinski@gmail.com"));
 		users.put("boton", new AsignadorImpl<AbstractDocument>("boton", "del orto", "algun lugar", "flordeboton@gmail.com", null));
+	}
+
+	@Override
+	public List<User> listUsersLike( Map<String, Object> map ) {
+		List<User> resultList = new ArrayList<User>();
+		try {
+			for(User user : users.values()) {
+				for(Entry<String, Object> e : map.entrySet()) {
+					if(BeanUtils.getSimpleProperty(user, e.getKey()).equals(e.getValue())) {
+						resultList.add(user);
+					}
+				}
+			}
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
+		return resultList;
 	}
 }
