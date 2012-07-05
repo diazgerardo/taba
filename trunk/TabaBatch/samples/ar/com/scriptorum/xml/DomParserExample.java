@@ -13,16 +13,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class DomParserExample {
+public class DomParserExample<T> {
 
 	//No generics
-	List myEmpls;
+	List<T> myEmpls;
 	Document dom;
 
 
 	public DomParserExample(){
 		//create a list to hold the employee objects
-		myEmpls = new ArrayList();
+		myEmpls = new ArrayList<T>();
 	}
 
 	public void runExample() {
@@ -75,7 +75,7 @@ public class DomParserExample {
 				Element el = (Element)nl.item(i);
 				
 				//get the Employee object
-				Employee e = getEmployee(el);
+				T e = getEmployee(el);
 				
 				//add it to list
 				myEmpls.add(e);
@@ -90,7 +90,7 @@ public class DomParserExample {
 	 * @param empEl
 	 * @return
 	 */
-	private Employee getEmployee(Element empEl) {
+	private T getEmployee(Element empEl) {
 		
 		//for each <employee> element get text or int values of 
 		//name ,id, age and name
@@ -103,7 +103,7 @@ public class DomParserExample {
 		//Create a new Employee with the value read from the xml nodes
 		Employee e = new Employee(name,id,age,type);
 		
-		return e;
+		return (T) e;
 	}
 
 
