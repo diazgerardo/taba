@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans     
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <!-- Advices -->    
+    <bean id = "beforeCall" 
+    class = "ar.com.scriptorum.aspects.adder.LogBeforeCallAdvice" />
+
+    <bean id = "afterCall" 
+    class = "ar.com.scriptorum.aspects.adder.LogAfterReturningAdvice" />
+
+    <bean id = "throwCall" 
+    class = "ar.com.scriptorum.aspects.adder.LogAfterThrowsAdvice" />
+
+    <bean id = "aroundCall" 
+    class = "ar.com.scriptorum.aspects.adder.LogAroundAdvice" />
+
+    <!-- Implementation Class -->
+    <bean id = "adderImpl" 
+    class = "ar.com.scriptorum.aspects.adder.AdderImpl" />    
+
+    <!-- Proxy Implementation Class -->
+    <bean id = "adder"
+    class = "org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name = "proxyInterfaces">
+            <value>ar.com.scriptorum.aspects.adder.Adder</value>
+        </property>
+
+        <property name = "interceptorNames">
+            <list>
+                <value>beforeCall</value>
+                <value>afterCall</value>
+                <value>throwCall</value>
+                <value>aroundCall</value>
+            </list> 
+        </property>
+
+        <property name = "target">    
+            <ref bean = "adderImpl"/>
+        </property>    
+    </bean>      
+
+</beans>
+		
