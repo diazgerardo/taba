@@ -1,7 +1,5 @@
 package ar.com.scriptorum.rimas.silabeo;
 
-import java.util.Iterator;
-
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
