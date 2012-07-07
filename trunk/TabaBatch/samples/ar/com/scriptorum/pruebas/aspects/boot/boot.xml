@@ -10,13 +10,13 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
    <bean id="fooService" class="com.citigroup.gerardo.pruebas.aspects2.DefaultFooService"/>
 
    <!-- this is the actual advice itself -->
-   <bean id="profiler" class="com.citigroup.gerardo.pruebas.aspects2.SimpleProfiler"/>
-   <bean id="logger" class="com.citigroup.gerardo.pruebas.aspects2.SimpleProfiler"/>
+   <bean id="profiler" class="ar.com.scriptorum.pruebas.aspects.boot.SimpleProfiler"/>
+   <bean id="logger" class="ar.com.scriptorum.pruebas.aspects.boot.SimpleProfiler"/>
    <aop:config>
       <aop:aspect ref="profiler">
 
          <aop:pointcut id="theExecutionOfSomeFooServiceMethod"
-                    expression="execution(* com.citigroup.gerardo.pruebas.aspects2.FooService.getFoo(String,int))
+                    expression="execution(* ar.com.scriptorum.pruebas.aspects.boot.FooService.getFoo(String,int))
                     and args(name, age)"/>
 
          <aop:around pointcut-ref="theExecutionOfSomeFooServiceMethod"

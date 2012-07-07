@@ -1,5 +1,5 @@
 				
-package ar.com.scriptorum.pruebas.aspects;
+package ar.com.scriptorum.pruebas.aspects.adder;
 
 public interface Adder {
   

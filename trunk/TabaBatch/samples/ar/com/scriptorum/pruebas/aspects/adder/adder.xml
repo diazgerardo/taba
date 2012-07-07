@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans     http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    xsi:schemaLocation="http://www.springframework.org/schema/beans     
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
     <!-- Advices -->    
     <bean id = "beforeCall" 
-    class = "com.citigroup.gerardo.pruebas.aspects.LogBeforeCallAdvice" />
+    class = "ar.com.scriptorum.pruebas.aspects.adder.LogBeforeCallAdvice" />
 
     <bean id = "afterCall" 
-    class = "com.citigroup.gerardo.pruebas.aspects.LogAfterReturningAdvice" />
+    class = "ar.com.scriptorum.pruebas.aspects.adder.LogAfterReturningAdvice" />
 
     <bean id = "throwCall" 
-    class = "com.citigroup.gerardo.pruebas.aspects.LogAfterThrowsAdvice" />
+    class = "ar.com.scriptorum.pruebas.aspects.adder.LogAfterThrowsAdvice" />
 
     <bean id = "aroundCall" 
-    class = "com.citigroup.gerardo.pruebas.aspects.LogAroundAdvice" />
+    class = "ar.com.scriptorum.pruebas.aspects.adder.LogAroundAdvice" />
 
     <!-- Implementation Class -->
     <bean id = "adderImpl" 
-    class = "com.citigroup.gerardo.pruebas.aspects.AdderImpl" />    
+    class = "ar.com.scriptorum.pruebas.aspects.adder.AdderImpl" />    
 
     <!-- Proxy Implementation Class -->
     <bean id = "adder"
     class = "org.springframework.aop.framework.ProxyFactoryBean">
 
         <property name = "proxyInterfaces">
-            <value>com.citigroup.gerardo.pruebas.aspects.Adder</value>
+            <value>ar.com.scriptorum.pruebas.aspects.adder.Adder</value>
         </property>
 
         <property name = "interceptorNames">

@@ -10,12 +10,12 @@ public class Diamond implements CrownFacet, PavillionFacet {
 		};
 	}
 
-//	public PavillionFacet getFacet() {
-//		return new PavillionFacet() {
-//			public PavillionFacet getFacet() {
-//				return null;
-//			}
-//		};
-//	}
+	public PavillionFacet getFacet() {
+		return new PavillionFacet() {
+			public PavillionFacet getFacet() {
+				return null;
+			}
+		};
+	}
 
 }

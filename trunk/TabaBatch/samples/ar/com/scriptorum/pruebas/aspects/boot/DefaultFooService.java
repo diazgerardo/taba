@@ -1,4 +1,4 @@
-package ar.com.scriptorum.pruebas.aspects2;
+package ar.com.scriptorum.pruebas.aspects.boot;
 
 
 public class DefaultFooService implements FooService {
