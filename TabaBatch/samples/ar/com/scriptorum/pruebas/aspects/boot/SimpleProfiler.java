@@ -1,4 +1,4 @@
-package ar.com.scriptorum.pruebas.aspects2;
+package ar.com.scriptorum.pruebas.aspects.boot;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.util.StopWatch;

@@ -8,7 +8,7 @@
         </layout>
     </appender>
     <root>
-        <level value="fatal" />
+        <level value="debug" />
         <appender-ref ref="stdout" />
     </root>
 </log4j:configuration>

@@ -1,4 +1,4 @@
-package ar.com.scriptorum.pruebas.aspects2;
+package ar.com.scriptorum.pruebas.aspects.boot;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
