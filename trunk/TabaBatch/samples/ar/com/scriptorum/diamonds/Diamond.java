@@ -1,8 +1,13 @@
 package ar.com.scriptorum.diamonds;
 
+/**
+ * Demonstrates the Diamond problem
+ * @author gerardo
+ *
+ */
 public class Diamond implements CrownFacet, PavillionFacet {
-
-	public CrownFacet getFacet() {
+	
+	public CrownFacet getCrownFacet() {
 		return new CrownFacet() {
 			public CrownFacet getFacet() {
 				return null;
