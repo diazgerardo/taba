@@ -28,5 +28,7 @@
 	<classpathentry kind="lib" path="lib/org.aspectj.matcher.jar"/>
 	<classpathentry kind="lib" path="lib/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.asm.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.expression.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
