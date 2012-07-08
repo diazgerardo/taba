@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.stat.SessionStatistics;
@@ -27,14 +28,16 @@ public class GenericDaoImpl {
 	private static final Object DUMMY_TRUE_WHERE_CLAUSE = null;
 	private static GenericDaoImpl _instance = null;
 	private static Logger _logger = Logger.getLogger(GenericDaoImpl.class);
+	protected static SessionFactory _sessionFactory;
 
+	protected GenericDaoImpl() {}
 
-	protected GenericDaoImpl() {
-	}
-
+		
+	
 	static synchronized GenericDaoImpl getInstance() {
 		if (_instance == null) {
 			_instance = new GenericDaoImpl();
+			_sessionFactory = HibernateUtil.getSessionFactory(); 
 		}
 		return _instance;
 	}
@@ -281,7 +284,7 @@ public class GenericDaoImpl {
 	}
 
 	protected Session getSession() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = _sessionFactory.openSession();
 		SessionStatistics stats = session.getStatistics();
 		if (stats.getEntityCount() >= HibernateUtil.MAX_ENTITIES_BY_SESSION) {
 			_logger.debug("Now entityCount() = " + stats.getEntityCount() + ", then max number of " + HibernateUtil.MAX_ENTITIES_BY_SESSION + " entities per session has been reached.");
