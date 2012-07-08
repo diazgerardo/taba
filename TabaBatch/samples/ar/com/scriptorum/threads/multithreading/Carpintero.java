@@ -8,12 +8,12 @@ public class Carpintero {
 	
 	@Test
 	public void iterar() {
-		ClavoFactory factory = ClavoFactory.getInstance();
 		try {
-			Thread.currentThread().sleep(10000);
+			Thread.currentThread();
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 		}
-		for(Clavo clavo : factory.clavos) {
+		for(Clavo clavo : ClavoFactory.clavos) {
 			assertNotNull(clavo.head);
 			assertNotNull(clavo.tip);
 			assertNotNull(clavo.body);

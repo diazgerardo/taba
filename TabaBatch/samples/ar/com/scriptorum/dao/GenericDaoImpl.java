@@ -23,10 +23,10 @@ import ar.com.scriptorum.taba.util.HibernateUtil;
 
 
 
-public class GenericDaoImpl {
+public class GenericDaoImpl <T>{
 
 	private static final Object DUMMY_TRUE_WHERE_CLAUSE = null;
-	private static GenericDaoImpl _instance = null;
+	private static GenericDaoImpl<?> _instance = null;
 	private static Logger _logger = Logger.getLogger(GenericDaoImpl.class);
 	protected static SessionFactory _sessionFactory;
 
@@ -34,9 +34,9 @@ public class GenericDaoImpl {
 
 		
 	
-	static synchronized GenericDaoImpl getInstance() {
+	static synchronized GenericDaoImpl<?> getInstance() {
 		if (_instance == null) {
-			_instance = new GenericDaoImpl();
+			_instance = new GenericDaoImpl<Object>();
 			_sessionFactory = HibernateUtil.getSessionFactory(); 
 		}
 		return _instance;
@@ -116,14 +116,14 @@ public class GenericDaoImpl {
 		return outcome;
 	}
 
-	public Object getEntity( Class clazz, Serializable id ) {
+	public Object getEntity( Class<T> clazz, Serializable id ) {
 		_logger.debug("id" + id);
 		Object result = getSession().get(clazz, id);
 		_logger.debug("Entity Id found: " + (result != null ? ((PersistentEntity) result).getId().toString() : "NONE"));
 		return result;
 	}
 
-	public Object getUniqueEntity( Class clazz, Map equalProps ) {
+	public Object getUniqueEntity( Class<T> clazz, Map<String,Object> equalProps ) {
 		_logger.debug(clazz);
 
 		Query query = createQuery(clazz, equalProps, null);
@@ -133,18 +133,19 @@ public class GenericDaoImpl {
 		return result;
 	}
 
-	public List getEntities( Class clazz, Map equalProps, List orderBy ) {
+	@SuppressWarnings("unchecked")
+	public List<T> getEntities( Class<T> clazz, Map<String,Object> equalProps, List<String> orderBy ) {
 		_logger.debug(clazz);
 
 		Query query = createQuery(clazz, equalProps, orderBy);
 
-		List result = query.list();
+		List<T> result = (List<T>) query.list();
 		_logger.debug("Result size: " + result.size());
 		return result;
 	}
 
 
-	private Query createQuery( Class clazz, Map equalProps, List orderBy ) {
+	private Query createQuery( Class<?> clazz, Map<?, ?> equalProps, List<?> orderBy ) {
 		_logger.debug(clazz);
 
 		Session session = getSession();
@@ -165,14 +166,14 @@ public class GenericDaoImpl {
 		return query;
 	}
 
-	void addToOrderByClause( List orderBy, StringBuffer orderByClause ) {
+	void addToOrderByClause( List<?> orderBy, StringBuffer orderByClause ) {
 		_logger.debug(orderByClause);
 
 		if (orderBy != null && !orderBy.isEmpty()) {
 			orderByClause.append(" ORDER BY ");
 			String currProp;
 			String propName;
-			for (Iterator props = orderBy.iterator(); props.hasNext();) {
+			for (Iterator<?> props = orderBy.iterator(); props.hasNext();) {
 				currProp = (String) props.next();
 				propName = currProp.substring(currProp.indexOf("_") + 1);
 				orderByClause.append(propName + ", ");
@@ -181,7 +182,7 @@ public class GenericDaoImpl {
 		}
 	}
 
-	protected void addToWhereClause( String alias, StringBuffer whereClause, Map equalProps ) {
+	protected void addToWhereClause( String alias, StringBuffer whereClause, Map<?, ?> equalProps ) {
 		_logger.debug(alias);
 
 		if (equalProps != null && !equalProps.isEmpty()) {
@@ -193,7 +194,7 @@ public class GenericDaoImpl {
 
 			String currPropKey;
 			String propName;
-			for (Iterator propKeys = equalProps.keySet().iterator(); propKeys.hasNext();) {
+			for (Iterator<?> propKeys = equalProps.keySet().iterator(); propKeys.hasNext();) {
 				currPropKey = (String) propKeys.next();
 				if (equalProps.get(currPropKey) != null) {
 					propName = currPropKey.substring(currPropKey.indexOf("_") + 1);
@@ -206,11 +207,11 @@ public class GenericDaoImpl {
 		}
 	}
 
-	protected static void logPropParams( Map equalProps ) {
+	protected static void logPropParams( Map<?, ?> equalProps ) {
 		if (equalProps != null && !equalProps.isEmpty()) {
 			String currPropKey;
 			Object currPropValue;
-			for (Iterator propKeys = equalProps.keySet().iterator(); propKeys.hasNext();) {
+			for (Iterator<?> propKeys = equalProps.keySet().iterator(); propKeys.hasNext();) {
 				currPropKey = (String) propKeys.next();
 				currPropValue = equalProps.get(currPropKey);
 				if (currPropValue != null) {
@@ -220,20 +221,20 @@ public class GenericDaoImpl {
 		}
 	}
 
-	public List getEntitiesLike( Class clazz, Object exampleEntity ) {
+	public List<?> getEntitiesLike( Class<?> clazz, Object exampleEntity ) {
 		// TODO: could add ignoreCase and MatchMode to the parameter set
 		Session session = getSession();
 		Example example = getExampleForStringProps(clazz, exampleEntity, true, null);
 		Criteria criteria = session.createCriteria(clazz);
 		criteria.add(example);
 
-		List result = criteria.list();
+		List<?> result = criteria.list();
 		_logger.debug("Result size: " + result.size());
 		return result;
 	}
 
 
-	private Example getExampleForStringProps( Class clazz, Object exampleEntity, boolean ignoreCase, MatchMode mode ) {
+	private Example getExampleForStringProps( Class<?> clazz, Object exampleEntity, boolean ignoreCase, MatchMode mode ) {
 		Example example = Example.create(exampleEntity).excludeZeroes();
 		if (ignoreCase) {
 			example.ignoreCase();
@@ -245,7 +246,7 @@ public class GenericDaoImpl {
 
 		_logger.debug("PARAMETERS: ");
 
-		Class currClass = clazz;
+		Class<?> currClass = clazz;
 		Field currField;
 		while (currClass != null) {
 			Field[] fields = currClass.getDeclaredFields();
@@ -262,7 +263,7 @@ public class GenericDaoImpl {
 		return example;
 	}
 
-	private void excludeNonStringField( Object exampleEntity, Example example, Class currClass, Field currField ) {
+	private void excludeNonStringField( Object exampleEntity, Example example, Class<?> currClass, Field currField ) {
 		try {
 			Object currValue = currField.get(exampleEntity);
 			if (currValue instanceof String) {

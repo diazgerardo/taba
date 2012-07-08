@@ -50,30 +50,31 @@ public class PredicateSQLExample {
 			}
 		};
 
-		Collection aList = CollectionUtils.select(list, sqlOrQueryPredicate);
-		Collection bList = CollectionUtils.select(list,
+		Collection<?> aList = CollectionUtils.select(list, sqlOrQueryPredicate);
+		Collection<?> bList = CollectionUtils.select(list,
 				PredicateUtils.notPredicate(sqlOrQueryPredicate));
-		Collection cList = CollectionUtils.select(list, sqlAndQueryPredicate);
-		Collection dList = CollectionUtils
+		Collection<?> cList = CollectionUtils.select(list, sqlAndQueryPredicate);
+		Collection<?> dList = CollectionUtils
 				.select(list,
 						PredicateUtils.allPredicate(new Predicate[] {
 								PredicateUtils.uniquePredicate(),
 								sqlOrQueryPredicate }));
-		Collection eList = CollectionUtils
+		Collection<?> eList = CollectionUtils
 				.select(list,
 						PredicateUtils.allPredicate(new Predicate[] {
 								PredicateUtils.uniquePredicate(),
 								likeNameStartsWithB }));
-		Collection fList = CollectionUtils.select(list,
+		Collection<?> fList = CollectionUtils.select(list,
 				PredicateUtils.uniquePredicate());
 
-		Map aGroupByStateMap = TransformedMap.decorate(new MultiValueMap(),
+		@SuppressWarnings("unchecked")
+		Map<Object, Object> aGroupByStateMap = TransformedMap.decorate(new MultiValueMap(),
 				new Transformer() {
-					public Object transform(Object o) {
+					public Object transform(final Object o) {
 						return ((DTO) o).getState();
 					}
 				}, TransformerUtils.nopTransformer());
-		for (Object o : fList) {
+		for(  Object o : fList) {
 			aGroupByStateMap.put(o, o);
 		}
 
@@ -96,10 +97,10 @@ public class PredicateSQLExample {
 		CollectionUtils.forAllDo(eList, PrintIt.getInstance());
 		System.out
 				.println("\nAll the distinct people grouped by state :\nselect distinct * from list group by state;");
-		Set states = aGroupByStateMap.keySet();
+		Set<Object> states = aGroupByStateMap.keySet();
 		for (Object state : states) {
 			System.out.println(((State) state).getFullyQualifiedName());
-			CollectionUtils.forAllDo((Collection) aGroupByStateMap.get(state),
+			CollectionUtils.forAllDo((Collection<?>) aGroupByStateMap.get(state),
 					PrintIt.getInstance());
 		}
 	}

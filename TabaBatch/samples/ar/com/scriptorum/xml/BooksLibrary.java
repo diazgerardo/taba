@@ -12,6 +12,7 @@ import org.xml.sax.AttributeList;
 import org.xml.sax.HandlerBase;
 import org.xml.sax.SAXException;
 
+@SuppressWarnings("deprecation")
 public class BooksLibrary extends HandlerBase
 {
     protected static final String XML_FILE_NAME = "data/library1.xml";

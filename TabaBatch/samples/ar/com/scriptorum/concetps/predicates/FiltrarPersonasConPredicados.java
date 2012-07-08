@@ -37,15 +37,15 @@ public class FiltrarPersonasConPredicados {
 				apellidoEqlPredicate);
 		Predicate[] arrayDePredicados = { nombreBeanPredicate,apellidoBeanPredicate };
 		Predicate criterioEstricto = PredicateUtils.allPredicate(arrayDePredicados);
-		Collection<Persona> listaFiltrada = CollectionUtils.select(listaPersona, criterioEstricto);
+		Collection<?> listaFiltrada = CollectionUtils.select(listaPersona, criterioEstricto);
 		System.out.println("-------------------------------------------------------------------------");
-		for (Persona persona : listaFiltrada) {
+		for (Object persona : listaFiltrada) {
 			System.out.println(persona);
 		}
 		OrPredicate criterioAmplio = new OrPredicate(nombreBeanPredicate, apellidoBeanPredicate);
 		listaFiltrada = CollectionUtils.select(listaPersona, criterioAmplio);
 		System.out.println("-------------------------------------------------------------------------");
-		for (Persona persona : listaFiltrada) {
+		for (Object persona : listaFiltrada) {
 			System.out.println(persona);
 		}
 		System.out.println("-------------------------------------------------------------------------");

@@ -10,7 +10,7 @@ public class CompareToBuilderTest extends TestCase {
 	public static final void testCompareTo() {
 		
 		CompareToBuilder cb = new CompareToBuilder();
-		
+		assertTrue(cb != null);		
 	}
 
 }

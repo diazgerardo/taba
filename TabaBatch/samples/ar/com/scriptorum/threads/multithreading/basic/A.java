@@ -14,7 +14,8 @@ public class A extends Letra {
 		try {
 			long pausa = (long) ((Math.random()*1000)+500);
 			System.out.println("pausa por "+pausa +" millis.." );
-			Thread.currentThread().sleep((long)Math.random()*1000+100);
+			Thread.currentThread();
+			Thread.sleep((long)Math.random()*1000+100);
 		} catch (InterruptedException e) {
 		}
 	}
