@@ -15,7 +15,7 @@ public class ObjectUtils <T> {
 	}
 	
 	
-	<T> T safeGet(T e){
+ T safeGet(T e){
 		   if(e == null){
 			   e = (T) defaultInstance;
 		   }

@@ -30,5 +30,9 @@
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.asm.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.expression.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.orm.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.jdbc.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.context.support.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.transaction.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

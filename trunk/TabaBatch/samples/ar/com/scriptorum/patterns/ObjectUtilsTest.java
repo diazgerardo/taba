@@ -8,22 +8,22 @@ public class ObjectUtilsTest extends TestCase {
 	public void test() {
 		
 		Object anObject = null;
-		Object o = new ObjectUtils(Object.class).safeGet(anObject);
+		Object o = new ObjectUtils<Object>(Object.class).safeGet(anObject);
 		assertNotNull(o);
 		assertTrue(o instanceof Object);
 		
 		anObject = new Object();
-		o = new ObjectUtils(Object.class).safeGet(anObject);
+		o = new ObjectUtils<Object>(Object.class).safeGet(anObject);
 		assertNotNull(o);
 		assertTrue(o instanceof Object);
 		
 		anObject = new String();
-		o = new ObjectUtils(Object.class).safeGet(anObject);
+		o = new ObjectUtils<Object>(Object.class).safeGet(anObject);
 		assertNotNull(o);
 		assertTrue(o instanceof String);
 		
 		anObject = new StringBuffer();
-		o = new ObjectUtils(Object.class).safeGet(anObject);
+		o = new ObjectUtils<Object>(Object.class).safeGet(anObject);
 		assertNotNull(o);
 		assertTrue(o instanceof StringBuffer);
 		
@@ -34,7 +34,7 @@ public class ObjectUtilsTest extends TestCase {
 		co.getCo().getCo().setCo(new ComplexObject());
 		co.getCo().getCo().getCo().setCo(co);
 		
-		o = new ObjectUtils(ComplexObject.class).safeGet(co.getCo().getCo().getCo());
+		o = new ObjectUtils<ComplexObject>(ComplexObject.class).safeGet(co.getCo().getCo().getCo());
 		assertNotNull(o);
 		assertTrue(o instanceof ComplexObject);
 		//} catch(Throwable t) {

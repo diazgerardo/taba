@@ -10,7 +10,7 @@ import ar.com.scriptorum.dao.GenericDaoImpl;
 import ar.com.scriptorum.taba.dao.UserDao;
 import ar.com.scriptorum.taba.interfaces.User;
 
-public class UserDaoImpl extends GenericDaoImpl implements UserDao {
+public class UserDaoImpl extends GenericDaoImpl<Object> implements UserDao {
 
 	@Override
 	public User findByName(String name) {

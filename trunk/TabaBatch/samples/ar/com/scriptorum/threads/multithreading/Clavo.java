@@ -6,7 +6,8 @@ public class Clavo {
 	Tip tip;
 	Body body;
 	public Clavo() {
-		this.id=ClavoFactory.getInstance().serial;
+		ClavoFactory.getInstance();
+		this.id=ClavoFactory.serial;
 	}
 	public void setHead(Head head) {
 		this.head=head;

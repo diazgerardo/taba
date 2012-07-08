@@ -56,7 +56,7 @@ public class Employee {
 		this.type = type;
 	}	
 	
-	
+	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("Employee Details - ");

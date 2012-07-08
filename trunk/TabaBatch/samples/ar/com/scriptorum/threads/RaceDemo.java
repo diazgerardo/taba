@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 public class RaceDemo {
 
-	private final static HashMap priorities = new HashMap();
+	private final static HashMap<Integer, Integer> priorities = new HashMap<Integer, Integer>();
 
 	public static void main(String[] args) {
 		RaceDemo raceDemo = new RaceDemo();
+		System.out.println(raceDemo);
 	}
 
 	public RaceDemo() {
@@ -23,7 +24,8 @@ public class RaceDemo {
 			runners[i].start();
 		}
 		try {
-			Thread.currentThread().sleep(60000);
+			Thread.currentThread();
+			Thread.sleep(60000);
 		} catch (InterruptedException e) {
 		}
 	}

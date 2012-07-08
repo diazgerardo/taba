@@ -43,7 +43,8 @@ public class ClavoFactory implements Runnable {
 			}else {
 				
 				try {
-					Thread.currentThread().sleep(1000);
+					Thread.currentThread();
+					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 				}
 			}

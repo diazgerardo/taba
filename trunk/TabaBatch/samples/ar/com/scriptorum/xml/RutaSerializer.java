@@ -35,7 +35,7 @@ class RutaSerializer {
 
 		Vertice v1 = new Vertice("gerardo",2.1D,2.2D,0.0D);        
 		Vertice v2 = new Vertice("claudia",2.1D,2.2D,0.0D);        
-		List elementList = new ArrayList();        
+		List<Vertice> elementList = new ArrayList<Vertice>();        
 		elementList.add(v1);        
 		elementList.add(v2);
 		//        elementList.add(user);        
@@ -72,7 +72,7 @@ class RutaSerializer {
 	}
 
 
-	private static void populateDocumentXML(List elements) {   
+	private static void populateDocumentXML(List<Vertice> elements) {   
 		Node newChild = new NodeImpl();
 		Element nElement, item;        
 		// 1. Crear elemento        
@@ -82,7 +82,7 @@ class RutaSerializer {
 		for (int a = 0; a < elements.size(); a++) {            
 				Object value = "";            
 				Method met;            
-				Class obj;            
+				Class<? extends Object> obj;            
 				Field[] stra;            
 				obj = elements.get(a).getClass();            
 				stra = obj.getDeclaredFields();    

@@ -125,7 +125,7 @@ public class PersonErrors implements Errors {
 	}
 
 	@Override
-	public Class getFieldType(String arg0) {
+	public Class<?> getFieldType(String arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}

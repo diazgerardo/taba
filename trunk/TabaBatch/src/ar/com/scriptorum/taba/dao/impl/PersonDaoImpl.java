@@ -5,7 +5,7 @@ import org.hibernate.Query;
 
 import ar.com.scriptorum.dao.GenericDaoImpl;
 
-public class PersonDaoImpl <T> extends GenericDaoImpl {
+public class PersonDaoImpl <T> extends GenericDaoImpl<Object> {
 	
 	private T t;
 

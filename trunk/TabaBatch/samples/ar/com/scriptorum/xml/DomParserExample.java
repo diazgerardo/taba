@@ -16,13 +16,13 @@ import org.xml.sax.SAXException;
 public class DomParserExample<T> {
 
 	//No generics
-	List<T> myEmpls;
+	List<Employee> myEmpls;
 	Document dom;
 
 
 	public DomParserExample(){
 		//create a list to hold the employee objects
-		myEmpls = new ArrayList<T>();
+		myEmpls = new ArrayList<Employee>();
 	}
 
 	public void runExample() {
@@ -75,7 +75,7 @@ public class DomParserExample<T> {
 				Element el = (Element)nl.item(i);
 				
 				//get the Employee object
-				T e = getEmployee(el);
+				Employee e = getEmployee(el);
 				
 				//add it to list
 				myEmpls.add(e);
@@ -90,7 +90,7 @@ public class DomParserExample<T> {
 	 * @param empEl
 	 * @return
 	 */
-	private T getEmployee(Element empEl) {
+	private Employee getEmployee(Element empEl) {
 		
 		//for each <employee> element get text or int values of 
 		//name ,id, age and name
@@ -103,9 +103,8 @@ public class DomParserExample<T> {
 		//Create a new Employee with the value read from the xml nodes
 		Employee e = new Employee(name,id,age,type);
 		
-		return (T) e;
+		return e;
 	}
-
 
 	/**
 	 * I take a xml element and the tag name, look for the tag and get
@@ -147,7 +146,7 @@ public class DomParserExample<T> {
 		
 		System.out.println("No of Employees '" + myEmpls.size() + "'.");
 		
-		Iterator it = myEmpls.iterator();
+		Iterator<Employee> it = myEmpls.iterator();
 		while(it.hasNext()) {
 			System.out.println(it.next().toString());
 		}
@@ -156,7 +155,7 @@ public class DomParserExample<T> {
 	
 	public static void main(String[] args){
 		//create an instance
-		DomParserExample dpe = new DomParserExample();
+		DomParserExample<Employee> dpe = new DomParserExample<Employee>();
 		
 		//call run example
 		dpe.runExample();

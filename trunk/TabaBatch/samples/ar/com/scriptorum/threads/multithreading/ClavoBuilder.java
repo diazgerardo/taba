@@ -24,7 +24,8 @@ public class ClavoBuilder implements Runnable {
 		addHead();
 		addTip();
 		addBody();
-		ClavoFactory.getInstance().clavos.add(clavo);
+		ClavoFactory.getInstance();
+		ClavoFactory.clavos.add(clavo);
 
 	}
 
