@@ -1,12 +1,14 @@
 package ar.com.scriptorum.concurrence;
 
+import org.junit.Test;
+
 
 public class Runner {
-
-	public static void main(String[] args) {
+	@Test
+	public void produceConsume() {
 		Store store = new Store();
 		
-		for (int i=0;;i++) {
+		for (int i=0;i<10;i++) {
 			
 			// just one producer ...
 			new Thread(new Producer(store), "Producer(p"+i+")").start();
