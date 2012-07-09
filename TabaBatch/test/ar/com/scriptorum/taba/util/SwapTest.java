@@ -1,4 +1,4 @@
-package ar.com.scriptorum.util;
+package ar.com.scriptorum.taba.util;
 
 import org.junit.Test;
 import static org.junit.Assert.assertNotNull;

@@ -1,7 +1,10 @@
 package ar.com.scriptorum.state;
 
+import org.junit.Test;
+
 public class TestClientState { 
-    public static void main(String[] args) { 
+	@Test
+    public void testStateContext() { 
             StateContext sc = new StateContext(); 
             sc.writeName("Monday"); 
             sc.writeName("Tuesday"); 

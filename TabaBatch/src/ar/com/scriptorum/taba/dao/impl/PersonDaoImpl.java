@@ -4,22 +4,30 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 import ar.com.scriptorum.dao.GenericDaoImpl;
+import ar.com.scriptorum.taba.beans.Person;
 
-public class PersonDaoImpl <T> extends GenericDaoImpl<Object> {
+public class PersonDaoImpl extends GenericDaoImpl {
 	
-	private T t;
-
-	public PersonDaoImpl(T t) {
-		this.t = t;
+	private static PersonDaoImpl _instance;
+	
+	private PersonDaoImpl() {
+		super();
+	}
+	
+	public static synchronized PersonDaoImpl getInstance() {
+		if(_instance == null ) {
+			_instance = new PersonDaoImpl();
+		}
+		return _instance;
 	}
 
 	@SuppressWarnings("unchecked")
-	public T findByName(String name) {
+	public Person findByName(String name) {
 		try {
-			String queryString = "from "+t.getClass().getName()+" where name = :name";
+			String queryString = "from Person where name = :name";
 			Query query = getSession().createQuery(queryString);
 			query.setString("name", name);
-			return (T) query.uniqueResult();
+			return (Person) query.uniqueResult();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -28,7 +36,7 @@ public class PersonDaoImpl <T> extends GenericDaoImpl<Object> {
 		return null;
 	}
 	
-	public boolean delete(T t) {
+	public boolean delete(Person t) {
 		boolean result = true;
 		try {
 			getSession().delete(t);

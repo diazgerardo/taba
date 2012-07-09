@@ -1,6 +1,6 @@
 package ar.com.scriptorum.patterns.factory;
 
-//Test the functionality
+//DecoratorTests the functionality
 class Test {
 
     public static void main(String[] args) {

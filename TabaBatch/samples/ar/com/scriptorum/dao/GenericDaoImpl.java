@@ -23,21 +23,22 @@ import ar.com.scriptorum.taba.util.HibernateUtil;
 
 
 
-public class GenericDaoImpl <T>{
+public class GenericDaoImpl {
 
 	private static final Object DUMMY_TRUE_WHERE_CLAUSE = null;
-	private static GenericDaoImpl<?> _instance = null;
+	private static GenericDaoImpl _instance = null;
 	private static Logger _logger = Logger.getLogger(GenericDaoImpl.class);
 	protected static SessionFactory _sessionFactory;
 
-	protected GenericDaoImpl() {}
+	protected GenericDaoImpl() {
+		_sessionFactory = HibernateUtil.getSessionFactory(); 
+	}
 
 		
 	
-	static synchronized GenericDaoImpl<?> getInstance() {
+	public static synchronized GenericDaoImpl getInstance() {
 		if (_instance == null) {
-			_instance = new GenericDaoImpl<Object>();
-			_sessionFactory = HibernateUtil.getSessionFactory(); 
+			_instance = new GenericDaoImpl();
 		}
 		return _instance;
 	}
@@ -116,30 +117,30 @@ public class GenericDaoImpl <T>{
 		return outcome;
 	}
 
-	public Object getEntity( Class<T> clazz, Serializable id ) {
+	public Object getEntity( Class clazz, Serializable id ) {
 		_logger.debug("id" + id);
 		Object result = getSession().get(clazz, id);
-		_logger.debug("Entity Id found: " + (result != null ? ((PersistentEntity) result).getId().toString() : "NONE"));
+		_logger.debug("Entity Id found: " + (result != null ? ((PersistentEntity) result).getId(): "NONE"));
 		return result;
 	}
 
-	public Object getUniqueEntity( Class<T> clazz, Map<String,Object> equalProps ) {
+	public Object getUniqueEntity( Class clazz, Map<String,Object> equalProps ) {
 		_logger.debug(clazz);
 
 		Query query = createQuery(clazz, equalProps, null);
 
 		Object result = query.uniqueResult();
-		_logger.debug("Entity Id found: " + (result != null ? ((PersistentEntity) result).getId().toString() : "NONE"));
+		_logger.debug("Entity Id found: " + (result != null ? ((PersistentEntity) result).getId(): "NONE"));
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<T> getEntities( Class<T> clazz, Map<String,Object> equalProps, List<String> orderBy ) {
+	public List getEntities( Class clazz, Map<String,Object> equalProps, List<String> orderBy ) {
 		_logger.debug(clazz);
 
 		Query query = createQuery(clazz, equalProps, orderBy);
 
-		List<T> result = (List<T>) query.list();
+		List result = query.list();
 		_logger.debug("Result size: " + result.size());
 		return result;
 	}
