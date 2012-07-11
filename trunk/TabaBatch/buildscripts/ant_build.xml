@@ -1,0 +1,277 @@
+<project name="ebo" default="all" basedir=".">
+
+  <property environment="env"/>
+
+  <!-- set global properties for this build -->
+  <property file="./ebobuild.properties"/>
+  <property file="./src/version.properties"/>
+
+  <property name="ear.lib" value="lib"/>  <!--relative path-->
+  <property name="dist.srv.cp.lib" value="${dist}/lib"/>
+  <property name="dist.modules" value="${dist}/modules"/>
+  <property name="dist.clients" value="${dist}/clients"/>
+  <property name="dist.config" value="${dist}/config"/>
+
+  <property name="build.ear" value="${build}/eboEar"/>
+
+     <!-- FILE/EXPLODED DIR names for deployment MODULES -->
+  <!--property name="ejb.name" value="trader" />
+  <property name="war.name" value="trader_services" />
+  <property name="ear.name" value="webservices_trader" /-->
+
+  <property name="ejb.name" value="ebo" />
+  <property name="war.name" value="ebo_services" />
+  <property name="ear.name" value="ebo_webservices" />
+
+  <property name="ejb.file" value="${ejb.name}.jar" />
+  <property name="war.file" value="${war.name}.war" />
+  <property name="ear.file" value="${ear.name}.ear" />
+
+  <property name="ws.client.file" value="EBOService_client.jar" />
+
+
+  <path id="cmp.ebo.classpath">
+    <pathelement location="${ebo.lib}/hibernate3.jar"/>
+    <pathelement location="${ebo.lib}/log4j-1.2.11.jar"/>
+    <pathelement location="${ebo.lib}/dom4j-1.6.1.jar"/>
+    <pathelement location="${ebo.lib}/xpp3_min-1.1.4c.jar"/>
+    <pathelement location="${ebo.lib}/xstream-1.3.1.jar"/>
+    <pathelement location="${ebo.lib.cmp}/cglib-2.1.3.jar"/>
+    <pathelement location="${ebo.lib.cmp}/ojdbc14.jar"/>
+    <pathelement location="${ebo.lib.run}/commons-lang3-3.1.jar"/>
+  </path>
+
+  <fileset id="wls.pre_classpath.fileset" dir="${ebo.lib.run}">
+    <include name="antlr-2.7.6.jar"/>
+  </fileset>
+
+  <fileset id="run.ebo.lib.fileset" dir="${basedir}">
+    <include name="lib/hibernate3.jar"/>
+    <include name="lib/log4j-1.2.11.jar"/>
+    <include name="lib/dom4j-1.6.1.jar"/>    <include name="lib/xpp3_min-1.1.4c.jar"/>
+    <include name="lib/xstream-1.3.1.jar"/>
+    <include name="lib.run/cglib-nodep-2.1_3.jar"/>
+    <include name="lib.run/commons-collections-2.1.1.jar"/>
+    <include name="lib.run/commons-logging-1.0.4.jar"/>
+    <include name="lib.run/commons-lang3-3.1.jar"/>
+    <include name="lib.run/jta.jar"/>
+  </fileset>
+
+  <path id="run.ebo.classpath">
+    <fileset refid="run.ebo.lib.fileset"/>
+  </path>
+
+
+  <!-- TARGETS -->
+	<target name="init">  
+		<record name="${ebo.log}/ant_build.log" loglevel="verbose" append="false"/>
+	</target>
+
+  <target name="info">
+    <echo message="     ant_home = ${ant.home}"/>
+    <echo message="   ebo.domain = ${ebo.domain}"/>
+    <echo message=" ebo.lib(c/r) = ${ebo.lib}"/>
+    <echo message=" ebo.lib.cmp  = ${ebo.lib.cmp}"/>
+    <echo message=" ebo.lib.run  = ${ebo.lib.run}"/>
+    <echo message="       wl.lib = ${wl.lib}"/>
+    <echo message="       source = ${source}"/>
+    <echo message="         test = ${test.src}"/>
+    <echo message="       config = ${config}"/>
+    <echo message="        build = ${build}"/>
+    <echo message="         dist = ${dist}"/>
+    <echo message="   classspath = ${env.CLASSPATH}"/>
+    <echo message=" version.name = ${ebo.version.name}"/>
+    <echo message="version.title = ${ebo.version.title}"/>
+    <echo message=" version.date = ${ebo.version.date}"/>
+  </target>
+  
+  <target name="clean" depends="info">
+    <delete dir="${build.ear}"/>
+    <delete dir="${dist.srv.cp.lib}"/>
+    <delete dir="${dist.modules}"/>
+    <delete dir="${dist.config}"/>
+    <!--delete file="${apps.dir}/${ear.file}"/-->
+  </target>
+
+  <target name="clean-client" depends="info">
+    <delete file="${build.clients}/${ws.client.file}"/>
+    <delete dir="${dist.clients}"/>
+  </target>
+
+  <target name="versionate">
+    <!--exec executable="${build.ear}"-->
+    <exec executable="${basedir}/../scripts/setVersion.sh"/>
+  </target>
+
+ <!--target name="all" depends="ear, genWSclient"/-->
+ <target name="all" depends="ear"/>
+
+
+ <target name="build-ejb" depends="clean">
+    <mkdir dir="${build.ear}" />
+    <mkdir dir="${build.ear}/${ejb.name}" />
+    <mkdir dir="${dist}"/>
+    <javac srcdir="${source}" destdir="${build.ear}/${ejb.name}" encoding="iso8859-1" debug="true">
+      <classpath refid="cmp.ebo.classpath"/>
+    </javac>
+    <copy todir="${build.ear}/${ejb.name}" >
+      <fileset dir="${source}" >
+        <include name="ebo.properties"/>
+        <include name="version.properties"/>
+        <include name="log4j.properties"/>
+      	<include name="filemanager.properties"/>
+        <include name="hibernate.cfg.xml"/>
+        <include name="**/*.hbm"/>
+      </fileset>
+    </copy>
+    <copy todir="${build.ear}/${ejb.name}/META-INF" >
+      <fileset dir="${source}" >
+        <include name="ejb-jar.xml"/>
+        <include name="weblogic-ejb-jar.xml"/>
+      </fileset>
+    </copy>
+    <!-- Convert project class path to string property -->
+    <pathconvert property="mf.run.ebo.classpath" pathsep=" ">
+      <path refid="run.ebo.classpath" />
+      <map from="${ebo.lib.run}" to="${ear.lib}"/>
+      <map from="${ebo.lib}" to="${ear.lib}"/>
+    </pathconvert>
+    <jar jarfile="${build.ear}/${ejb.file}"
+         basedir="${build.ear}/${ejb.name}"
+         update="yes">
+      <manifest>
+        <attribute name="Class-Path" value="${mf.run.ebo.classpath}" />
+      </manifest>
+    </jar>
+    <delete dir="${build.ear}/${ejb.name}" /> <!-- clean up temp ejb structure-->
+    <wlappc debug="${debug}"
+            source="${build.ear}/${ejb.file}" />
+  </target>
+
+  <target name="ear" depends="build-ejb">
+    <servicegen
+    	destEar="${build.ear}"
+    	warName="${war.file}" 
+    	contextURI="webservice">
+    	<service
+    		ejbJar="${build.ear}/${ejb.file}"
+    		excludeEJBs="EBOReports"
+    		targetNamespace="http://www.citigroup.com/ebo"
+    		serviceName="EBOService"
+    		serviceURI="/EBOService"
+    		generateTypes="True"
+    		expandMethods="True" >
+    		<!--client (DON'T NEED TO INCLUDE CLIENT JAR IN EAR BY NOW)
+    			packageName="com.citigroup.ebo.services"
+    			clientJarName="${client_file}"
+    		/-->
+                <client 
+                        packageName="com.citigroup.ebo.services"
+                        clientJarName="${ws.client.file}"
+                />
+
+    	</service>
+   
+    	<!-- EBOReports webservice is not being used -->
+    	
+    </servicegen>
+
+    <!-- Classloading alternatives for Third-Party/Utility classes:
+         a) reference jars in the global CLASSPATH (system classloader): the cons are: unique versions, and no re-loading (needs rebooting server)
+         b) put jars in each ear's APP-INF/lib directory: the cons are: duplication   
+         c) put jars in some shared repository and reference them from the client jar's MANIFEST.MF Class-Path attribute (best choice: modularity and no duplication, but does NOT work in weblogic 8)
+         d) put jars somewhere starting from the same dir level as the client jar, and reference them from the MANIFEST.MF (similar to APP-INF)-->
+    <!--mkdir dir="${build.ear}/APP-INF"/-->
+    <!--mkdir dir="${build.ear}/APP-INF/lib"/-->
+    <mkdir dir="${build.ear}/${ear.lib}"/>
+    <copy todir="${build.ear}/${ear.lib}" flatten="true">
+      <fileset refid="run.ebo.lib.fileset"/> 
+    </copy>
+
+    <mkdir dir="${dist.modules}"/>
+    <jar jarfile="${dist.modules}/${ear.file}"
+         basedir="${build.ear}"
+         update="yes">
+    <!--manifest NEEDED FOR CHOICE c)?>
+        <attribute name="Class-Path" value="${mf.run.ebo.classpath}" />
+      </manifest-->
+    </jar>
+
+    <!-- HOT DEPLOYMENT -->
+    <!--copy file="${dist.modules}/${ear.file}" todir="${apps.dir}"/-->  
+
+
+    <!-- EXPLODE JAR/WAR CONTENTS INTO build DIRECTORY for INFO purposes -->
+    <copy file="${build.ear}/${ejb.file}" todir="${dist}"/>
+    <copy file="${build.ear}/${war.file}" todir="${dist}"/>
+
+    <mkdir dir="${build.ear}/${ejb.name}" />
+    <unzip src="${build.ear}/${ejb.file}" dest="${build.ear}/${ejb.name}"/>
+    <mkdir dir="${build.ear}/${war.name}" />
+    <unzip src="${build.ear}/${war.file}" dest="${build.ear}/${war.name}"/>
+
+    <delete file="${dist}/${ejb.file}" />
+    <delete file="${dist}/${war.file}"/>
+
+    <!-- PUT SYSTEM LIB (system classloader level) IN DIST DIRECTORY -->
+    <mkdir dir="${dist.srv.cp.lib}"/>
+    <copy todir="${dist.srv.cp.lib}">
+      <fileset refid="wls.pre_classpath.fileset"/>
+    </copy>
+
+
+    <!-- copy CONFIGURATION FILES to DIST directory -->
+    <mkdir dir="${dist.config}"/>
+    <mkdir dir="${dist.config}/weblogic"/>
+    <copy todir="${dist.config}">
+      <fileset dir="${config}" >
+        <include name="filemanager.properties"/>
+         <include name="ebo.properties"/>
+
+        <include name="log4j.properties"/>
+        <include name="weblogic/ebodomain.app.properties"/>
+        <include name="weblogic/ebodomain.server.properties"/>
+        <include name="weblogic/pre_lib.lst"/>
+      </fileset>
+    </copy>
+
+
+    <!-- copy to DIST DIRECTORY -->
+    <mkdir dir="${dist.clients}"/>
+    <!--copy file="${build.clients}/${ws.client.file}" todir="${dist.clients}"/-->
+    <copy file="${build.ear}/${war.name}/${ws.client.file}" todir="${dist.clients}"/>
+
+  </target>
+
+
+
+<!--taskdef name="clientgen"
+    classname="weblogic.ant.taskdefs.webservice.clientgen.ClientGenTask" /-->
+<!--taskdef name="clientgen"
+    classname="weblogic.webservice.clientgen"/-->
+
+  <target name="genWSclient" depends="info, clean-client"> <!--depends="ear"-->
+      <!--ear="${apps.dir}/${ear.file}"
+      warName="${war.file}"
+      useServerTypes="true"-->
+      <!--wsdl="http://${hostname}:${port}/webservice/EBOService?WSDL"-->
+    <!--clientgen 
+      ear="${dist.modules}/${ear.file}"
+      warName="${war.file}"
+      useServerTypes="false"
+      packageName="com.citigroup.ebo.services"
+      clientJar="${build.clients}/${ws.client.file}" /-->
+    <clientgen
+       wsdl="${build.ear}/${war.name}/WEB-INF/web-services.xml"
+       destDir="{build.clients}"
+       packageName="com.citigroup.ebo.services"
+       type="JAXRPC"/>
+
+    <!-- copy to DIST DIRECTORY -->
+    <mkdir dir="${dist.clients}"/>
+    <!--copy file="${build.clients}/${ws.client.file}" todir="${dist.clients}"/-->
+    <copy file="${build.ear}/${war.name}/${ws.client.file}" todir="${dist.clients}"/>
+
+  </target>
+
+</project>
