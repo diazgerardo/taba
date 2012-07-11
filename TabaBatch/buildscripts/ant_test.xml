@@ -1,0 +1,100 @@
+<project name="ebo_test" default="run-junit" basedir=".">
+
+  <property environment="env"/> 
+
+  <!-- set global properties for this build -->
+  <property file="./ebobuild.properties"/>
+
+  <!--property name="war.file" value="trader_services.war" />
+  <property name="ear.file" value="webservices_trader.ear" /-->
+  <property name="war.file" value="ebo_services.war" />
+  <property name="ear.file" value="ebo_webservices.ear" />
+
+  <property name="ws.client.file" value="EBOService_client.jar" />
+
+  <property name="ebo.home.test.dir" value="${env.EBO_WORKDIR}/test" />
+  <property name="ebo.home.test.cfg" value="${ebo.home.test.dir}/config" />
+  <property name="test.bin" value="${ebo.home.test.dir}/bin" />
+  <property name="test.bin.data" value="${ebo.home.test.dir}/test_data" />
+  <property name="test.class" value="com.citigroup.ebo.${class}Test" />
+
+
+  <target name="info-run">
+    <echo message="   test class: ${test.class}"/>
+    <echo message="        tests: ${tests}"/> <!-- test methods -->
+    <echo message="        input: ${input}"/>
+    <echo message="ebo.test.home: ${ebo.home.test.dir}"/>
+  </target>
+
+  <target name="info-cmp">
+    <echo message="TODO: ADD PROPER INFO HERE"/> 
+  </target>
+
+  <target name="clean">
+    <delete dir="${test.bin}"/>
+    <delete dir="${test.bin.data}"/>
+  </target>
+
+
+
+  <target name="compile" depends="clean,info-cmp">
+    <mkdir dir="${test.bin}"/>
+    <javac srcdir="${test.src}" fork ="true"
+      destdir="${test.bin}" > 
+      <classpath>
+        <pathelement location="${ebo.lib}/hibernate3.jar"/>
+        <pathelement location="${ebo.lib}/log4j-1.2.11.jar"/>
+        <pathelement location="${test.lib}/junit-3.8.1.jar"/>
+        <pathelement path="${build}/eboEar/ebo.jar"/>
+        <!--pathelement location="${test.lib}/${ws.client.file}"/-->
+        <pathelement location="${build.clients}/${ws.client.file}"/>
+
+        <pathelement location="${wl.lib}/weblogic.jar"/>
+        <pathelement location="${wl.lib}/webservices.jar"/>
+      </classpath>
+    </javac>
+    <copy todir="${test.bin}" >
+      <fileset dir="${test.src}" >
+        <include name="ebo.properties"/>
+        <include name="log4j.properties"/>
+        <include name="hibernate.cfg.xml"/>
+      </fileset>
+    </copy>
+
+    <!-- copy CONFIGURATION files -->
+    <mkdir dir="${ebo.home.test.cfg}"/>
+    <copy todir="${ebo.home.test.cfg}">
+      <fileset dir="${config}/test" >
+        <include name="ebo.properties"/>
+        <include name="log4j.properties"/>
+      </fileset>
+    </copy> 
+
+    <!-- copy test INPUT DATA files -->
+    <mkdir dir="${test.bin.data}"/>
+    <copy todir="${test.bin.data}">
+        <fileset dir="${test.src.data}"/>
+    </copy> 
+  </target>
+
+
+  <target name="run-junit" if="class" depends="info-run">
+    <junit fork="yes" showoutput="true" filtertrace="off"> 
+      <test name="${test.class}" todir="${ebo.home.test.dir}/log" />
+      <classpath>
+        <pathelement path="${test.bin}"/>
+        <pathelement path="${build}/eboEar/ebo.jar"/>
+        <pathelement path="${ebo.lib.cmp}/ojdbc14.jar"/>
+        <pathelement path="${wl.lib}/weblogic.jar"/>
+        <pathelement location="${build.clients}/${ws.client.file}"/>
+      </classpath>
+      <formatter type="plain" usefile="true" />
+      <sysproperty key="@sys.ebo.home" value="${ebo.home.test.dir}"/>
+      <sysproperty key="@sys.ebo.conf.path" value="${ebo.home.test.cfg}"/>
+      <sysproperty key="log4j.configuration" value="file:${ebo.home.test.cfg}/log4j.properties"/>
+      <sysproperty key="tests" value="${tests}"/>
+      <sysproperty key="input" value="${input}"/>
+    </junit>
+  </target>
+
+</project>

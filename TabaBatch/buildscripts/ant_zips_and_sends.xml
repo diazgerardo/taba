@@ -1,0 +1,55 @@
+<project name="scp" default="info" basedir=".">
+	<property environment="env" />
+	<property file="./ebobuild.properties" />
+	<property file="./src/version.properties" />
+
+	<target name="info">
+		<echo message="     ant_home = ${ant.home}" />
+		<echo message="   ebo.domain = ${ebo.domain}" />
+		<echo message=" ebo.lib(c/r) = ${ebo.lib}" />
+		<echo message=" ebo.lib.cmp  = ${ebo.lib.cmp}" />
+		<echo message=" ebo.lib.run  = ${ebo.lib.run}" />
+		<echo message="       wl.lib = ${wl.lib}" />
+		<echo message="       source = ${source}" />
+		<echo message="         test = ${test.src}" />		<echo message="       config = ${config}" />
+		<echo message="        build = ${build}" />
+		<echo message="         dist = ${dist}" />
+		<echo message="   classspath = ${env.CLASSPATH}" />
+		<echo message=" version.name = ${ebo.version.name}" />
+		<echo message="version.title = ${ebo.version.title}" />
+		<echo message=" version.date = ${ebo.version.date}" />
+		<echo message="   ebo.zipDir = ${ebo.zipDir}" />
+	</target>
+
+	<target name="clean" depends="info">
+		<delete file="${ebo.zipDir}/src.zip" />
+	</target>
+
+	<target name="zip" depends="clean">
+		<zip destfile="${ebo.zipDir}/src.zip"
+	       basedir="${source}"
+	       excludes="**svn**"
+	  	/>
+	</target>
+	
+	<!-- 
+	<target name="7z" depends="clean">
+		<exec executable="7z">
+			<arg value="a" />
+			<arg value="-r" />
+			<arg value="${ebo.zipDir}/src.zip" />
+			<arg value="-x" />
+			<arg value="*svn*" />
+			<arg value="${source}/*.*" />
+		</exec>
+	</target>
+	-->
+
+	<target name="scp" depends="zip">
+		<scp remoteTodir="support@lats24.nam.nsroot.net:/tmp/ebo/"
+			password="g3g4g5" trust="yes" sftp="true" file="${ebo.zipDir}/src.zip"
+			verbose="true">
+		</scp>
+	</target>
+
+</project>
