@@ -6,7 +6,9 @@
 	<target name="compile" depends="create">
 		<javac destdir="../bin">
 			<src path="${src}" />
-			<path refid="build.classpath" />
+			<classpath>
+				<path refid="build.classpath" />
+			</classpath>
 		</javac>
 	</target>
 
