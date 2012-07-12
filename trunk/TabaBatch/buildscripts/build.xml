@@ -6,56 +6,7 @@
 	<target name="compile" depends="create">
 		<javac destdir="../bin">
 			<src path="${src}" />
-			<classpath>
-			     <fileset dir="../lib">
-			     	<include name="antlr-2.7.6.jar"/>
-			     	<include name="aopalliance.jar"/>
-			     	<include name="aspectjrt.jar"/>
-			     	<include name="aspectjtools.jar"/>
-			     	<include name="aspectjweaver.jar"/>
-			     	<include name="commons-beanutils-1.8.1.jar"/>
-			     	<include name="commons-collections-3.2.1.jar"/>
-			     	<include name="commons-digester3-3.2-with-deps.jar"/>
-			     	<include name="commons-lang-2.4-bin.jar"/>
-			     	<include name="commons-lang-2.4.jar"/>
-			     	<include name="commons-logging-1.1.1.jar"/>
-			     	<include name="commons-logging-adapters-1.1.1.jar"/>
-			     	<include name="commons-logging-api-1.1.1.jar"/>
-			     	<include name="commons-logging-tests.jar"/>
-			     	<include name="commons-validator-1.4.0.jar"/>
-			     	<include name="dom4j-1.6.1.jar"/>
-			     	<include name="hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
-			     	<include name="hibernate3.jar"/>
-			     	<include name="javassist-3.12.0.GA.jar"/>
-			     	<include name="jta-1.1.jar"/>
-			     	<include name="junit-4.8.2.jar"/>
-			     	<include name="log4j-1.2.16.jar"/>
-			     	<include name="org.aspectj.matcher.jar"/>
-			     	<include name="org.springframework.aop.jar"/>
-			     	<include name="org.springframework.asm.jar"/>
-			     	<include name="org.springframework.aspects.jar"/>
-			     	<include name="org.springframework.beans.jar"/>
-			     	<include name="org.springframework.context.jar"/>
-			     	<include name="org.springframework.context.support.jar"/>
-			     	<include name="org.springframework.core.jar"/>
-			     	<include name="org.springframework.expression.jar"/>
-			     	<include name="org.springframework.instrument.jar"/>
-			     	<include name="org.springframework.instrument.tomcat.jar"/>
-			     	<include name="org.springframework.jdbc.jar"/>
-			     	<include name="org.springframework.jms.jar"/>
-			     	<include name="org.springframework.orm.jar"/>
-			     	<include name="org.springframework.oxm.jar"/>
-			     	<include name="org.springframework.test.jar"/>
-			     	<include name="org.springframework.transaction.jar"/>
-			     	<include name="org.springframework.web.jar"/>
-			     	<include name="org.springframework.web.portlet.jar"/>
-			     	<include name="org.springframework.web.servlet.jar"/>
-			     	<include name="org.springframework.web.struts.jar"/>
-			     	<include name="postgresql-9.1-901.jdbc4.jar"/>
-			     	<include name="slf4j-api-1.6.1.jar"/>
-			     	<include name="slf4j-simple-1.6.1.jar"/>
-			     </fileset>
-			</classpath>
+			<path refid="build.classpath" />
 		</javac>
 	</target>
 
@@ -73,5 +24,62 @@
 	<target name="create" depends="clean">
 		<mkdir dir="${output}" />
 	</target>
+	
+	<path id="build.classpath">
+	<fileset dir="../lib">
+	<include name="*/.jar"/>
+	</fileset>
+	</path>
+	
+	<classpath>
+	     <fileset dir="../lib">
+	     	<include name="antlr-2.7.6.jar"/>
+	     	<include name="aopalliance.jar"/>
+	     	<include name="aspectjrt.jar"/>
+	     	<include name="aspectjtools.jar"/>
+	     	<include name="aspectjweaver.jar"/>
+	     	<include name="commons-beanutils-1.8.1.jar"/>
+	     	<include name="commons-collections-3.2.1.jar"/>
+	     	<include name="commons-digester3-3.2-with-deps.jar"/>
+	     	<include name="commons-lang-2.4-bin.jar"/>
+	     	<include name="commons-lang-2.4.jar"/>
+	     	<include name="commons-logging-1.1.1.jar"/>
+	     	<include name="commons-logging-adapters-1.1.1.jar"/>
+	     	<include name="commons-logging-api-1.1.1.jar"/>
+	     	<include name="commons-logging-tests.jar"/>
+	     	<include name="commons-validator-1.4.0.jar"/>
+	     	<include name="dom4j-1.6.1.jar"/>
+	     	<include name="hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	     	<include name="hibernate3.jar"/>
+	     	<include name="javassist-3.12.0.GA.jar"/>
+	     	<include name="jta-1.1.jar"/>
+	     	<include name="junit-4.8.2.jar"/>
+	     	<include name="log4j-1.2.16.jar"/>
+	     	<include name="org.aspectj.matcher.jar"/>
+	     	<include name="org.springframework.aop.jar"/>
+	     	<include name="org.springframework.asm.jar"/>
+	     	<include name="org.springframework.aspects.jar"/>
+	     	<include name="org.springframework.beans.jar"/>
+	     	<include name="org.springframework.context.jar"/>
+	     	<include name="org.springframework.context.support.jar"/>
+	     	<include name="org.springframework.core.jar"/>
+	     	<include name="org.springframework.expression.jar"/>
+	     	<include name="org.springframework.instrument.jar"/>
+	     	<include name="org.springframework.instrument.tomcat.jar"/>
+	     	<include name="org.springframework.jdbc.jar"/>
+	     	<include name="org.springframework.jms.jar"/>
+	     	<include name="org.springframework.orm.jar"/>
+	     	<include name="org.springframework.oxm.jar"/>
+	     	<include name="org.springframework.test.jar"/>
+	     	<include name="org.springframework.transaction.jar"/>
+	     	<include name="org.springframework.web.jar"/>
+	     	<include name="org.springframework.web.portlet.jar"/>
+	     	<include name="org.springframework.web.servlet.jar"/>
+	     	<include name="org.springframework.web.struts.jar"/>
+	     	<include name="postgresql-9.1-901.jdbc4.jar"/>
+	     	<include name="slf4j-api-1.6.1.jar"/>
+	     	<include name="slf4j-simple-1.6.1.jar"/>
+	     </fileset>
+	</classpath>
 
 </project>
