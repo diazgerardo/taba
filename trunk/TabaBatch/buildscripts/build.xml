@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="TabaBatch" basedir="." default="jar">
     <property name="src" value="../src"/>
-    <property name="output" value="bin"/>
+    <property name="output" value="../bin"/>
  
     <target name="compile" depends="create">
         <javac destdir="bin">
