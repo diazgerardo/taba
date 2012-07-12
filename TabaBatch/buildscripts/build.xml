@@ -6,7 +6,7 @@
 	<target name="compile" depends="create">
 		<javac destdir="../bin">
 			<src path="${src}" />
-			<classpath refid="java" />
+			<compilerarg arg="-Xbootclasspath/p:${toString:java}"/>
 		</javac>
 	</target>
 
