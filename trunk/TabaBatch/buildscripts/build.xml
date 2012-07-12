@@ -6,13 +6,17 @@
 	<target name="compile" depends="create">
 		<javac destdir="../bin">
 			<src path="${src}" />
-			<compilerarg arg="-Xbootclasspath/p:${toString:java}"/>
+			<classpath>
+			     <fileset dir="../lib">
+			        <include name="**/*.jar"/>
+			     </fileset>
+			</classpath>
 		</javac>
 	</target>
 
 	<target name="jar" depends="compile">
 		<jar destfile="test.jar">
-			<fileset dir="bin" />
+			<fileset dir="../bin" />
 		</jar>
 	</target>
 
@@ -25,7 +29,4 @@
 		<mkdir dir="${output}" />
 	</target>
 
-	<path id="java">
-		<fileset dir="../lib" includes="*.jar" />
-	</path>
 </project>
