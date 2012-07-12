@@ -4,7 +4,7 @@
     <property name="output" value="../bin"/>
  
     <target name="compile" depends="create">
-        <javac destdir="bin">
+        <javac destdir="../bin">
             <src path="${src}"/>
             <classpath refid="java"/>
         </javac>
