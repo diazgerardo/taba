@@ -4,7 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 
 import ar.com.scriptorum.dao.GenericDaoImpl;
-import ar.com.scriptorum.taba.beans.Person;
+import ar.com.scriptorum.taba.beans.*;
 
 public class PersonDaoImpl extends GenericDaoImpl {
 	
