@@ -1,10 +1,11 @@
 package ar.com.scriptorum.taba.util.documents;
 
+import ar.com.scriptorum.taba.interfaces.Transition;
 import ar.com.scriptorum.taba.interfaces.Workflow;
 
 public abstract class AbstractDocument {
 	
-	private Workflow<AbstractDocument> workflow;
+	private Workflow<Transition> workflow;
 	private String docName;
 	private String department;
 	
@@ -21,10 +22,10 @@ public abstract class AbstractDocument {
 		this.department = deparment;
 	}
 	
-	public Workflow<AbstractDocument> getWorkflow() {
+	public Workflow<Transition> getWorkflow() {
 		return workflow;
 	}
-	public void setWorkflow(Workflow<AbstractDocument> workflow) {
+	public void setWorkflow(Workflow<Transition> workflow) {
 		this.workflow = workflow;
 	}
 
