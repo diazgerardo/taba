@@ -2,8 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
           "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-	<bean id="prnService" class="ar.com.scriptorum.spring.ioc.appContextBased.PrintServiceImpl">
-	</bean>
-	<bean id="foo" class="ar.com.scriptorum.spring.ioc.appContextBased.Foo">
-	</bean>
+	<bean id="prnService" class="ar.com.scriptorum.spring.ioc.appContextBased.PrintServiceImpl"/>
+	<bean id="foo" class="ar.com.scriptorum.spring.ioc.appContextBased.Foo"/>
+	<bean id="basicPrinter" class="ar.com.scriptorum.spring.ioc.appContextBased.Printer"/>
 </beans>
