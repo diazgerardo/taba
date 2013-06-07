@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
+
+		<!-- weblogic
+        <property name="transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</property>
+         -->
+         
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Disable the second-level cache  -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <!-- property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property-->
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">false</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+        <!-- property name="hbm2ddl.auto">create</property -->
+
+        <!-- WARNING!!! enable and try in case of having problems like org.hibernate.QueryException: ClassNotFoundException: org.hibernate.hql.ast.HqlToken -->
+		<!-- property name="hibernate.query.factory_class"> org.hibernate.hql.classic.ClassicQueryTranslatorFactory</property-->
+
+        <property name="hibernate.query.substitutions">true 'Y', false 'N'</property>
+        
+        <property name="hibernate.transaction.auto_close_session">false</property>
+        
+        <mapping resource="com/citigroup/ebo/hbm/Interface.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/Parameter.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/Config.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/ConfigValue.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/Bond.hbm" />
+        <!--<mapping resource="com/citigroup/ebo/hbm/PauBond.hbm" />  -->
+		<mapping resource="com/citigroup/ebo/hbm/BondCashflow.hbm" />
+		<!-- <mapping resource="com/citigroup/ebo/hbm/PauBondCashFlow.hbm" / -->
+		<mapping resource="com/citigroup/ebo/hbm/Branch.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Portfolio.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Deal.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/BuySell.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Calendar.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Country.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Currency.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/CurrencyRate.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/LegalVehicle.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Liquidation.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Position.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Price.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Rate.hbm" />
+        <mapping resource="com/citigroup/ebo/hbm/Customer.hbm"/>        
+        <mapping resource="com/citigroup/ebo/hbm/Edealer_Groups.hbm"/>               
+        <mapping resource="com/citigroup/ebo/hbm/Edealer_Deals.hbm"/>               
+        <mapping resource="com/citigroup/ebo/hbm/Edealer_Prism_Deals.hbm"/>               
+		<!-- mapping resource="com/citigroup/ebo/hbm/ProcessLog.hbm"/> -->
+        <mapping resource="com/citigroup/ebo/hbm/Holiday.hbm"/>               
+		<mapping resource="com/citigroup/ebo/hbm/RepoReve.hbm"/>
+		<mapping resource="com/citigroup/ebo/hbm/SwappableRepo.hbm"/>
+   		<mapping resource="com/citigroup/ebo/hbm/Flag.hbm" />
+        <mapping resource="com/citigroup/ebo/hbm/AccEvent.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/EventSchema.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/GLEvent.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/AccountCode.hbm"/>
+   		<mapping resource="com/citigroup/ebo/hbm/UserPrefer.hbm" />
+<!--    		<mapping resource="com/citigroup/ebo/hbm/EdealerBondMessage.hbm" />
+   		<mapping resource="com/citigroup/ebo/hbm/EdealerBondMessageCashFlow.hbm" /> -->
+   		<!-- 
+   		<mapping resource="com/citigroup/ebo/hbm/EdealerBondAdapter.hbm" />
+   		<mapping resource="com/citigroup/ebo/hbm/EdealerCashFlowAdapter.hbm" />
+   		 -->
+ 		<mapping resource="com/citigroup/ebo/hbm/AccountMap.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/Category.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/ConstantValue.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/DealType.hbm" />
+		<mapping resource="com/citigroup/ebo/hbm/EventType.hbm" />		
+		<mapping resource="com/citigroup/ebo/hbm/AccountClass.hbm" />	
+		<mapping resource="com/citigroup/ebo/hbm/ConfigType.hbm" />			
+		<mapping resource="com/citigroup/ebo/hbm/ProcessLog.hbm" />			
+        <mapping resource="com/citigroup/ebo/hbm/Edealer_Trans_Journal_Deals.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/Order.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/Assignation.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/AssignationDetail.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/Envelope.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/EnvelopeOrder.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/EnvelopeAsig.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/EnvelopePauBond.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/EnvelopeDeal.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/State.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/EnvelopeWorkflow.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/EnvelopeWorkflowHist.hbm"/>
+        <mapping resource="com/citigroup/ebo/hbm/BusXmlMsg.hbm" />
+        <mapping resource="com/citigroup/ebo/hbm/PauBond.hbm" />
+        <mapping resource="com/citigroup/ebo/hbm/PauBondCashFlow.hbm" />
+    </session-factory>
+
+</hibernate-configuration>
+
