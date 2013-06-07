@@ -1,0 +1,27 @@
+<project name="workflow" >
+
+	<target name="createModule">
+		<echo message="${ant.file}"/>
+		<local name="workflow_dir"/>
+		<local name="src_dir"/>
+		<local name="target_dir"/>
+		<local name="name"/>
+		<local name="file"/>
+		<property name="workflow_dir" value="${basedir}/../workflow" />
+		<property name="src_dir" value="${workflow_dir}/src" />
+		<property name="target_dir" value="${workflow_dir}/target" />
+		<property name="name" value="workflow" />
+		<property name="file" value="${name}.jar" />
+		<delete dir="${target_dir}" />
+		<mkdir dir="${target_dir}" />
+		<delete file="${ebo.lib.modules}/${file}" />
+		<javac srcdir="${src_dir}" destdir="${target_dir}" fork="true" source="1.6" target="1.6" verbose="${javacVerbose}" includeantruntime="false" debug="true" debuglevel="lines, vars, and source">
+		    <compilerarg value="-Xlint"/>
+			<classpath refid="EBO_DEPENDENCIES" />
+		</javac>
+		<jar destfile="${ebo.lib.modules}/${file}" basedir="${target_dir}" >
+			<fileset dir="${src_dir}" includes="workflow.application.context.xml"></fileset>
+		</jar>
+	</target>
+
+</project>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="workflow/test"/>
+	<classpathentry kind="src" path="workflow/src"/>
 	<classpathentry kind="src" path="samples"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="samplesTest"/>
