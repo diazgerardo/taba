@@ -14,7 +14,7 @@ public class IngenieriaDocumentVisitor implements DocumentVisitor {
 	
 	private void commonBehaviour(AbstractDocument d) {
 		d.setDepartment(Constants.INGENIERIA);
-		d.setWorkflow(new IngenieriaDocWkfl(d));
+		//d.setWorkflow(new IngenieriaDocWkfl(d));
 	}
 
 }
