@@ -17,8 +17,8 @@ public class DocumentTransitionTest extends DocumentConfiguratorsTest {
 	public void testAutorizacionIngresoTransition() {
 		StateBuilder builder = new StateBuilder();
 		assertNotNull(aiIng.getWorkflow());
-		assertTrue(aiIng.getWorkflow() instanceof IngenieriaDocWkfl);
-		Workflow<AbstractDocument> workflow = aiIng.getWorkflow();
+		//assertTrue(aiIng.getWorkflow() instanceof IngenieriaDocWkfl);
+		Workflow<AbstractDocument> workflow  = null;//= aiIng.getWorkflow();
 		assertNotNull(workflow.getCurrentState());
 		assertTrue(builder.createState("edited").build().equals(workflow.getCurrentState()));
 		assertTrue(workflow.transicionate());
@@ -31,7 +31,7 @@ public class DocumentTransitionTest extends DocumentConfiguratorsTest {
 	}
 	
 	public void testAutorizacionIngresoActions() {
-		Workflow<AbstractDocument> workflow = aiIng.getWorkflow();
+		Workflow<AbstractDocument> workflow = null;//aiIng.getWorkflow();
 		StateBuilder builder = new StateBuilder();
 		while(!builder.createState("validated").build().equals(workflow.getCurrentState())) {
 			workflow.transicionate();
