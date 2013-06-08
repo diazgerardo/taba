@@ -39,7 +39,7 @@ public class CaseTransitionTest {
 		// 1st element of the suite
 		conditionsToMatch =  new HashSet<Condition>();
 		conditionsToMatch.add(BusinessRuleFactory.newBusinesRule(true, FIRST_CONDITION));
-		//conditionsToMatch.add(BusinessRuleFactory.newBusinesRule(true, SECOND_CONDITION));
+		conditionsToMatch.add(BusinessRuleFactory.newBusinesRule(true, SECOND_CONDITION));
 		asocciatedState = new State("1stState");
 		suiteCase.add(conditionsToMatch, asocciatedState);
 		
@@ -66,7 +66,7 @@ public class CaseTransitionTest {
 	public void assert1stState() {
 		Set<Condition> conditions = new HashSet<Condition>();
 		conditions.add(BusinessRuleFactory.newBusinesRule(true,FIRST_CONDITION));
-		//conditions.add(BusinessRuleFactory.newBusinesRule(true,SECOND_CONDITION));
+		conditions.add(BusinessRuleFactory.newBusinesRule(true,SECOND_CONDITION));
 		State result;
 		assertTrue((result = transition.eval(conditions))!=null);
 		assertTrue(new State("1stState").equals(result));
