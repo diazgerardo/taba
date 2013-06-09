@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.citigroup.workflow.strategy.ConditionStrategy;
+import ar.com.scriptorum.workflow.strategy.ConditionStrategy;
 
 @Component
 @Scope("prototype")

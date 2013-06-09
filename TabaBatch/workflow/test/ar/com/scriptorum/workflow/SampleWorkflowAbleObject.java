@@ -5,8 +5,8 @@ import java.util.Date;
 import ar.com.scriptorum.workflow.Cartography;
 import ar.com.scriptorum.workflow.Workflow;
 import ar.com.scriptorum.workflow.WorkflowAble;
+import ar.com.scriptorum.workflow.strategy.ConditionStrategy;
 
-import com.citigroup.workflow.strategy.ConditionStrategy;
 
 public class SampleWorkflowAbleObject implements WorkflowAble {
 
