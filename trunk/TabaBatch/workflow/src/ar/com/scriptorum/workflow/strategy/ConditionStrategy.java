@@ -1,4 +1,4 @@
-package com.citigroup.workflow.strategy;
+package ar.com.scriptorum.workflow.strategy;
 
 import java.util.Set;
 

@@ -3,7 +3,7 @@ package ar.com.scriptorum.workflow;
 import java.util.Date;
 import java.util.List;
 
-import com.citigroup.workflow.strategy.ConditionStrategy;
+import ar.com.scriptorum.workflow.strategy.ConditionStrategy;
 
 public interface Workflow <W> {
 	public Long getId();
