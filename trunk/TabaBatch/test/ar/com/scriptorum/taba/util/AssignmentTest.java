@@ -7,6 +7,9 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
+/**
+ * @See http://www.javabeat.net/2011/02/introduction-to-spring-expression-language-spel/
+ */
 import ar.com.scriptorum.taba.beans.Customer;
 
 public class AssignmentTest {

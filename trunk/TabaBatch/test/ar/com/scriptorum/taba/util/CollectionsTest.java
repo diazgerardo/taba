@@ -21,6 +21,10 @@ import ar.com.scriptorum.taba.beans.DTSystem;
 import ar.com.scriptorum.taba.beans.Defect;
 import ar.com.scriptorum.taba.beans.Release;
 
+
+/**
+ * @See http://www.javabeat.net/2011/02/introduction-to-spring-expression-language-spel/
+ */
 public class CollectionsTest {
 
 	@Test
