@@ -10,6 +10,9 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import ar.com.scriptorum.taba.beans.AddressType;
 import ar.com.scriptorum.taba.beans.Customer;
 
+/**
+ * @See http://www.javabeat.net/2011/02/introduction-to-spring-expression-language-spel/
+ */
 public class MiscTest {
 
 	@Test
