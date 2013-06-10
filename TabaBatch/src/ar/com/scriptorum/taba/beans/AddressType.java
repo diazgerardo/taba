@@ -4,5 +4,7 @@ public enum AddressType {
 
 	HOME,
 	
-	BILLING
+	BILLING, 
+	
+	SPARE_TIME
 }
