@@ -36,9 +36,11 @@ public class CollectionsTest {
 		
 		Address homeAddress = new Address("Home Address", AddressType.HOME);
 		Address billingAddress = new Address("Billing Address", AddressType.BILLING);
-		
+		Address spareTimeAddress = new Address("Spare Time Address", AddressType.SPARE_TIME);
 		customer.getAddresses().add(homeAddress);
 		customer.getAddresses().add(billingAddress);
+		customer.getAddresses().add(spareTimeAddress);
+		
 		
 		EvaluationContext context = new StandardEvaluationContext(customer);
 		Expression expression = null;
@@ -49,7 +51,13 @@ public class CollectionsTest {
 		
 		expression = parser.parseExpression("addresses[1].addressType");
 		AddressType addressType = expression.getValue(context, AddressType.class);
+		System.out.println("Address Type is " + addressType);
+		
+		
+		expression = parser.parseExpression("addresses[2].addressType");
+		addressType = expression.getValue(context, AddressType.class);
 		System.out.println("Address Type is " + addressType);		
+
 	}
 
 	@Test
