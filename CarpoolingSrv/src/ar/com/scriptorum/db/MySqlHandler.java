@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
+import com.mockrunner.jdbc.StatementResultSetHandler;
+import com.mockrunner.mock.jdbc.MockConnection;
+import com.mockrunner.mock.jdbc.MockResultSet;
+
 import ar.com.scriptorum.exceptions.BusinessException;
 
 public class MySqlHandler {
@@ -38,8 +42,7 @@ public class MySqlHandler {
 		}
 
 	}
-
-
+	
 	public void writeResultSet(ResultSet resultSet) throws SQLException {
 		logMetadata(resultSet);
 		while (resultSet.next()) {

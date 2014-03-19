@@ -10,5 +10,11 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/CarpoolingSrv/gson-2.2.4-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="mockrunner.jar"/>
+	<classpathentry kind="lib" path="commons-dbutils-1.5.jar" sourcepath="commons-dbutils-1.5-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/CarpoolingSrv/commons-dbutils-1.5-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
