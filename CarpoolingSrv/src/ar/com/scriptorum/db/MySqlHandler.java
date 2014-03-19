@@ -25,14 +25,14 @@ public class MySqlHandler {
 		return this;
 	}
 
-	public void read(String query) throws Exception {
+	public ResultSet read(String query) {
 		try {
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery(query);
 			writeResultSet(resultSet);
-
+			return(resultSet);
 		} catch (Exception e) {
-			throw e;
+			throw new BusinessException(e.getMessage());
 		} finally {
 			close();
 		}
