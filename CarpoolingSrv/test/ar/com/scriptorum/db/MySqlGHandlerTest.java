@@ -11,7 +11,7 @@ public class MySqlGHandlerTest {
 	@Test
 	public void readDatabase() {
 		try {
-			h.readDataBase();
+			h.read("select * from DIAZ.VIAJES");
 		} catch(Exception e) {
 			fail("unexpected exception="+e);
 		}
