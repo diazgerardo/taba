@@ -7,19 +7,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
+import ar.com.scriptorum.exceptions.BusinessException;
+
 public class MySqlHandler {
 	private Connection connect = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 
-	public void connect() throws Exception {
+	public MySqlHandler connected() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url = "jdbc:mysql://190.228.29.195:3306/diaz";
 			connect = DriverManager.getConnection(url, "gerardo_camp","Android132134");
 		} catch (Exception e) {
-			throw e;
+			throw new BusinessException("oops. shit happens :)");
 		} 
+		return this;
 	}
 
 	public void read(String query) throws Exception {
