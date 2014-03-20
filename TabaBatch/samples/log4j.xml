@@ -3,9 +3,7 @@
 "http://logging.apache.org/log4j/docs/api/org/apache/log4j/xml/log4j.dtd" > 
 <log4j:configuration>
     <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
-        <layout class="org.apache.log4j.PatternLayout">
-            
-        </layout>
+        <layout class="org.apache.log4j.PatternLayout"/>
     </appender>
     <root>
         <level value="debug" />
