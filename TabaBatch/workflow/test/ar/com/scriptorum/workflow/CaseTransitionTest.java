@@ -67,7 +67,7 @@ public class CaseTransitionTest {
 		Set<Condition> conditions = new HashSet<Condition>();
 		conditions.add(BusinessRuleFactory.newBusinesRule(true,FIRST_CONDITION));
 		conditions.add(BusinessRuleFactory.newBusinesRule(true,SECOND_CONDITION));
-		State result;
+		State result = null;
 		assertTrue((result = transition.eval(conditions))!=null);
 		assertTrue(new State("1stState").equals(result));
 	}
@@ -77,7 +77,7 @@ public class CaseTransitionTest {
 		Set<Condition> conditions = new HashSet<Condition>();
 		conditions.add(BusinessRuleFactory.newBusinesRule(true, FIRST_CONDITION));
 		conditions.add(BusinessRuleFactory.newBusinesRule(false,SECOND_CONDITION));
-		State result;
+		State result = null;
 		assertTrue((result = transition.eval(conditions))!=null);
 		assertTrue(new State("2ndState").equals(result));
 	}
@@ -87,7 +87,7 @@ public class CaseTransitionTest {
 		Set<Condition> conditions = new HashSet<Condition>();
 		conditions.add(BusinessRuleFactory.newBusinesRule(false, FIRST_CONDITION));
 		conditions.add(BusinessRuleFactory.newBusinesRule(true, SECOND_CONDITION));
-		State result;
+		State result = null;
 		assertTrue((result = transition.eval(conditions))!=null);
 		assertTrue(new State("3rdState").equals(result));
 	}
@@ -96,7 +96,7 @@ public class CaseTransitionTest {
 	public void assertDefaultState() {
 		Set<Condition> conditions = new HashSet<Condition>();
 		conditions.add(BusinessRuleFactory.newBusinesRule(true,DEFAULT));
-		State result;
+		State result = null;
 		assertTrue((result = transition.eval(conditions))!=null);
 		assertTrue(new State("defaultState").equals(result));
 	}

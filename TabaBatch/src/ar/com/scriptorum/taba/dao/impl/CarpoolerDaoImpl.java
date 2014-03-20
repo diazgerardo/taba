@@ -2,32 +2,33 @@ package ar.com.scriptorum.taba.dao.impl;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import java.util.List;
 
 import ar.com.scriptorum.dao.GenericDaoImpl;
 import ar.com.scriptorum.taba.beans.*;
 
-public class PersonDaoImpl extends GenericDaoImpl {
+public class CarpoolerDaoImpl extends GenericDaoImpl {
 	
-	private static PersonDaoImpl _instance;
+	private static CarpoolerDaoImpl _instance;
 	
-	private PersonDaoImpl() {
+	private CarpoolerDaoImpl() {
 		super();
 	}
 	
-	public static synchronized PersonDaoImpl getInstance() {
+	public static synchronized CarpoolerDaoImpl getInstance() {
 		if(_instance == null ) {
-			_instance = new PersonDaoImpl();
+			_instance = new CarpoolerDaoImpl();
 		}
 		return _instance;
 	}
 
 	@SuppressWarnings("unchecked")
-	public Person findByName(String name) {
+	public List<Carpooler> findByName(String nombre) {
 		try {
-			String queryString = "from Person where name = :name";
+			String queryString = "from Carpooler where nombre = :nombre";
 			Query query = getSession().createQuery(queryString);
-			query.setString("name", name);
-			return (Person) query.uniqueResult();
+			query.setString("nombre", nombre);
+			return query.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
 		} finally {
@@ -36,7 +37,7 @@ public class PersonDaoImpl extends GenericDaoImpl {
 		return null;
 	}
 	
-	public boolean delete(Person t) {
+	public boolean delete(Carpooler t) {
 		boolean result = true;
 		try {
 			getSession().delete(t);
