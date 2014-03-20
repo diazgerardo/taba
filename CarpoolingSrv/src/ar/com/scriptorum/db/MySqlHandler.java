@@ -7,10 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-import com.mockrunner.jdbc.StatementResultSetHandler;
-import com.mockrunner.mock.jdbc.MockConnection;
-import com.mockrunner.mock.jdbc.MockResultSet;
-
 import ar.com.scriptorum.exceptions.BusinessException;
 
 public class MySqlHandler {
@@ -34,11 +30,9 @@ public class MySqlHandler {
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery(query);
 			writeResultSet(resultSet);
-			return(resultSet);
+			return resultSet;
 		} catch (Exception e) {
 			throw new BusinessException(e.getMessage());
-		} finally {
-			close();
 		}
 
 	}
@@ -50,7 +44,7 @@ public class MySqlHandler {
 			Integer id = resultSet.getInt("id");
 			Integer itinerarioId = resultSet.getInt("itinerario_id");
 			Integer groupId = resultSet.getInt("group_id");
-			Integer vehicleId = resultSet.getInt("vehicle_id");
+			Integer vehicleId = resultSet.getInt("vehiculo_id");
 			Boolean cerrado = resultSet.getBoolean("cerrado");
 			Date inicio = resultSet.getDate("inicio");
 			Date fin = resultSet.getDate("fin");
@@ -62,6 +56,7 @@ public class MySqlHandler {
 			System.out.println("      inicio: " + inicio);
 			System.out.println("         fin: " + fin);
 		}
+		resultSet.beforeFirst();
 	}
 
 	public void close() {

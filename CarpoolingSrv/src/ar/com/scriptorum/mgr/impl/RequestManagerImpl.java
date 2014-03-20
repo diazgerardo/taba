@@ -9,7 +9,6 @@ import org.apache.commons.dbutils.RowProcessor;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
 import ar.com.scriptorum.db.MySqlHandler;
-import ar.com.scriptorum.db.MySqlHandlerMock;
 import ar.com.scriptorum.mgr.RequestManager;
 
 import com.google.gson.Gson;
@@ -17,21 +16,21 @@ import com.google.gson.Gson;
 public class RequestManagerImpl implements RequestManager {
 
 	// TODO replace with real implementation
-	static MySqlHandler handler = new MySqlHandlerMock().connected();
+	static MySqlHandler handler = new MySqlHandler().connected();
 	static Gson gson = new Gson();
 
 	@Override
 	public String readViajes() {
-		List list = null;
-		ResultSet rs = handler.read("select * from DIAZ.VIAJES");
-		MapListHandler ml = new MapListHandler(new MyRowConverter());
+		List<?> list = null;
+		ResultSet rs = handler.read("select * from viajes");
+		MapListHandler ml = new MapListHandler(/*new MyRowConverter()*/);
 		try {
 			list = ml.handle(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		String st = gson.toJson(list);
-		
+		handler.close();
 		return st; 
 	}
 	
