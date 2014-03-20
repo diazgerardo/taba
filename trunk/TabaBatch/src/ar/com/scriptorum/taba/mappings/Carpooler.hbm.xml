@@ -2,10 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping>
-    <class name="ar.com.scriptorum.taba.beans.Person" table="Person">
+    <class name="ar.com.scriptorum.taba.beans.Carpooler" table="carpoolers">
         <id name="id" column="id" type="int">
         	<generator class="native"/>
         </id>
-        <property name="name" column="name" type="java.lang.String"/>
+        <property name="nombre" column="nombre" type="java.lang.String"/>
+        <property name="dni" column="dni" type="java.lang.String"/>
+        <property name="telefono" column="telefono" type="java.lang.String"/>
     </class>
 </hibernate-mapping>

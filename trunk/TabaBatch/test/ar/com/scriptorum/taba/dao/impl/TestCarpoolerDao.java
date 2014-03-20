@@ -3,6 +3,8 @@ package ar.com.scriptorum.taba.dao.impl;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,37 +13,33 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.com.scriptorum.taba.beans.Person;
+import ar.com.scriptorum.taba.beans.Carpooler;
 
 /**
  * 
  */
-public class TestPersonDao
+public class TestCarpoolerDao
 {
 
 	@Before
 	public void testCreate() {
-		Person person = new Person();
-		person.setName("aaa");
-		PersonDaoImpl pdi = PersonDaoImpl.getInstance();
-		assertTrue(pdi.create(person, true));
+		Carpooler carpooler = new Carpooler();
+		carpooler.setNombre("aaa");
+		carpooler.setDni("123456");
+		carpooler.setTelefono("456 789");
+		CarpoolerDaoImpl pdi = CarpoolerDaoImpl.getInstance();
+		assertTrue(pdi.create(carpooler, true));
 	}
 	
 	@Test
 	public void testFindByName() {
 	
-		PersonDaoImpl pdi = PersonDaoImpl.getInstance();
-		Person p = pdi.findByName("aaa");
-		assertTrue(p != null);
-		
-	}
-	
-	@After
-	public void testDelete() {
-	
-		PersonDaoImpl pdi = PersonDaoImpl.getInstance();
-		Person p = pdi.findByName("aaa");
-		assertTrue(pdi.delete(p));
+		CarpoolerDaoImpl pdi = CarpoolerDaoImpl.getInstance();
+		List<Carpooler> list = pdi.findByName("aaa");
+		for(Carpooler p: list) {
+			assertTrue(p != null);
+			assertTrue(pdi.delete(p));
+		}
 		
 	}
 	
@@ -54,9 +52,9 @@ public class TestPersonDao
 			Session session = sessionFactory.openSession();
 			Transaction transaction = session.beginTransaction();
 			transaction.begin();
-			Person person = new Person();
-			person.setName("KamalHasan");
-			session.save(person);
+			Carpooler carpooler = new Carpooler();
+			carpooler.setNombre("KamalHasan");
+			session.save(carpooler);
 			transaction.commit();
 			session.close();
 		} catch (Exception e) {

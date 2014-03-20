@@ -36,5 +36,6 @@
 	<classpathentry kind="lib" path="lib/org.springframework.jdbc.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.context.support.jar"/>
 	<classpathentry kind="lib" path="lib/org.springframework.transaction.jar"/>
+	<classpathentry kind="lib" path="lib/mysql_connector_java_5.1.29_bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

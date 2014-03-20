@@ -1,18 +1,18 @@
 package ar.com.scriptorum.taba.util;
 
-import ar.com.scriptorum.taba.beans.Person;
+import ar.com.scriptorum.taba.beans.Carpooler;
 
-public class PersonSwappingBag extends SwappingBag<Person, Person> {
+public class PersonSwappingBag extends SwappingBag<Carpooler, Carpooler> {
 
-	public PersonSwappingBag(Person r, Person t) {
+	public PersonSwappingBag(Carpooler r, Carpooler t) {
 		super(r, t);
 	}
 
 	@Override
 	PersonSwappingBag swap() {
-		holder = t.getName();
-		t.setName(r.getName());
-		r.setName((String)holder);
+		holder = t.getNombre();
+		t.setNombre(r.getNombre());
+		r.setNombre((String)holder);
 		return this;
 	}
 
