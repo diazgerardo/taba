@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="ar.com.scriptorum.taba.beans.Vehiculo" table="vehiculos">
+        <id name="id" column="id" type="int">
+        	<generator class="native"/>
+        </id>
+        <property name="googleMapId" column="google_map_id" type="int"/>
+        <property name="descripcion" column="descripcion" type="java.lang.String"/>
+    </class>
+</hibernate-mapping>
