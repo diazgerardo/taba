@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="ar.com.scriptorum.beans.Vehiculo" table="vehiculos">
+        <id name="id" column="id" type="int">
+        	<generator class="native"/>
+        </id>
+        <property name="patente" column="patente" type="java.lang.String"/>
+        <property name="alta" column="alta" type="java.util.Date"/>
+        <property name="plazas" column="plazas" type="int"/>
+    </class>
+</hibernate-mapping>

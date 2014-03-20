@@ -16,5 +16,16 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="hibernate3.jar"/>
+	<classpathentry kind="lib" path="log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="lib" path="javassist-3.12.0.GA.jar"/>
+	<classpathentry kind="lib" path="jta-1.1.jar"/>
+	<classpathentry kind="lib" path="antlr-2.7.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
