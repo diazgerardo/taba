@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="ar.com.scriptorum.beans.Viaje" table="viajes">
+        <id name="id" column="id" type="long">
+        	<generator class="native"/>
+        </id>
+		<many-to-one name="group" class="Group" column="group_id" lazy="false" />
+		<many-to-one name="itinerario" class="Itinerario" column="itinerario_id" lazy="false" />
+		<many-to-one name="vehiculo" class="Vehiculo" column="vehiculo_id" lazy="false" />
+		<property name="inicio" column="fecha" type="java.util.Date"/>
+		<property name="fin" column="fecha" type="java.util.Date"/>
+		<property name="cerrado" column="cerrado" type="boolean"/>
+		
+    </class>
+</hibernate-mapping>
