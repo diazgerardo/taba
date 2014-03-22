@@ -12,11 +12,12 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
 import ar.com.scriptorum.beans.Carpooler;
+import ar.com.scriptorum.beans.Viaje;
 
 /**
  * 
  */
-public class CarpoolerDaoTest
+public class DaoTest
 {
 
 	@Test
@@ -37,6 +38,16 @@ public class CarpoolerDaoTest
 		for(Carpooler p: list) {
 			assertTrue(p != null);
 			assertTrue(pdi.delete(p));
+		}
+		
+	}
+	
+	@Test
+	public void findAllViajes() {
+		ViajeDaoImpl pdi = ViajeDaoImpl.getInstance();
+		List<Viaje> list = pdi.findAll();
+		for(Viaje p: list) {
+			assertTrue(p != null);
 		}
 		
 	}

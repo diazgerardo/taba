@@ -43,4 +43,13 @@ public class GroupMember implements PersistentEntity {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
+	@Override
+	public String toString() {
+		return 	"["+
+				" "+this.getId()+
+				" "+this.getCarpooler()+
+				" "+this.getFecha()+
+				"]";
+	}
 }

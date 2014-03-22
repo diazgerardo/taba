@@ -23,5 +23,10 @@
  <property name="show_sql">true</property>
   <!-- Mapping files -->
   <mapping resource="ar/com/scriptorum/taba/mappings/Carpooler.hbm.xml"/>
+  <mapping resource="ar/com/scriptorum/taba/mappings/Itinerario.hbm.xml"/>
+  <mapping resource="ar/com/scriptorum/taba/mappings/Group.hbm.xml"/>
+  <mapping resource="ar/com/scriptorum/taba/mappings/GroupMember.hbm.xml"/>
+  <mapping resource="ar/com/scriptorum/taba/mappings/Vehiculo.hbm.xml"/>
+  <mapping resource="ar/com/scriptorum/taba/mappings/Viaje.hbm.xml"/>
 </session-factory>
 </hibernate-configuration>

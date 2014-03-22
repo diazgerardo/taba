@@ -1,6 +1,7 @@
 package ar.com.scriptorum.beans;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * source : www.javabeat.net
@@ -11,7 +12,14 @@ public class Group implements PersistentEntity {
 	private long id;
 	private String nombre;
 	private Date creacion;
+	private Set<GroupMember> groupMembers;
 	
+	public Set<GroupMember> getGroupMembers() {
+		return groupMembers;
+	}
+	public void setGroupMembers(Set<GroupMember> groupMembers) {
+		this.groupMembers = groupMembers;
+	}
 	public long getId() {
 		return id;
 	}
@@ -31,4 +39,19 @@ public class Group implements PersistentEntity {
 		this.creacion = creacion;
 	}
 
+	@Override
+	public String toString() {
+		StringBuffer members = new StringBuffer();
+		members.append("{");
+		for(GroupMember member: groupMembers) {
+			members.append(member);
+		}
+		members.append("}");
+		return  "["+
+				" "+this.getId()+
+				" "+this.getNombre()+
+				" "+this.getCreacion()+
+				" "+members.toString()+
+				"]";
+	}
 }

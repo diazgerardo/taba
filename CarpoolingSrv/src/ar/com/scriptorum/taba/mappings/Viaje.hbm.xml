@@ -6,11 +6,11 @@
         <id name="id" column="id" type="long">
         	<generator class="native"/>
         </id>
-		<many-to-one name="group" class="Group" column="group_id" lazy="false" />
-		<many-to-one name="itinerario" class="Itinerario" column="itinerario_id" lazy="false" />
-		<many-to-one name="vehiculo" class="Vehiculo" column="vehiculo_id" lazy="false" />
-		<property name="inicio" column="fecha" type="java.util.Date"/>
-		<property name="fin" column="fecha" type="java.util.Date"/>
+		<many-to-one name="group" class="ar.com.scriptorum.beans.Group" column="group_id" lazy="false" />
+		<many-to-one name="itinerario" class="ar.com.scriptorum.beans.Itinerario" column="itinerario_id" lazy="false" />
+		<many-to-one name="vehiculo" class="ar.com.scriptorum.beans.Vehiculo" column="vehiculo_id" lazy="false" />
+		<property name="inicio" column="inicio" type="java.util.Date"/>
+		<property name="fin" column="fin" type="java.util.Date"/>
 		<property name="cerrado" column="cerrado" type="boolean"/>
 		
     </class>
