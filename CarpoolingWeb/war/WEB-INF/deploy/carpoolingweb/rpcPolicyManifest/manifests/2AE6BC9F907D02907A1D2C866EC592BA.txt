@@ -1,2 +1,0 @@
-serviceClass: ar.com.scriptorum.carpooling.client.GreetingService
-path: B2FCB8939DEE9AA97633F30F4F76506A.gwt.rpc
