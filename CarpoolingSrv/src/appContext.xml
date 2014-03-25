@@ -7,19 +7,19 @@
 		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
 	</bean>
 	
-	<bean name="viajeDao" class="ar.com.scriptorum.dao.ViajeDaoImpl">
+	<bean id="viajeDao" class="ar.com.scriptorum.dao.ViajeDaoImpl">
 	    <property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	<bean name="groupDao" class="ar.com.scriptorum.dao.GroupDaoImpl">
+	<bean id="groupDao" class="ar.com.scriptorum.dao.GroupDaoImpl">
 	    <property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	<bean name="carpoolerDao" class="ar.com.scriptorum.dao.CarpoolerDaoImpl">
+	<bean id="carpoolerDao" class="ar.com.scriptorum.dao.CarpoolerDaoImpl">
 	    <property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	<bean name="itinerarioDao" class="ar.com.scriptorum.dao.ItinerarioDaoImpl">
+	<bean id="itinerarioDao" class="ar.com.scriptorum.dao.ItinerarioDaoImpl">
 	    <property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-	<bean name="vehiculoDao" class="ar.com.scriptorum.dao.VehiculoDaoImpl">
+	<bean id="vehiculoDao" class="ar.com.scriptorum.dao.VehiculoDaoImpl">
 	    <property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 </beans>

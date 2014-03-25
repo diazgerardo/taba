@@ -8,7 +8,7 @@
 		</id>
 		<property name="nombre" column="name" type="java.lang.String" />
 		<property name="creacion" column="creacion" type="java.util.Date" />
-		<set name="groupMembers" cascade="all">
+		<set name="groupMembers" cascade="all" lazy="false">
 			<key column="group_id" />
 			<one-to-many class="ar.com.scriptorum.beans.GroupMember" />
 		</set>
