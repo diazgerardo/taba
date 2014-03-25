@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>CarpoolingClient</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description>Sample Servlet</description>
+    <display-name>CarpoolingClientServlet</display-name>
+    <servlet-name>CarpoolingClientServlet</servlet-name>
+    <servlet-class>ar.com.scriptorum.CarpoolingClientServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CarpoolingClientServlet</servlet-name>
+    <url-pattern>/carpoolingclient</url-pattern>
+  </servlet-mapping>
+<context-param>
+<param-name>contextConfigLocation</param-name>
+<param-value>classpath:appContext.xml</param-value>
+</context-param>
+<!-- Spring -->
+<listener>
+<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+<listener>
+<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+</listener>
+
+</web-app>
