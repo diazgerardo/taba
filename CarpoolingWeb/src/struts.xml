@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+ 
+  <constant name="struts.devMode" value="true" />
+ 
+  <package name="basicstruts2" extends="struts-default">
+ 
+        <action name="index">
+            <result>/Carpooling.html</result>
+        </action>
+        
+        <action name="carpooler">
+            <result>/jsp/carpoolers.jsp</result>
+        </action>
+        
+        <action name="itinerario">
+            <result>/jsp/itinerarios.jsp</result>
+        </action>
+        
+        <action name="vehiculo">
+            <result>/jsp/vehiculos.jsp</result>
+        </action>
+        
+        <action name="grupo">
+            <result>/jsp/grupos.jsp</result>
+        </action>
+        
+        
+        <!-- CRUD Carpooler -->
+		<action name="saveOrUpdateCarpooler" method="saveOrUpdate" class="ar.com.scriptorum.actions.CarpoolerActions">
+			<result name="success" type="redirect">listCarpooler</result>
+		</action>
+		<action name="listCarpooler" method="list" class="ar.com.scriptorum.actions.CarpoolerActions">
+			<result name="success">/jsp/carpoolers.jsp</result>
+		</action>
+		<action name="editCarpooler" method="edit" class="ar.com.scriptorum.actions.CarpoolerActions">
+			<result name="success">/jsp/carpoolers.jsp</result>
+		</action>
+		<action name="deleteCarpooler" method="delete" class="ar.com.scriptorum.actions.CarpoolerActions">
+			<result name="success" type="redirect">listCarpooler</result>
+		</action>
+		
+        
+        <!-- CRUD Itinerario -->
+		<action name="saveOrUpdateItinerario" method="saveOrUpdate" class="ar.com.scriptorum.actions.ItinerarioActions">
+			<result name="success" type="redirect">listItinerario</result>
+		</action>
+		<action name="listItinerario" method="list" class="ar.com.scriptorum.actions.ItinerarioActions">
+			<result name="success">/jsp/itinerarios.jsp</result>
+		</action>
+		<action name="editItinerario" method="edit" class="ar.com.scriptorum.actions.ItinerarioActions">
+			<result name="success">/jsp/itinerarios.jsp</result>
+		</action>
+		<action name="deleteItinerario" method="delete" class="ar.com.scriptorum.actions.ItinerarioActions">
+			<result name="success" type="redirect">listItinerario</result>
+		</action>
+		
+        
+        <!-- CRUD Vehiculo -->
+		<action name="saveOrUpdateVehiculo" method="saveOrUpdate" class="ar.com.scriptorum.actions.VehiculoActions">
+			<result name="success" type="redirect">listVehiculo</result>
+		</action>
+		<action name="listVehiculo" method="list" class="ar.com.scriptorum.actions.VehiculoActions">
+			<result name="success">/jsp/vehiculos.jsp</result>
+		</action>
+		<action name="editVehiculo" method="edit" class="ar.com.scriptorum.actions.VehiculoActions">
+			<result name="success">/jsp/vehiculos.jsp</result>
+		</action>
+		<action name="deleteVehiculo" method="delete" class="ar.com.scriptorum.actions.VehiculoActions">
+			<result name="success" type="redirect">listVehiculo</result>
+		</action>
+		
+  		
+        <!-- CRUD Grupo -->
+		<action name="saveOrUpdateGrupo" method="saveOrUpdate" class="ar.com.scriptorum.actions.GrupoActions">
+			<result name="success" type="redirect">listGrupo</result>
+		</action>
+		<action name="listGrupo" method="list" class="ar.com.scriptorum.actions.GrupoActions">
+			<result name="success">/jsp/grupos.jsp</result>
+		</action>
+		<action name="editGrupo" method="edit" class="ar.com.scriptorum.actions.GrupoActions">
+			<result name="success">/jsp/grupos.jsp</result>
+		</action>
+		<action name="deleteGrupo" method="delete" class="ar.com.scriptorum.actions.GrupoActions">
+			<result name="success" type="redirect">listGrupo</result>
+		</action>
+		
+				
+        <!-- CRUD User -->
+		<action name="saveOrUpdateUser" method="saveOrUpdate" class="ar.com.scriptorum.actions.UserAction">
+			<result name="success" type="redirect">listUser</result>
+		</action>
+		<action name="listUser" method="list" class="ar.com.scriptorum.actions.UserAction">
+			<result name="success">/jsp/users.jsp</result>
+		</action>
+		<action name="editUser" method="edit" class="ar.com.scriptorum.actions.UserAction">
+			<result name="success">/jsp/users.jsp</result>
+		</action>
+		<action name="deleteUser" method="delete" class="ar.com.scriptorum.actions.UserAction">
+			<result name="success" type="redirect">listUser</result>
+		</action>
+		        
+</package>
+ 
+</struts>
+
