@@ -8,7 +8,8 @@ public class HibernateUtil {
     private static final SessionFactory sessionFactory = buildSessionFactory();
 	public static final int MAX_ENTITIES_BY_SESSION = 1001;
 
-    private static SessionFactory buildSessionFactory() {
+    @SuppressWarnings("deprecation")
+	private static SessionFactory buildSessionFactory() {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
             return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();

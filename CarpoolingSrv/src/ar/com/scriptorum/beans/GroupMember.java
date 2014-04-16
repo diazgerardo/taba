@@ -47,9 +47,9 @@ public class GroupMember implements PersistentEntity {
 	@Override
 	public String toString() {
 		return 	"["+
-				" "+this.getId()+
-				" "+this.getCarpooler()+
-				" "+this.getFecha()+
-				"]";
+				" Id:"+this.getId()+
+				" Carpooler:"+this.getCarpooler()+
+				" Fecha:"+this.getFecha()+
+				" ]";
 	}
 }

@@ -4,29 +4,16 @@
 "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-<session-factory>
- <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-<!--  <property name="connection.driver_class">org.postgresql.Driver</property> -->
-  <property name="hibernate.connection.url">
-	<!--  jdbc:postgresql://localhost:5432/postgres-->
-		  jdbc:mysql://190.228.29.195:3306/diaz
-	</property>
-<!--  <property name="connection.username">postgres</property> -->
-<!--  <property name="connection.password">zaq12WSX</property> -->
-<!--  <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property> -->
-<!--  <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> -->
-
-	 <property name="connection.username">gerardo_camp</property>
-	 <property name="connection.password">Android132134</property>
-	 <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
-	 <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
- <property name="show_sql">true</property>
-  <!-- Mapping files -->
-  <mapping resource="ar/com/scriptorum/taba/mappings/Carpooler.hbm.xml"/>
-  <mapping resource="ar/com/scriptorum/taba/mappings/Itinerario.hbm.xml"/>
-  <mapping resource="ar/com/scriptorum/taba/mappings/Group.hbm.xml"/>
-  <mapping resource="ar/com/scriptorum/taba/mappings/GroupMember.hbm.xml"/>
-  <mapping resource="ar/com/scriptorum/taba/mappings/Vehiculo.hbm.xml"/>
-  <mapping resource="ar/com/scriptorum/taba/mappings/Viaje.hbm.xml"/>
-</session-factory>
+	<session-factory>
+		
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="show_sql">false</property>
+        <property name="hibernate.transaction.auto_close_session">false</property>
+		<mapping resource="ar/com/scriptorum/taba/mappings/Carpooler.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/Itinerario.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/Group.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/GroupMember.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/Vehiculo.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/Viaje.hbm.xml" />
+	</session-factory>
 </hibernate-configuration>

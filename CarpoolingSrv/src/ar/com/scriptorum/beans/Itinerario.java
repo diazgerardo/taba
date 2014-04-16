@@ -31,9 +31,9 @@ public class Itinerario implements PersistentEntity {
 	
 	@Override
 	public String toString() {
-		return "["+this.getId()+
-				" "+this.getDescripcion()+
-				" "+this.getGoogleMapId()+
-				"]";
+		return "[ Id:"+this.getId()+
+				" Descripcion:"+this.getDescripcion()+
+				" GoogleMapId:"+this.getGoogleMapId()+
+				" ]";
 	}
 }

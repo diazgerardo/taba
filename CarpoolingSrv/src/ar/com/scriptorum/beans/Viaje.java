@@ -60,10 +60,10 @@ public class Viaje implements PersistentEntity {
 
 	@Override
 	public String toString() {
-		return 	"{"+this.getId()+
-				" "+this.getGroup()+
-				" "+this.getItinerario()+
-				" "+this.getInicio()+
-				" "+this.getFin()+"]";
+		return 	"[ Id:"+this.getId()+
+				" Group:"+this.getGroup()+
+				" Itinerario:"+this.getItinerario()+
+				" Inicio:"+this.getInicio()+
+				" Fin:"+this.getFin()+"]";
 	}
 }

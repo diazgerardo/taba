@@ -39,11 +39,10 @@ public class Carpooler implements PersistentEntity {
 	@Override
 	public String toString() {
 		return  "["+
-				" "+this.getId()+
-				" "+this.getDni()+
-				" "+this.getNombre()+
-				" "+this.getDni()+
-				" "+this.getTelefono()+
+				" Id:"+this.getId()+
+				", Dni:"+this.getDni()+
+				", Nombre"+this.getNombre()+
+				", Telefono"+this.getTelefono()+
 				"]";
 		
 	}

@@ -36,5 +36,14 @@ public class Vehiculo implements PersistentEntity {
 	public void setPlazas(int plazas) {
 		this.plazas = plazas;
 	}
-	
+
+	@Override
+	public String toString() {
+		return 	"["+
+				" Id:"+this.getId()+
+				" Patente:"+this.getPatente()+
+				" Plazas:"+this.getPlazas()+
+				" Alta:"+this.getAlta()+
+				" ]";
+	}
 }

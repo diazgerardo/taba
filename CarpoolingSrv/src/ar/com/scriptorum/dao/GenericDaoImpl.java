@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+
+import ar.com.scriptorum.beans.PersistentEntity;
 
 public abstract class GenericDaoImpl<E, PK extends Serializable> extends HibernateDaoSupport implements GenericDao<E,PK> {
 
@@ -27,7 +29,7 @@ public abstract class GenericDaoImpl<E, PK extends Serializable> extends Hiberna
 	@SuppressWarnings("unchecked")
 	public List<E> findAll() {
 
-		return getHibernateTemplate().findByCriteria(createDetachedCriteria());
+		return (List<E>) getHibernateTemplate().findByCriteria(createDetachedCriteria());
 
 	}
 
@@ -38,7 +40,7 @@ public abstract class GenericDaoImpl<E, PK extends Serializable> extends Hiberna
 
 		criteria.add(Restrictions.eq(propertyName, value));
 
-		return getHibernateTemplate().findByCriteria(criteria);
+		return (List<E>) getHibernateTemplate().findByCriteria(criteria);
 
 	}
 
@@ -85,6 +87,6 @@ public abstract class GenericDaoImpl<E, PK extends Serializable> extends Hiberna
 
 	}
 
-	protected abstract Class getEntityClass();
+	protected abstract Class<? extends PersistentEntity> getEntityClass();
 
 }

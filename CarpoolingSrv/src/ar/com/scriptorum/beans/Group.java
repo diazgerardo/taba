@@ -48,10 +48,10 @@ public class Group implements PersistentEntity {
 		}
 		members.append("}");
 		return  "["+
-				" "+this.getId()+
-				" "+this.getNombre()+
-				" "+this.getCreacion()+
-				" "+members.toString()+
+				" Id:"+this.getId()+
+				" Nombre:"+this.getNombre()+
+				" Creacion:"+this.getCreacion()+
+				" Members:"+this.getGroupMembers()==null?"sin miembros aún.":members.toString()+
 				"]";
 	}
 }
