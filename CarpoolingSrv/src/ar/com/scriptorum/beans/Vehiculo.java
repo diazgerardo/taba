@@ -11,7 +11,7 @@ public class Vehiculo implements PersistentEntity {
 	private long id;
 	private String patente;
 	private Date alta;
-	private int plazas;
+	private int plazas=0;
 	public long getId() {
 		return id;
 	}
