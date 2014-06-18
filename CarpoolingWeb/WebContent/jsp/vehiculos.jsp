@@ -16,7 +16,6 @@
 	<s:push value="vehiculo">
 		<s:hidden name="id" />
 		<s:textfield name="patente" label="Patente" />
-		<s:textfield name="plazas" label="Plazas" />
 		<s:submit />
 	</s:push>
 </s:form>
@@ -35,8 +34,6 @@
 			<tr
 				class="<s:if test="#vehiculoStatus.odd == true ">odd</s:if><s:else>even</s:else>">
 				<td><s:property value="patente" /></td>
-				<td><s:property value="plazas" /></td>
-				<td><s:property value="alta" /></td>
 				<td><s:url id="editURL" action="editVehiculo">
 					<s:param name="id" value="%{id}"></s:param>
 				</s:url> <s:a href="%{editURL}">Editar</s:a></td>

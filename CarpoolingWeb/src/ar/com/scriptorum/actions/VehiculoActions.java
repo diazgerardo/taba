@@ -62,8 +62,8 @@ public class VehiculoActions extends SpringActionSupport implements ModelDriven<
 		return vehiculoList;
 	}
 
-	public void setVehiculoList(List<Vehiculo> VehiculoList) {
-		this.vehiculoList = VehiculoList;
+	public void setVehiculoList(List<Vehiculo> vehiculoList) {
+		this.vehiculoList = vehiculoList;
 	}
 
 	public String list() {
