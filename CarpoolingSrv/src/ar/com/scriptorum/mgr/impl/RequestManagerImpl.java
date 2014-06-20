@@ -23,7 +23,7 @@ public class RequestManagerImpl implements RequestManager {
 	public String readViajes() {
 		List<?> list = null;
 		ResultSet rs = handler.read("select * from viajes");
-		MapListHandler ml = new MapListHandler(/*new MyRowConverter()*/);
+		MapListHandler ml = new MapListHandler(new MyRowConverter());
 		try {
 			list = ml.handle(rs);
 		} catch (SQLException e) {

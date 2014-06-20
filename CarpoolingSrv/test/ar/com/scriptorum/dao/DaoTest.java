@@ -37,6 +37,7 @@ public class DaoTest
 		carpooler.setNombre("aaa");
 		carpooler.setDni("123456");
 		carpooler.setTelefono("456 789");
+		carpoolerDao.save(carpooler);
 	}
 	
 	@Test

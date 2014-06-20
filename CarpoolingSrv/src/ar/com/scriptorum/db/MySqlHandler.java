@@ -13,11 +13,15 @@ public class MySqlHandler {
 	private Connection connect = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
+	
+	public MySqlHandler() {
+	    connected();
+	}
 
 	public MySqlHandler connected() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://190.228.29.195:3306/diaz";
+			String url = "jdbc:mysql://localhost:3306/diaz";
 			connect = DriverManager.getConnection(url, "gerardo_camp","Android132134");
 		} catch (Exception e) {
 			throw new BusinessException("oops. shit happens :)");
