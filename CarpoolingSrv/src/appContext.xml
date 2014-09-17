@@ -7,12 +7,11 @@
 	<bean id="myDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url"
-			value="jdbc:mysql://127.0.0.1:3306/diaz">
-<!-- 			value="jdbc:mysql://190.228.29.195:3306/diaz"> -->
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/diaz">
+			<!-- value="jdbc:mysql://190.228.29.195:3306/diaz"> -->
 		</property>
-		<property name="username" value="gerardo_camp"/>
-		<property name="password" value="Android132134"/>
+		<property name="username" value="gerardo_camp" />
+		<property name="password" value="Android132134" />
 	</bean>
 
 	<bean id="sessionFactory"
@@ -21,7 +20,7 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<!--  <prop key="hibernate.query.substitutions">true=1 false=0</prop>-->
+				<!-- <prop key="hibernate.query.substitutions">true=1 false=0</prop> -->
 			</props>
 		</property>
 		<property name="dataSource">
@@ -38,6 +37,7 @@
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
+
 	<bean id="viajeDao" class="ar.com.scriptorum.dao.ViajeDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -53,4 +53,19 @@
 	<bean id="vehiculoDao" class="ar.com.scriptorum.dao.VehiculoDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="punitDao" class="ar.com.scriptorum.dao.PUnitDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="pmethodDao" class="ar.com.scriptorum.dao.PMethodDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="pnameDao" class="ar.com.scriptorum.dao.PNameDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="keywordsDao" class="ar.com.scriptorum.dao.KeywordsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="transformer" class="ar.com.scriptorum.util.PUTransformer" />
+
 </beans>

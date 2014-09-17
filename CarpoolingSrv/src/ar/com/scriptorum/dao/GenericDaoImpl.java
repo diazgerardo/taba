@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import ar.com.scriptorum.beans.PersistentEntity;
+import ar.com.scriptorum.exceptions.BusinessException;
 
 public abstract class GenericDaoImpl<E, PK extends Serializable> extends HibernateDaoSupport implements GenericDao<E,PK> {
 
@@ -44,7 +45,25 @@ public abstract class GenericDaoImpl<E, PK extends Serializable> extends Hiberna
 
 	}
 
-	public List<E> findByExample(E object) {
+    @SuppressWarnings("unchecked")
+    public E findUnique(String propertyName, Object value) {
+
+        DetachedCriteria criteria = createDetachedCriteria();
+
+        criteria.add(Restrictions.eq(propertyName, value));
+
+        List<E> list = (List<E>) getHibernateTemplate().findByCriteria(criteria);
+        if(list == null|| list.size()==0)
+            return null;
+        
+        if(list.size()>1) 
+            throw new BusinessException("Received more results("+list.size()+") than expected (1).");
+        
+        return list.iterator().next();
+
+    }
+
+    public List<E> findByExample(E object) {
 
 		List<E> resultList = getHibernateTemplate().findByExample(object, 0, 1);
 

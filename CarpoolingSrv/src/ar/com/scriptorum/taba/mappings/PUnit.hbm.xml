@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="ar.com.scriptorum.beans.PUnit" table="punits">
+ 		<cache usage="read-write"/>
+ 		<id name="id" column="id" type="long">
+			<generator class="native" />
+		</id>
+		<many-to-one name="pName" class="ar.com.scriptorum.beans.PName"
+			column="pname_id" lazy="false" />
+		<property name="modifiedOn" column="modifiedOn" />
+		<property name="module" column="module" />
+		<property name="modifiedBy" column="modifiedBy" />
+		<property name="nLines" column="nLines" />
+		<property name="md5" column="md5" />
+		<set name="methods" cascade="all-delete-orphan" lazy="false">
+			<key column="punit_id" />
+			<one-to-many class="ar.com.scriptorum.beans.PMethod" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -5,15 +5,21 @@
 
 <hibernate-configuration>
 	<session-factory>
-		
-		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-        <property name="show_sql">false</property>
-        <property name="hibernate.transaction.auto_close_session">false</property>
+
+	    	<property name="cache.provider_class"> org.hibernate.cache.EhCacheProvider </property>
+<!-- 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property> -->
+		<property name="show_sql">true</property>
+		<property name="hibernate.transaction.auto_close_session">false</property>
 		<mapping resource="ar/com/scriptorum/taba/mappings/Carpooler.hbm.xml" />
 		<mapping resource="ar/com/scriptorum/taba/mappings/Itinerario.hbm.xml" />
 		<mapping resource="ar/com/scriptorum/taba/mappings/Group.hbm.xml" />
 		<mapping resource="ar/com/scriptorum/taba/mappings/GroupMember.hbm.xml" />
 		<mapping resource="ar/com/scriptorum/taba/mappings/Vehiculo.hbm.xml" />
 		<mapping resource="ar/com/scriptorum/taba/mappings/Viaje.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/PUnit.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/PName.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/PMethod.hbm.xml" />
+		<mapping resource="ar/com/scriptorum/taba/mappings/Keyword.hbm.xml" />
+				
 	</session-factory>
 </hibernate-configuration>

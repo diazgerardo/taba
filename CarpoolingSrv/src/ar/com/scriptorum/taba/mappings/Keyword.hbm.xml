@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="ar.com.scriptorum.beans.Keywords" table="keywords">
+		<id name="id" column="id" type="long">
+			<generator class="native" />
+		</id>
+		<property name="ifKeyword" />
+		<property name="elseKeyword" />
+		<property name="switchKeyword" />
+		<property name="caseKeyword" />
+		<property name="autowiredKeyword" />
+		<property name="newKeyword" />
+		<property name="builtOn" column="builtOn" type="java.util.Date" />
+		<many-to-one name="pMethod" class="ar.com.scriptorum.beans.PMethod"
+			column="pmethod_id" lazy="false" />
+	</class>
+</hibernate-mapping>

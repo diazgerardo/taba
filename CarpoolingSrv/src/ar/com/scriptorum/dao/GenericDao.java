@@ -24,5 +24,7 @@ public interface GenericDao<E, PK extends Serializable> {
     List<E> findAll();
 
     List<E> findAllByProperty(String propertyName,Object value);
+    
+    E findUnique(String propertyName, Object value);
 
 }

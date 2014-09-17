@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="ar.com.scriptorum.beans.PMethod" table="pmethods">
+		<id name="id" column="id" type="long">
+			<generator class="native" />
+		</id>
+		<many-to-one name="pUnit" class="ar.com.scriptorum.beans.PUnit"
+			column="punit_id" lazy="false" />
+		<property name="countParameters" column="countParameters" />
+		<property name="name" column="name" />
+		<property name="md5" column="md5" />
+		<property name="lines" column="nLines" />
+		<set name="keywords" cascade="all-delete-orphan" lazy="false">
+			<key column="pmethod_id" />
+			<one-to-many class="ar.com.scriptorum.beans.Keywords" />
+		</set>
+	</class>
+</hibernate-mapping>
