@@ -178,13 +178,14 @@ a:hover  {
 	border-style: outset outset outset outset;
 	border-color: black black black black;
 	border-collapse: collapse;
-	background-color: rgb(255, 255, 255);
 }
 
 .odd {
-background-color: #FFFFF0;
+	foreground-color: #A6F2F7;
+	background-color: #A27BE5;
 }
 
 .even {
-background-color: #FAF0E6;
+	foreground-color: #A6F2F7;
+	background-color: #702FDF;
 }

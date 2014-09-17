@@ -29,6 +29,10 @@
             <result>/jsp/grupos.jsp</result>
         </action>
         
+        <action name="punits">
+            <result>/jsp/punits.jsp</result>
+        </action>
+        
         
         <!-- CRUD Carpooler -->
 		<action name="saveOrUpdateCarpooler" method="saveOrUpdate" class="ar.com.scriptorum.actions.CarpoolerActions">
@@ -104,6 +108,28 @@
 			<result name="success" type="redirect">listUser</result>
 		</action>
 		        
+        <!-- CRUD PUnit -->
+		<action name="saveOrUpdatePUnit" method="saveOrUpdate" class="ar.com.scriptorum.actions.PUnitActions">
+			<result name="success" type="redirect">listPUnit</result>
+		</action>
+		<action name="listPUnit" method="list" class="ar.com.scriptorum.actions.PUnitActions">
+			<result name="success">/jsp/punits.jsp</result>
+		</action>
+		<action name="showPMethods" method="showPMethods" class="ar.com.scriptorum.actions.PUnitActions">
+			<result name="success">/jsp/pmethods.jsp</result>
+		</action>
+				<action name="editPUnit" method="edit" class="ar.com.scriptorum.actions.PUnitActions">
+			<result name="success">/jsp/punits.jsp</result>
+		</action>
+		<action name="deletePUnit" method="delete" class="ar.com.scriptorum.actions.PUnitActions">
+			<result name="success" type="redirect">listPUnit</result>
+		</action>
+		
+		<action name="sortBy" method="sort" class="ar.com.scriptorum.actions.PUnitActions">
+			<result name="success">/jsp/punits.jsp</result>
+		</action>
+		
+		
 </package>
  
 </struts>
