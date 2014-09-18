@@ -10,8 +10,16 @@ public class StringUtil {
      * @return
      */
     public static int count(String str, String subStr) {
+
+        if(isEmpty(str))
+            return 0;
+        
+        if(isEmpty(subStr))
+            return 0;
+        
         int lastIndex = 0;
         int count = 0;
+        
         while (lastIndex != -1) {
 
             lastIndex = str.indexOf(subStr, lastIndex);
@@ -23,4 +31,13 @@ public class StringUtil {
         }
         return count;
     }
+
+    public static boolean isEmpty(String str) {
+        return str == null?Boolean.TRUE:"".equals(str)?Boolean.TRUE:Boolean.FALSE;
+    }
+
+    public static boolean isNotEmpty(String str) {
+        return !isEmpty(str);
+    }
+
 }
