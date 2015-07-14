@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="workflow/test"/>
-	<classpathentry kind="src" path="workflow/src"/>
-	<classpathentry kind="src" path="samples"/>
+	<classpathentry including="**/*.java" kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="workflow/test">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry including="**/*.java" kind="src" path="workflow/src"/>
+	<classpathentry including="**/*.java" kind="src" path="samples"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="samplesTest"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate3.jar" sourcepath="D:/proyectos/tools/hibernate/project/hibernate-core/src/main/java"/>
 	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
@@ -18,25 +27,47 @@
 	<classpathentry kind="lib" path="lib/slf4j-simple-1.6.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/antlr-2.7.6.jar"/>
-	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-validator-1.4.0.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.core.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.context.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.beans.jar"/>
 	<classpathentry kind="lib" path="lib/aopalliance.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.1.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.aop.jar"/>
 	<classpathentry kind="lib" path="lib/org.aspectj.matcher.jar"/>
 	<classpathentry kind="lib" path="lib/aspectjrt.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.asm.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.expression.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.orm.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.jdbc.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.context.support.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.transaction.jar"/>
+	<classpathentry kind="lib" path="lib/aspectjtools.jar"/>
+	<classpathentry kind="lib" path="lib/aspectjweaver.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.8.2.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-beanutils-1.8.1.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-digester3-3.2-with-deps.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-lang-2.4.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-logging-adapters-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-logging-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-logging-tests.jar"/>
+	<classpathentry kind="lib" path="D:/software/Apache/commons-validator-1.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/mysql_connector_java_5.1.29_bin.jar"/>
-	<classpathentry kind="lib" path="/lib/lib.run/javaparser-1.0.8.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/org.springframework.aop.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.asm.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.aspects.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.beans.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.context.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.context.support.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.core.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.expression.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.instrument.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.instrument.tomcat.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.jdbc.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.jms.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.orm.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.oxm.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.test.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.transaction.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.web.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.web.portlet.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.web.servlet.jar"/>
+	<classpathentry kind="lib" path="lib/org.springframework.web.struts.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

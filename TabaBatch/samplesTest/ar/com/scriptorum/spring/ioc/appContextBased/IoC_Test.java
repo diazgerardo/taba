@@ -44,6 +44,7 @@ public class IoC_Test {
 		}
 		prnService = (PrintService) context.getBean("prnService");
 		assertNotNull(prnService);
+		prnService.setPrinter((Printer) context.getBean("printer"));
 	}
 	
 	@Test 
